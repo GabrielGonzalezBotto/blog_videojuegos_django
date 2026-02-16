@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif, Arial;
+    background: url(/static/img/bg.jpg) no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+    border: 10px solid red;
+}

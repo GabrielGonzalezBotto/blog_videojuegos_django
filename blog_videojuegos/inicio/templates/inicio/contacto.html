@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Checkpoint Games | Contacto{% endblock %}
+
+{% block content %}
+    
+    <span class="flickering-h1"><h2 class="contacto-title">C<span class="flickering-o">O</span>NT<span class="flickering-a">A</span><span class="flickering-c">C</span>T<span class="flickering-o">O</span></h2></span>
+    <p class="sub-text">¿Tenés alguna consulta, sugerencia o simplemente querés saludar? Completá el formulario y te responderemos lo antes posible.</p>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="login-container">
+
+        <form action="#" method="POST" id="edit-perfil-form" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="input-box">
+                        <span class="icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input type="text" required id="nombre" name="nombre">
+                        <label for="nombre">Nombre</label>
+                        <div class="input-line"></div>
+                    </div>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="mail"><i class="fa-solid fa-at"></i></ion-icon>
+                    </span>
+                    <input type="email" name="email" value="{{ user.email }}" required>
+                    <label for="email">Email</label>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <textarea class="mensaje" name="mensaje" rows="2" required></textarea>
+                    <label for="mensaje">Mensaje</label>
+                    <div class="input-line"></div>
+                </div>
+
+                <button type="submit" class="login-btn">Enviar</button>
+            </form>
+    </div>
+
+        <span><hr></span>
+
+    <h4 class="redes-title">También podés encontrarnos en:</h4>
+
+    <div class="redes">
+        
+            <div class="d-flex flex-wrap justify-content-center gap-3 fs-4 text-primary">
+                <h5 class="redes-sub-title">Redes Sociales</h5>
+                <a href="https://www.facebook.com/TuPagina" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/TuPagina" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/TuPagina" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.youtube.com/TuCanal" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://discord.gg/TuServidor" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://www.twitch.tv/TuCanal" target="_blank"><i class="fab fa-twitch"></i></a>
+            </div>
+
+            <div>
+                <h5 class="redes-sub-title">Contacto Directo</h5>
+                <p><i class="fab fa-whatsapp text-primary"></i> <a href="https://wa.me/5491123456789" target="_blank" class="num-contacto">+54 9 11 2345-6789</a></p>
+                <p><i class="fas fa-map-marker-alt text-primary"></i>Resistencia, Chaco, Argentina</p>
+            </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
