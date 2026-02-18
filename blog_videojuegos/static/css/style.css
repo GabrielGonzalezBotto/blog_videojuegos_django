@@ -6,3 +6,233 @@ body {
     color: #ffffff;
     border: 10px solid red;
 }
+
+/*-------HERO------*/
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+    height: 100vh;
+}
+
+.img-hero {
+    height: 450px;
+    filter: drop-shadow( 4px 6px 12px #66ccff);
+    position: relative;
+    top: 17%;
+}
+
+.main-title {
+    position:absolute;
+    top: 77%;
+    left: 37%;
+    font-size: 76px;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.registro {
+    position: relative;
+    padding: 20px 40px;
+    text-align: center;
+}
+
+.registro p{
+    padding: 10px;
+    font-size: 18px;
+    text-shadow: 0 0 20px #66ccee,
+                0 0 20px #66ccee;
+}
+
+.btn-registro {
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #66ccff;
+    border: 3px solid #66ccff;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+.btn-registro:hover {
+    transform: scale(1.2);
+    background: #66ccff;
+    color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 25px #66ccff;
+}
+
+/*-------NEON FLICKERING------*/
+
+span {
+    animation: flicker 10s infinite;
+}
+
+h1 {
+    color: #66ccee;
+    line-height: 1.1;
+    text-shadow: 0 0 25px #66ccff,
+                0 0 25px #66ccff,
+                0 0 25px #66ccff ;
+}
+
+.flickering-a {
+    animation: latter-flicker 5s infinite;
+}
+
+.flickering-s {
+    animation: latter-flicker 1s infinite;
+}
+
+.flickering-e {
+    animation: latter-flicker 5s infinite;
+}
+
+.flickering-t {
+    animation: latter-flicker 6s infinite;
+}
+
+@keyframes flicker {
+    0%, 19%, 20.99%, 22%, 30%, 62.99%, 64%, 100%{
+        opacity: 1;
+    }
+    20%, 20.99%, 31%, 63%, 63.99%{
+        opacity: 0;
+    }
+}
+
+@keyframes latter-flicker {
+    0%, 19%, 22%, 30%, 62.99%, 64%, 68%, 76%, 100% {
+        opacity: 1;
+    }
+    20%, 21.99%, 31%, 63%, 63.99%, 67%, 75% {
+        opacity: 0;
+    }
+}
+
+.registro {
+    position: relative;
+    padding: 20px 40px;
+    text-align: center;
+}
+
+.registro p{
+    color: #66ccee;
+    padding: 10px;
+    font-size: 18px;
+    text-shadow: 0 0 20px #66ccee,
+                0 0 20px #66ccee;
+}
+
+.btn-registro {
+    padding: 10px 25px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #66ccff;
+    border: 3px solid #66ccff;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+.btn-registro:hover {
+    transform: scale(1.2);
+    background: #66ccff;
+    color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 25px #66ccff;
+}
+
+/*------JUEGOS POPULARES------*/
+
+.popular {
+    min-height: 100vh;
+}
+
+.pop-content {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0px 15px;
+    position: absolute;
+    top: 145%;
+    left: 14%;
+    text-align: center;
+}
+
+.pop-title {
+    position: relative;
+    top: 100%;
+    left: 1%;
+    font-size: 45px;
+    text-shadow: 0 0 25px #66ccff,
+                0 0 25px #66ccff,
+                0 0 25px #66ccff ;
+} 
+
+.card {
+    max-height: 500px;
+    max-width: 250px;
+    padding: 20px;
+    margin: 20px;
+    background: rgba(20, 20, 30, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    transition: all 0.4s;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.407);
+    animation: pulse 1.5s infinite;
+}
+
+.card h3 {
+    color: #66ccff;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #d0eaff;
+}
+
+.card img {
+    min-height: 270px;
+    width: 200px;
+    border-radius: 20px;
+    border: solid 3px #66ccff;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.5s ease;
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 5px #15f4ee, 0 0 10px #15f4ee, 0 0 20px #15f4ee;
+        box-shadow: 0 0 10px #15f4ee, 0 0 20px #15f4ee, 0 0 30px #15f4ee;
+    }
+    100% {
+        text-shadow: 0 0 10px #15f4ee, 0 0 20px #15f4ee, 0 0 30px #15f4ee;
+        box-shadow: 0 0 20px #15f4ee, 0 0 30px #15f4ee, 0 0 50px #15f4ee;
+    }
+}
+
+.card img:hover {
+    transform: scale(1.1);
+}
+
+.btn-post {
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #66ccff;
+    border: 3px solid #66ccff;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+}
+
+.btn-post:hover {
+    transform: scale(1.2);
+    background: #66ccff;
+    color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 25px #66ccff;
+}
