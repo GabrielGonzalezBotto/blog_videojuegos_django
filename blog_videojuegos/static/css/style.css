@@ -662,10 +662,23 @@ h3 {
 }
 
 .registro p{
+    color: #d0eaff;
     padding: 10px;
     font-size: 18px;
     text-shadow: 0 0 20px #66ccee,
                 0 0 20px #66ccee;
+}
+
+.arrow {
+    font-size: 40px;
+    color: #66ccee;
+    text-shadow: 0 0 25px #66ccee,
+                0 0 25px #66ccee;
+    position: relative;
+    left: 48%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
 }
 
 .btn-registro {
