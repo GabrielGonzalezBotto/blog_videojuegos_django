@@ -31,7 +31,7 @@ body {
     list-style: none;
     display: flex;
     position: relative;
-    left: 34%;
+    left: 44%;
     gap: 40px;
     margin: 0;
     padding: 0;
@@ -66,9 +66,9 @@ body {
 
 .login-label{
     position: absolute;
-    left: 5%;
+    left: 30%;
     color: #66ccff;
-    padding: 5px 25px 5px 15px;
+    padding: 5px 25px 5px 25px;
     border: 2px solid #66ccff;
     border-radius: 10px;
     cursor: pointer;
@@ -84,7 +84,7 @@ body {
     display: none;
     position: absolute;
     top: 95%;
-    left: 5%;
+    left: 30%;
     max-height: 250px;
     text-align: center;
     background-color: rgba(0,0,0,0.7);
@@ -646,10 +646,11 @@ h3 {
 }
 
 .main-title {
+    color: #66ccee;
     position:absolute;
     top: 77%;
-    left: 37%;
-    font-size: 76px;
+    left: 33%;
+    font-size: 86px;
     text-align: center;
     margin: 5px 0;
 }
@@ -3135,6 +3136,8 @@ hr {
 
 @media(max-width: 1100px) {
     .hamburger-label {
+        position: relative;
+        left: 34%;
         display: block;
     }
 
