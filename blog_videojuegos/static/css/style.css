@@ -20,7 +20,7 @@ body {
 .navbar {
     display: flex;
     height: 40px;
-    width: 98%;
+    width: 96%;
     justify-content: center;
     padding: 20px;
     background: rgba(0, 0, 0, 0.6);
@@ -659,8 +659,8 @@ h3 {
 .arrow {
     display: flex;
     flex-direction: column;
+    text-align: center;
     position: relative;
-    left: 49%;
     font-size: 26px;
     text-shadow: 0 0 20px #66ccee,
                 0 0 20px #66ccee;
@@ -740,15 +740,6 @@ h1 {
 /*------JUEGOS POPULARES======*/
 
 .popular {
-    /*position: absolute;
-    top: 88%;
-    height: 100vh;
-    text-align: center;
-    padding: 30px 20px 30px 10px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin: 40px 0;*/
     min-height: 100vh;
 }
 
@@ -758,7 +749,7 @@ h1 {
     gap: 20px;
     padding: 0px 15px;
     position: absolute;
-    top: 145%;
+    top: 165%;
     left: 14%;
     text-align: center;
 }
@@ -845,20 +836,15 @@ h1 {
 /*------NEWS------*/
 
 .news {
-    /*position: absolute;
-    top: 88%;
-    height: 100vh;
-    text-align: center;
-    padding: 30px 20px 30px 10px;*/
     text-align: center;
     margin: 40px 0;
-    min-height: 100vh;
+    min-height: 70vh;
 }
 
 .news hr {
     width: 90%;
     position: absolute;
-    top: 230%;
+    top: 245%;
 }
 
 .news-content {
@@ -867,14 +853,14 @@ h1 {
     gap: 20px;
     padding: 0px 25px;
     position: absolute;
-    top: 253%;
+    top: 273%;
     left: 9%;
 }
 
-.news-title h2 {
+.news-title {
     position: absolute;
-    top: 215%;
-    left: 44%;
+    top: 250%;
+    left: 41%;
     font-size: 35px;
     text-shadow: 0 0 25px #66ccff,
                 0 0 25px #66ccff,
@@ -2778,7 +2764,7 @@ h5.card-title {
     text-align: center;
     color: #a1e6ff;
     font-size: 0.75rem;
-    width: 100%;
+    width: 96%;
 }
 
 hr {
