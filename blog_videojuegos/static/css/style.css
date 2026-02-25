@@ -31,7 +31,7 @@ body {
     list-style: none;
     display: flex;
     position: relative;
-    left: 44%;
+    left: 3%;
     gap: 40px;
     margin: 0;
     padding: 0;
@@ -44,7 +44,6 @@ body {
 }
 
 .nav-links a:hover {
-    color: #66ccee;
     text-shadow: 0 0 5px #15f4ee, 0 0 5px #15f4ee;
 }
 
@@ -66,9 +65,9 @@ body {
 
 .login-label{
     position: absolute;
-    left: 30%;
+    left: 25%;
     color: #66ccff;
-    padding: 5px 25px 5px 25px;
+    padding: 5px 15px 5px 10px;
     border: 2px solid #66ccff;
     border-radius: 10px;
     cursor: pointer;
@@ -83,8 +82,8 @@ body {
 .dropdown-login {
     display: none;
     position: absolute;
-    top: 95%;
-    left: 30%;
+    top: 80%;
+    left: 25%;
     max-height: 250px;
     text-align: center;
     background-color: rgba(0,0,0,0.7);
@@ -628,9 +627,6 @@ h3 {
 /*-------HERO------*/
 
 .hero {
-    /*position: absolute;
-    top: 15%;
-    left: 40%;*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -646,11 +642,10 @@ h3 {
 }
 
 .main-title {
-    color: #66ccee;
     position:absolute;
     top: 77%;
-    left: 33%;
-    font-size: 86px;
+    left: 32%;
+    font-size: 76px;
     text-align: center;
     margin: 5px 0;
 }
@@ -661,24 +656,21 @@ h3 {
     text-align: center;
 }
 
-.registro p{
-    color: #d0eaff;
-    padding: 10px;
-    font-size: 18px;
+.arrow {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 49%;
+    font-size: 26px;
     text-shadow: 0 0 20px #66ccee,
                 0 0 20px #66ccee;
 }
 
-.arrow {
-    font-size: 40px;
-    color: #66ccee;
-    text-shadow: 0 0 25px #66ccee,
-                0 0 25px #66ccee;
-    position: relative;
-    left: 48%;
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
+.registro p{
+    padding: 10px;
+    font-size: 18px;
+    text-shadow: 0 0 20px #66ccee,
+                0 0 20px #66ccee;
 }
 
 .btn-registro {
@@ -3149,8 +3141,6 @@ hr {
 
 @media(max-width: 1100px) {
     .hamburger-label {
-        position: relative;
-        left: 34%;
         display: block;
     }
 
