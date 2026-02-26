@@ -804,7 +804,7 @@ h1 {
 }
 
 .card img {
-    min-height: 270px;
+    max-height: 270px;
     width: 200px;
     border-radius: 20px;
     border: solid 3px #66ccff;
