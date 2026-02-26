@@ -838,7 +838,7 @@ h1 {
 .news {
     text-align: center;
     margin: 40px 0;
-    min-height: 70vh;
+    min-height: 90vh;
 }
 
 .news hr {
