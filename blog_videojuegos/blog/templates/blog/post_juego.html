@@ -1,0 +1,26 @@
+% extends 'base.html' %}
+{% load static %}
+{% block title %}Posts{% endblock %}
+{% block content %}
+
+<div class="neon-text flickering">
+    <h1 class="main-title">
+        <span>P</span><span class="flickering-a">O</span><span>STE</span><span class="flickering-s">OS</span>
+    </h1>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+    {% for juego in post_juego %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{% static 'img/img-blog/imagen-predeterminada.jpg' %}" alt="imagen juego">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ juego.nombre }}</h5>
+                <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                <button class="btn-login">leer post</button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
