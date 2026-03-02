@@ -1,4 +1,4 @@
-% extends 'base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block title %}Posts{% endblock %}
 {% block content %}
@@ -12,15 +12,16 @@
     {% for juego in post_juego %}
         <div class="col">
             <div class="card h-100">
-                <img src="{% static 'img/img-blog/imagen-predeterminada.jpg' %}" alt="imagen juego">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ juego.nombre }}</h5>
+                <img src="{% static 'img/img-blog/Boogerman.png' %}" alt="imagen juego">
+                <div class="card-body">
+                <h3>{{ juego.nombre }}</h3>
                 <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
-                <button class="btn-login">leer post</button>
+                <a href="#" class="btn-post">Ver Post</a>
+            </div>
             </div>
         </div>
     {% endfor %}
 </div>
+
 
 {% endblock %}
