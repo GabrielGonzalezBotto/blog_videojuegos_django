@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Posts{% endblock %}
+{% block content %}
+
+<span class="flickering-h1"><h2 class="contacto-title">PO<span class="flickering-o">S</span>TE<span class="flickering-a">O</span><span class="flickering-c">S</span><span class="flickering-o"></span></h2></span>
+
+</div>
+
+
+<!--<div class="row row-cols-1 row-cols-md-3 g-4 mt-3">-->
+    {% for juego in post_juego %}
+        <div class="col">
+            <div class="card-blog">
+                <img class="main-img" src="{% static 'img/img-blog/Boogerman.png' %}" alt="imagen juego">
+                <div class="card-body">
+                    <p class="card-text">{{ juego.nombre_usuario }}</p>
+                    <p class="card-text">Fecha:{{ juego.fecha }}</p>
+                    <h3 class="card-title">{{ juego.nombre }}</h3>
+                    <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                    <a href="#" class="btn-post">Ver Post</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+<!--</div>-->
+
+
+
+{% endblock %}
