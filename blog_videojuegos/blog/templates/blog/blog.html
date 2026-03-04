@@ -7,22 +7,23 @@
 
 </div>
 
-
-<!--<div class="row row-cols-1 row-cols-md-3 g-4 mt-3">-->
-    {% for juego in post_juego %}
-        <div class="col">
-            <div class="card-blog">
-                <img class="main-img" src="{% static 'img/img-blog/Boogerman.png' %}" alt="imagen juego">
-                <div class="card-body">
+<!--<div class="blog">-->
+    <div class="grid-container">
+    <!--{% for juego in post_juego %}-->
+            <!--<div class="col">-->
+                <div class="card">
                     <p class="card-text">{{ juego.nombre_usuario }}</p>
                     <p class="card-text">Fecha:{{ juego.fecha }}</p>
-                    <h3 class="card-title">{{ juego.nombre }}</h3>
-                    <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
-                    <a href="#" class="btn-post">Ver Post</a>
+                    <img class="main-img" src="{% static 'img/img-blog/Boogerman.png' %}" alt="imagen juego">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ juego.nombre }}</h3>
+                        <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                        <a href="#" class="btn-post">Ver Post</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-    {% endfor %}
+            <!--</div>-->
+    <!--{% endfor %}-->
+    </div>
 <!--</div>-->
 
 
