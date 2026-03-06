@@ -423,8 +423,8 @@ h3 {
 .filtros-container {
     /*position: relative; /* Cambia a relative para evitar problemas de posicionamiento */
     position: absolute;
-    top: 49%;
-    left: 40%;
+    top: 40%;
+    left: 37%;
     max-width: 657px;
     margin: 20px auto;
     padding: 0 20px;
@@ -434,8 +434,8 @@ h3 {
 .carrusel-filtros {
     /*position: relative;*/
     position: absolute;
-    top: 69%;
-    left: 33%;
+    top: 59%;
+    left: 30%;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -632,6 +632,14 @@ h3 {
     align-items: center;
     margin-top: 0px;
     height: 100vh;
+}
+
+.hero-post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+    height: 70vh;
 }
 
 .img-hero {
@@ -945,8 +953,8 @@ h1 {
 
 .blog-title {
     position: absolute;
-    top: 24%;
-    left: 44%;
+    top: 7%;
+    left: 33%;
     font-size: 76px;
 }
 
@@ -1074,7 +1082,7 @@ h1 {
 .grid-container {
     position: relative;
     display: grid;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
     justify-content: center;
@@ -3038,13 +3046,13 @@ hr {
 
     .main-title {
         position: absolute;
-        left: 23%;
+        left: 9%;
         font-size: 56px;
     }
 
     .img-hero{
         position: relative;
-        left: 6%;
+        left: 3%;
     }
 
     .subtitle {
@@ -3183,6 +3191,14 @@ hr {
 }
 
 @media (max-width: 768px) {
+    .hero-post{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+        height: 65vh;
+    }
+
     .img-hero {
     height: 350px;
     filter: drop-shadow( 4px 6px 12px #66ccff);
@@ -3191,9 +3207,9 @@ hr {
 }
     .blog-title {
         position: absolute;
-        top: 24%;
-        left: 27%;
-        font-size: 76px;
+        top: 1%;
+        left: 1%;
+        /*font-size: 90px;*/
     }
     .card-blog {
         width: 100%;

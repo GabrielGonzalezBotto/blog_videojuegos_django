@@ -3,11 +3,61 @@
 {% block title %}Posts{% endblock %}
 {% block content %}
 
-<span class="flickering-h1"><h2 class="contacto-title">PO<span class="flickering-o">S</span>TE<span class="flickering-a">O</span><span class="flickering-c">S</span><span class="flickering-o"></span></h2></span>
+<div class="hero-post">
+    <h2 class="blog-title">
+        <span class="flickering-h1"><h2 class="contacto-title">PO<span class="flickering-o">S</span>TE<span class="flickering-a">O</span><span class="flickering-c">S</span><span class="flickering-o"></span></h2></span>
+    </h2>
+    
 
-</div>
+
+
 
 <!--<div class="blog">-->
+
+    <section class="filtros-container">
+        <h3>Filtrar y ordenar</h3>
+        <!-- Botones de tipo de filtro -->
+        <div class="filtro-tipo-container">
+            <button class="filtro-tipo-btn active" data-tipo="categoria">Categorías</button>
+            <button class="filtro-tipo-btn" data-tipo="fecha">Post</button>
+            <button class="filtro-tipo-btn" data-tipo="comentarios">Comentarios</button>
+        </div>
+    </section>
+
+    <!-- Carrusel de filtros -->
+    <div class="carrusel-filtros">
+        <button class="carrusel-btn prev-btn" aria-label="Deslizar hacia la izquierda">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="carrusel-track">
+        <!-- Grupo de filtros: Categoría -->
+            <div class="filtro-grupo categoria active">
+                <button class="filtro-btn active" data-filtro="categoria" data-categoria="all">Todos</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="nes">NES</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="sega">SEGA</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="playstation">PlayStation</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="xbox">XBOX</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="pc">PC</button>
+            </div>
+        <!-- Grupo de filtros: Fecha -->
+            <div class="filtro-grupo fecha">
+                <button class="filtro-btn" data-filtro="fecha" data-orden="reciente">Post Más recientes</button>
+                <button class="filtro-btn" data-filtro="fecha" data-orden="antiguo">Post Más antiguos</button>
+            </div>
+        <!-- Grupo de filtros: Comentarios -->
+            <div class="filtro-grupo comentarios">
+                <button class="filtro-btn" data-filtro="comentarios" data-orden="mas">Más comentados</button>
+                <button class="filtro-btn" data-filtro="comentarios" data-orden="menos">Menos comentados</button>
+            </div>
+        </div>
+        <button class="carrusel-btn next-btn" aria-label="Deslizar hacia la derecha">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
+
+
+
     <div class="grid-container">
     {% for juego in post_juego %}
             <!--<div class="col">-->
@@ -19,7 +69,7 @@
                         </a>
                     </div>
                     <p class="card-text">Fecha: {{ juego.fecha }}</p>
-                    <img class="main-img" src="{% static 'img/img-blog/Boogerman.png' %}" alt="imagen juego">
+                    <img class="main-img" src="{% static 'img/img-blog/imagen_predeterminada.jpg' %}" alt="imagen juego">
                     <div class="like-container"><!--BOTON LIKE-->
                         <input type="checkbox" class="like-checkbox" id="like-1">
                         <label class="like-label" for="like-1">
