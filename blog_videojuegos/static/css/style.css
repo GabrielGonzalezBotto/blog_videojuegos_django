@@ -32,6 +32,7 @@ body {
     display: flex;
     position: relative;
     left: 3%;
+    top: 16%;
     gap: 40px;
     margin: 0;
     padding: 0;
@@ -53,6 +54,15 @@ body {
 
 .nav-links li:hover {
     transform: scale(1.1);
+}
+
+/*------LOGO------*/
+.logo img{
+    position: absolute;
+    left: 3%;
+    top: 20%;
+    max-height: 45px;
+    max-width: 45px;
 }
 
 /*------BOTON INICIAR SESION------*/
@@ -202,7 +212,7 @@ body {
 .perfil-usuario {
     position: absolute;
     top: 15px;
-    left: 15px;
+    left: 15%;
     display: flex;
 }
 
@@ -2835,8 +2845,8 @@ hr {
     .hamburger-label {
     display: block;
     position: relative;
-    left: 53%;
-    top: 15px;
+    left: 23%;
+    /*top: 5px;*/
     }
 
     .perfil-mobile{
@@ -2858,7 +2868,7 @@ hr {
     box-shadow: 0 0 10px #66ccee;
     position: absolute;
     top: 100%;
-    left: 48%;
+    left: 8%;
     z-index: 1000;
     padding: 10px 27px;
     }
