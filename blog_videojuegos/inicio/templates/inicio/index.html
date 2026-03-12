@@ -35,7 +35,7 @@
         </span>
         <h2 class="pop-title">JUEGOS MAS POPULARES</h2>
         <div class="pop-content">
-            <div class="card">
+            <!--<div class="card">
                 <img src="{% static 'img/img-blog/Battletoads.webp' %}" alt="Battletoads">
                 <h3>Battletoads</h3>
                 <p>Discover and conquer distant planets filled with unique environments and hidden secrets.</p>
@@ -52,7 +52,80 @@
                 <h3>Cadillacs & Dinosaurs</h3>
                 <p>Discover and conquer distant planets filled with unique environments and hidden secrets.</p>
                 <a href="#" class="btn-post">Ver Post</a>
-            </div>
+            </div>-->
+
+                <div class="card">
+                    <div class="post-usuario">
+                        <a href="#">
+                            <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
+                            <p class="card-text">{{ juego.nombre_usuario }}</p>
+                        </a>
+                    </div>
+                    <p class="card-text">Fecha: {{ juego.fecha }}</p>
+                    <img class="main-img" src="{% static 'img/img-blog/imagen_predeterminada.jpg' %}" alt="imagen juego">
+                    <div class="like-container"><!--BOTON LIKE-->
+                        <input type="checkbox" class="like-checkbox" id="like-1">
+                        <label class="like-label" for="like-1">
+                            <i class="fas fa-heart"></i>
+                            <span class="sr-only">Me gusta</span>
+                        </label>
+                        <span class="like-count">0</span>
+                    </div><!--TERMINA BOTON LIKE-->
+                    <!--<div class="card-body">-->
+                        <h3 class="card-title">{{ juego.nombre }}</h3>
+                        <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                        <a href="#" class="btn-post">Ver Post</a>
+                    <!--</div>-->
+                </div>
+
+                <div class="card">
+                    <div class="post-usuario">
+                        <a href="#">
+                            <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
+                            <p class="card-text">{{ juego.nombre_usuario }}</p>
+                        </a>
+                    </div>
+                    <p class="card-text">Fecha: {{ juego.fecha }}</p>
+                    <img class="main-img" src="{% static 'img/img-blog/imagen_predeterminada.jpg' %}" alt="imagen juego">
+                    <div class="like-container"><!--BOTON LIKE-->
+                        <input type="checkbox" class="like-checkbox" id="like-1">
+                        <label class="like-label" for="like-1">
+                            <i class="fas fa-heart"></i>
+                            <span class="sr-only">Me gusta</span>
+                        </label>
+                        <span class="like-count">0</span>
+                    </div><!--TERMINA BOTON LIKE-->
+                    <!--<div class="card-body">-->
+                        <h3 class="card-title">{{ juego.nombre }}</h3>
+                        <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                        <a href="#" class="btn-post">Ver Post</a>
+                    <!--</div>-->
+                </div>
+
+                <div class="card">
+                    <div class="post-usuario">
+                        <a href="#">
+                            <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
+                            <p class="card-text">{{ juego.nombre_usuario }}</p>
+                        </a>
+                    </div>
+                    <p class="card-text">Fecha: {{ juego.fecha }}</p>
+                    <img class="main-img" src="{% static 'img/img-blog/imagen_predeterminada.jpg' %}" alt="imagen juego">
+                    <div class="like-container"><!--BOTON LIKE-->
+                        <input type="checkbox" class="like-checkbox" id="like-1">
+                        <label class="like-label" for="like-1">
+                            <i class="fas fa-heart"></i>
+                            <span class="sr-only">Me gusta</span>
+                        </label>
+                        <span class="like-count">0</span>
+                    </div><!--TERMINA BOTON LIKE-->
+                    <!--<div class="card-body">-->
+                        <h3 class="card-title">{{ juego.nombre }}</h3>
+                        <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                        <a href="#" class="btn-post">Ver Post</a>
+                    <!--</div>-->
+                </div>
+            
         </div>
     </div>
 
