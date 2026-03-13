@@ -7,6 +7,7 @@ class Juego(models.Model):
     fecha = models.DateField(max_length=8)
     nombre = models.CharField(max_length=100)
     plataforma = models.CharField(max_length=200)
+    imagen = models.CharField(max_length=200, default='default.jpg')
 
     def __str__(self):
         return self.nombre

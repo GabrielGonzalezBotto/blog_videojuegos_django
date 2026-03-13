@@ -69,7 +69,7 @@
                         </a>
                     </div>
                     <p class="card-text">Fecha: {{ juego.fecha }}</p>
-                    <img class="main-img" src="{% static 'img/img-blog/imagen_predeterminada.jpg' %}" alt="imagen juego">
+                    <img class="main-img" src="{% static 'img/img-blog/' %}{{ juego.imagen }}" alt="imagen juego">
                     <div class="like-container"><!--BOTON LIKE-->
                         <input type="checkbox" class="like-checkbox" id="like-1">
                         <label class="like-label" for="like-1">
