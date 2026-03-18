@@ -89,6 +89,63 @@
     </div>
 <!--</div>-->
 
+    <!--PAGINACIÓN-->
+
+    <nav aria-label="Paginación" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if lista_post.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">Primera</a>
+            </li>
+            
+            <li class="page-item">
+                <a class="page-link" href="?page={{lista_post.previous_page_number}}">
+                    Anterior
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Primera</span>
+            </li>
+
+            <li class="page-item disabled">
+                <span class="page-link">Ultima</span>
+            </li>
+            {% endif %}
+
+            {% for num in lista_post.paginator.page_range %}
+            {% if lista_post.number == num %}
+            <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+            </li>
+            {% elif num > post.juego.number|add:'-3' and num < post.juego.number|add:'3' %}
+            <li class="page-item">
+                <a class="link-page" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+
+            {% if lista_post.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ lista_post.paginator.next_page_number }}">Siguiente</a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" href="?page={{ lista_post.paginator.num_pages }}">Ultima</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Siguente</span>
+            </li>
+
+            <li class="page-item disabled">
+                <span class="page-link">Ultima</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+
+
 
 
 {% endblock %}
