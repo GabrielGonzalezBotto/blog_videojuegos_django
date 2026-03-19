@@ -10,7 +10,7 @@ def post_juego(request):
 
 def lista_post(request):
     juegos = Juego.objects.all().order_by('id') #Mantenemos un orden consistente
-    paginator = Paginator(Juego, 1) #Mostramos juegos por pagina
+    paginator = Paginator(Juego, 8) #Mostramos juegos por pagina
     page_number = request.GET.get('page') #Obtenemos el numero de pagina desde la URL (?page=2)
     page_obj = paginator.get_page(page_number) #Obtenemos los objetos de esa pagina
     #Pasamos a plantilla como 'lista_post'
