@@ -1100,11 +1100,11 @@ h1 {
 
 /*-------PAGINACION------*/
 
-.pagination {
+/*.pagination {
     display: flex;
     justify-content: center;
     /*gap: 40px;*/
-    list-style: none;
+    /*list-style: none;
 }
 .page-item {
     color: #66ccee;
@@ -1112,7 +1112,7 @@ h1 {
     border: 3px solid #66ccee;
     border-radius: 15px;
     cursor: pointer;
-}
+}*/
 
 /*------CONTENIDO DEL POST------*/
 
