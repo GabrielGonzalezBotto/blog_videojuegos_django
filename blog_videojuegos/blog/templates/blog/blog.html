@@ -149,13 +149,13 @@
 
     <nav aria-label="Paginación" class="pagination">
         <ul class="pagination justify-content-center">
-            {% if lista_post.has_previous %}
+            {% if lista_juegos.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page=1">Primera</a>
             </li>
             
             <li class="page-item">
-                <a class="page-link" href="?page={{ lista_post.previous_page_number }}">
+                <a class="page-link" href="?page={{ lista_juegos.previous_page_number }}">
                     Anterior
                 </a>
             </li>
@@ -169,8 +169,8 @@
             </li>
             {% endif %}
 
-            {% for num in lista_post.paginator.page_range %}
-            {% if lista_post.number == num %}
+            {% for num in lista_juegos.paginator.page_range %}
+            {% if lista_juegos.number == num %}
             <li class="page-item active">
                 <span class="page-link">{{ num }}</span>
             </li>
@@ -181,13 +181,13 @@
             {% endif %}
             {% endfor %}
 
-            {% if lista_post.has_next %}
+            {% if lista_juegos.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ lista_post.paginator.next_page_number }}">Siguiente</a>
+                <a class="page-link" href="?page={{ lista_juegos.paginator.next_page_number }}">Siguiente</a>
             </li>
 
             <li class="page-item">
-                <a class="page-link" href="?page={{ lista_post.paginator.num_pages }}">Ultima</a>
+                <a class="page-link" href="?page={{ lista_juegos.paginator.num_pages }}">Ultima</a>
             </li>
             {% else %}
             <li class="page-item disabled">
