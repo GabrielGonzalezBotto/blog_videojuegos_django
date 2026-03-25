@@ -59,7 +59,7 @@
 
 
     <div class="grid-container">
-    {% for juego in post_juego %}
+    {% for juego in lista_juegos %}
             <!--<div class="col">-->
                 <div class="card">
                     <div class="post-usuario">
@@ -174,7 +174,7 @@
             <li class="page-item active">
                 <span class="page-link">{{ num }}</span>
             </li>
-            {% elif num > post.juego.number|add:'-3' and num < post.juego.number|add:'3' %}
+            {% elif num > lista_juegos.number|add:'-3' and num < lista_juegos.number|add:'3' %}
             <li class="page-item">
                 <a class="link-page" href="?page={{ num }}">{{ num }}</a>
             </li>
@@ -183,15 +183,15 @@
 
             {% if lista_juegos.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ lista_juegos.paginator.next_page_number }}">Siguiente</a>
+                <a class="page-link" href="?page={{ lista_juegos.next_page_number }}">Siguiente</a>
             </li>
 
             <li class="page-item">
-                <a class="page-link" href="?page={{ lista_juegos.paginator.num_pages }}">Ultima</a>
+                <a class="page-link" href="?page={{ lista_juegos.num_pages }}">Ultima</a>
             </li>
             {% else %}
             <li class="page-item disabled">
-                <span class="page-link">Siguente</span>
+                <span class="page-link">Siguiente</span>
             </li>
 
             <li class="page-item disabled">
