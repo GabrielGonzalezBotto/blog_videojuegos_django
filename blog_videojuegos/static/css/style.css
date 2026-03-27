@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap");
 
 body {
-    margin: 0 30px;
+    margin: 0;
     font-family: 'Orbitron', sans-serif, Arial;
     background: url(/static/img/bg.jpg) no-repeat center center fixed;
     background-size: cover;
@@ -1103,15 +1103,27 @@ h1 {
 .pagination {
     display: flex;
     justify-content: center;
-    /*gap: 40px;*/
+    gap: 5px;
     list-style: none;
+    text-decoration: none;
 }
 .page-item {
     color: #66ccee;
     padding: 10px 15px 10px 15px;
     border: 3px solid #66ccee;
     border-radius: 15px;
-    /*cursor: pointer;*/
+    cursor: pointer;
+}
+
+.page-item.disabled {
+    opacity: 0.3;
+}
+
+.page-item.active {
+    background: #66ccee;
+    color: #1a1a2e;
+    text-shadow: none;
+    transform: scale(1.05);
 }
 
 /*------CONTENIDO DEL POST------*/
@@ -2809,7 +2821,7 @@ h5.card-title {
     text-align: center;
     color: #a1e6ff;
     font-size: 0.75rem;
-    width: 96%;
+    width: 98%;
 }
 
 hr {
