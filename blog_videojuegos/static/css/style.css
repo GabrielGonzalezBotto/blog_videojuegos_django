@@ -9,6 +9,11 @@ body {
     border: 10px solid red;
 }
 
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .favicon {
     width:32px;
     height: 32px;
@@ -1100,19 +1105,23 @@ h1 {
 
 /*-------PAGINACION------*/
 
-.pagination {
+/*.pagination {
     display: flex;
     justify-content: center;
     gap: 5px;
     list-style: none;
-    text-decoration: none;
 }
 .page-item {
     color: #66ccee;
     padding: 10px 15px 10px 15px;
     border: 3px solid #66ccee;
     border-radius: 15px;
+    text-decoration: none;
     cursor: pointer;
+}
+
+.page-item.active {
+    text-decoration: none;
 }
 
 .page-item.disabled {
@@ -1124,7 +1133,65 @@ h1 {
     color: #1a1a2e;
     text-shadow: none;
     transform: scale(1.05);
+}*/
+
+/* Contenedor principal de paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 3rem 0;
+    flex-wrap: wrap;
 }
+
+/* Cada botón/item */
+.page-item {
+    color: #66ccee;
+    background-color: transparent;
+    padding: 10px 18px;
+    border: 3px solid #66ccee;
+    border-radius: 15px;
+    text-decoration: none !important;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-weight: 500;
+}
+
+/* Hover */
+.page-item:hover:not(.active):not(.disabled) {
+    background-color: #66ccee;
+    color: #1a1a2e;
+    transform: scale(1.08);
+    border-color: #66ccee;
+}
+
+/* Página actual */
+.page-item.active {
+    background-color: #66ccee;
+    color: #1a1a2e;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(102, 204, 238, 0.3);
+    font-weight: bold;
+}
+
+/* Deshabilitado */
+.page-item.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    border-color: #999;
+    color: #999;
+}
+
+/* Asegurarnos que los links dentro no tengan color violeta ni subrayado */
+.page-item a {
+    color: inherit;
+    text-decoration: none !important;
+    display: block;
+}
+
+
 
 /*------CONTENIDO DEL POST------*/
 
