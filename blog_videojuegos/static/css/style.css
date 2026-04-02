@@ -1098,7 +1098,8 @@ h1 {
     /*position: relative;*/
     display: grid;
     border: 1px solid red;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /*grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
+    grid-template-columns: repeat(3, 400px);
     gap: 5px;
     justify-content: center;
 }
