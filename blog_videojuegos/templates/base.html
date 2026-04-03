@@ -78,8 +78,8 @@
             </ul>
             </div>
             <!--BARRA DE BUSQUEDA-->
-            <div class="container-search">
-                <input type="text" name="" placeholder="Buscar...">
+            <div class="container-search" role="search" action="{% url 'buscar_juego' %}" method="get">
+                <input type="search" name="q" placeholder="Buscar..." aria-label="Buscar" value="{{ request.GET.q|default:'' }}">
                 <div class="btn-search">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>

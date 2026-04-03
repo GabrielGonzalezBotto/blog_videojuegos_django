@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load statics %}
+
+{% block title %} Resultados de búsqueda {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="blog-title">
+        <span class="flickering-h1"><h2 class="contacto-title">Re<span class="flickering-o">su</span>tado<span class="flickering-a"> p</span><span class="flickering-c"></span>ara<span class="flickering-o">:</span> {{ query }}</h2></span>
+    </h2>
+
+    {% if lista_juegos %}
+    <div class="row">
+        {% for juego in lista_juegos %}
+        <div class="col-md-4 md-3">
+            <div class="card h-100 shadow-sm">
+                <img src="{% static 'img/img-blog/'|add:juego.imagen %}" class="main-img" alt="{{ juego.nombre }}">
+                <div class="like-container"><!--BOTON LIKE-->
+                        <input type="checkbox" class="like-checkbox" id="like-1">
+                        <label class="like-label" for="like-1">
+                            <i class="fas fa-heart"></i>
+                            <span class="sr-only">Me gusta</span>
+                        </label>
+                        <span class="like-count">0</span>
+                    </div><!--TERMINA BOTON LIKE-->
+                <div class="card-body text-start">
+                    <h3 class="card-title">{{ juego.nombre }}</h3>
+                    <p class="card-text">{{ juego.plataforma }}</p>
+                    <a href="#" class="btn-post">Ver Post</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
