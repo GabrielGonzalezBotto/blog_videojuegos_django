@@ -40,23 +40,15 @@
             {% if lista_juegos.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?q={{ query }}&page={{
-                    lista.juegos.previous?page?number 
+                    lista.juegos.previous_page_number 
                 }}">Primera</a>
             </li>
             
-            <li class="page-item">
-                <a class="page-link" href="?page={{ lista_juegos.previous_page_number }}">
-                    Anterior
-                </a>
-            </li>
             {% else %}
             <li class="page-item disabled">
                 <span class="page-link">Primera</span>
             </li>
 
-            <li class="page-item disabled">
-                <span class="page-link">Anterior</span>
-            </li>
             {% endif %}
 
             {% for num in lista_juegos.paginator.page_range %}
@@ -64,16 +56,16 @@
             <li class="page-item active">
                 <span class="page-link">{{ num }}</span>
             </li>
-            {% elif num > lista_juegos.number|add:'-3' and num < lista_juegos.number|add:'3' %}
+            {% else %}
             <li class="page-item">
-                <a class="link-page" href="?page={{ num }}">{{ num }}</a>
+                <a class="link-page" href="?q={{ query }}&page={{ num }}">{{ num }}</a>
             </li>
             {% endif %}
             {% endfor %}
 
             {% if lista_juegos.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?q={{ query }}&page={{ num }}">Siguiente</a>
+                <a class="page-link" href="?q={{ query }}&page={{ Lista }}">Siguiente</a>
             </li>
 
             <li class="page-item">
