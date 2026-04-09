@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 from blog.models import Juego
 
@@ -14,6 +14,16 @@ def lista_juegos(request):
     #Pasamos a la plantilla como lista_juegos
     contexto_blog_juegos = {'lista_juegos': page_obj}
     return render(request, 'blog/blog.html', contexto_blog_juegos)
+
+def detalle_juego(request, pk):
+    #Obtenemos el juego concreto o un 404 si no existe
+    Juego = get_object_or_404(Juego, pk=pk)
+
+    #Creamos el contexto que pasaremos a la plantilla
+    contexto = {'juego': Juego}
+
+    #Renderizamos la pantillade detalle
+    return render(request, 'blog/detalle_juego.html', contexto)
 
 #def post_juego(request):
     #juegos = Juego.objects.all()

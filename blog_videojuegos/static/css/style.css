@@ -941,11 +941,14 @@ h1 {
 
 .btn-post {
     padding: 5px 15px;
+    font-size: 15px;
     text-decoration: none;
     color: #66ccff;
+    background-color: #0000001f;
     border: 3px solid #66ccff;
     border-radius: 10px;
     transition: all 0.5s ease;
+    cursor: pointer;
 }
 
 .btn-post:hover {
