@@ -992,8 +992,8 @@ h1 {
 
 .card-blog {
     position: relative;
-    width: 500px;
-    min-height: 500px;
+    width: 600px;
+    min-height: 300px;
     box-shadow: rgba(0, 255, 255, 0.2) 0px 0px 20px;
     display: flex;
     flex-direction: column;
@@ -1006,7 +1006,7 @@ h1 {
     overflow: hidden;
 }
 
-.card:hover {
+.card-blog:hover {
     transform: scale(1.1);
     box-shadow: 0 0 40px rgba(0, 255, 255, 0.407), 0 0 60px rgba(0, 255, 255, 0.2);
     animation: neon-pulse 1.5s infinite;

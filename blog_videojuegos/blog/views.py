@@ -17,10 +17,10 @@ def lista_juegos(request):
 
 def detalle_juego(request, pk):
     #Obtenemos el juego concreto o un 404 si no existe
-    Juego = get_object_or_404(Juego, pk=pk)
+    juego = get_object_or_404(Juego, pk=pk)
 
     #Creamos el contexto que pasaremos a la plantilla
-    contexto = {'juego': Juego}
+    contexto = {'juego': juego}
 
     #Renderizamos la pantillade detalle
     return render(request, 'blog/detalle_juego.html', contexto)

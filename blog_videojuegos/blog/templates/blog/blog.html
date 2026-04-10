@@ -81,7 +81,7 @@
                     <!--<div class="card-body">-->
                         <h3 class="card-title">{{ juego.nombre }}</h3>
                         <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
-                        <a href="#" class="btn-post">Ver Post</a>
+                        <a href="{% url 'detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
                         <!--<button class="btn-post">Ver Post</button>-->
                     <!--</div>-->
                 </div>
