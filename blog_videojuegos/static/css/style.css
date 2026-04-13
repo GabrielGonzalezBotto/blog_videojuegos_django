@@ -993,7 +993,7 @@ h1 {
 .card-blog {
     position: relative;
     width: 600px;
-    min-height: 300px;
+    max-height: 300px;
     box-shadow: rgba(0, 255, 255, 0.2) 0px 0px 20px;
     display: flex;
     flex-direction: column;
