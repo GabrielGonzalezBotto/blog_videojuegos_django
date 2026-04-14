@@ -993,7 +993,7 @@ h1 {
 .card-blog {
     position: relative;
     width: 600px;
-    max-height: 300px;
+    min-height: 300px;
     box-shadow: rgba(0, 255, 255, 0.2) 0px 0px 20px;
     display: flex;
     flex-direction: column;
@@ -1203,7 +1203,7 @@ h1 {
     display: flex;
     align-items: flex-start;
     gap: 20px;
-    margin-bottom: 20px;
+    margin-top: 90px;
 }
 
 .main-img {
