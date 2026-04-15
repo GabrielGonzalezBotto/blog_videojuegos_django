@@ -21,6 +21,15 @@
             </label>
             <span class="like-count">0</span>
         </div><!--TERMINA BOTON LIKE-->
+        <a href="#" class="btn-descarga"><i class="fas fa-download"></i>Descargar</a>
+                <div class="rating-container">
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <span class="rating-score">5/5</span>
+                </div>
         <!--<div class="card-body">-->
             <h3 class="card-title">{{ juego.nombre }}</h3>
             <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
@@ -33,6 +42,57 @@
                     al ser similares a sus competidoras reptiles las Tortugas Ninja.
                     Battletoads fue desarrollado en respuesta al auge de las Tortugas Ninja.
                 </p>
+        </div>
+
+        <div class="comentario-container">
+            <form class="com-form" action="#" method="post" id="com-form">
+                <label for="comment-input-1" class="com-label">comentar</label>
+                <input type="text" name="comentario" placeholder="Comenta aquí...">
+                <button type="submit" class="com-btn">ENVIAR</button>
+            </form>
+        </div>
+
+        <div class="lista-com">
+
+            <div class="comentarios">
+                <span>Usuario1:</span> Batteltoads! orem ipsum dolor sit amet consectetur adipisicing elit. 
+                Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
+                temporibus debitis quod obcaecati fugiat dolorem placeat. 
+                <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
+                    <input type="checkbox" class="menu-checkbox" id="menu-1">
+                    <label class="menu-label" for="menu-1"><i class="fas fa-ellipsis-v"></i></label>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item">
+                            <form action="#" method="get">
+                                <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
+                            </form>
+                            <form action="#" method="post">
+                                <button type="submit" class="delete-btn" aria-label="Eliminar comentario"><i class="fas fa-trash"></i>Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!--TERMINA ACA-->
+            </div>
+
+            <div class="comentarios"><span>Usuario1:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
+                temporibus debitis quod obcaecati fugiat dolorem placeat. 
+                Dolorum, dolore.
+                <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
+                    <input type="checkbox" class="menu-checkbox" id="menu-2">
+                    <label class="menu-label" for="menu-2"><i class="fas fa-ellipsis-v"></i></label>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item">
+                            <form action="#" method="get">
+                                <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
+                            </form>
+                            <form action="#" method="post">
+                                <button type="submit" class="edit-btn" aria-label="Eliminar comentario"><i class="fas fa-edit"></i> Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!--TERMINA ACA-->
+            </div>
         </div>
     </div>
 </div>

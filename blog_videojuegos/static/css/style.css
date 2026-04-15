@@ -1380,7 +1380,7 @@ h1 {
     color: #66ccee;
     position: relative;
     top: 1px;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .com-form input {
@@ -1389,6 +1389,7 @@ h1 {
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.5);
     color: #d0eaff;
+    text-shadow: 5px 5px 25px #66ccee;
     font-family: 'Orbitron', 'sans-serif';
     width: 100%;
 }
@@ -1420,6 +1421,7 @@ h1 {
 
 .lista-com {
     position: relative;
+    border: 2px #66ccee;
     margin-top: 10px;
     max-height: 150px;
     overflow-y: auto;
