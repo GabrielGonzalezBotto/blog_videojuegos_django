@@ -5,6 +5,20 @@
 
 <div class="content-container">
     <div class="card-blog">
+
+        <div class="post-actions">
+            <input type="checkbox" class="menu-checkbox" id="post-menu-1">
+            <label class="menu-label" for="post-menu-1"><i class="fas fa-ellipsis-v"></i></label>
+            <div class="dropdown-menu">
+                <form action="#" method="get">
+                    <button type="submit" class="edit-btn"><i class="fas fa-edit"></i> Editar</button>
+                </form>
+                <form action="#" method="post">
+                    <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Eliminar</button>
+                </form>
+            </div>
+        </div>
+
         <div class="post-usuario">
             <a href="#">
                 <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
@@ -35,6 +49,7 @@
             <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
         <!--</div>-->
         <div class="text-content">
+            <label class="com-label" for="">DESCRIPCIÓN:</label>
             <p>Battletoads es un videojuego del género beat 'em up donde el personaje principal debe luchar contra muchos enemigos (como en Double Dragon o Final Fight). 
                     Fue publicado por primera vez para la videoconsola Nintendo Entertainment System, en el año 1991.
                     En este juego, debíamos manejar a unos sapos, los cuales debían luchar contra distintos enemigos, con caracteres de monstruos. 
@@ -48,14 +63,14 @@
             <form class="com-form" action="#" method="post" id="com-form">
                 <label for="comment-input-1" class="com-label">comentar</label>
                 <input type="text" name="comentario" placeholder="Comenta aquí...">
-                <button type="submit" class="com-btn">ENVIAR</button>
+                <button type="submit" class="btn-post">ENVIAR</button>
             </form>
         </div>
 
         <div class="lista-com">
 
             <div class="comentarios">
-                <span>Usuario1:</span> Batteltoads! orem ipsum dolor sit amet consectetur adipisicing elit. 
+                <span><a href="#">Usuario1:</a></span> Batteltoads! orem ipsum dolor sit amet consectetur adipisicing elit. 
                 Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
                 temporibus debitis quod obcaecati fugiat dolorem placeat. 
                 <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
@@ -74,7 +89,7 @@
                 </div><!--TERMINA ACA-->
             </div>
 
-            <div class="comentarios"><span>Usuario1:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            <div class="comentarios"><span><a href="#">Usuario1:</a></span> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
                 Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
                 temporibus debitis quod obcaecati fugiat dolorem placeat. 
                 Dolorum, dolore.

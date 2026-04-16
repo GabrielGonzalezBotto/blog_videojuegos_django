@@ -379,14 +379,14 @@ input {
     transition: all .7s ease;
 }
 
-::placeholder {
+/*::placeholder {
     color: #66ccee;
     text-shadow: 0 0 15px #66ccee,
                 0 0 15px #66ccee;
     box-shadow: 0 0 15px #66ccee;
     font-family: 'Orbitron', sans-serif;
     font-size: 14px;
-}
+}*/
 
 .btn-search {
     position: absolute;
@@ -1007,7 +1007,7 @@ h1 {
 }
 
 .card-blog:hover {
-    transform: scale(1.1);
+    /*transform: scale(1.1);*/
     box-shadow: 0 0 40px rgba(0, 255, 255, 0.407), 0 0 60px rgba(0, 255, 255, 0.2);
     animation: neon-pulse 1.5s infinite;
 }
@@ -1368,6 +1368,7 @@ h1 {
 
 .comentario-container {
     margin-top: 20px;
+    border: 2px #66ccee;
 }
 
 .com-form {
@@ -1381,6 +1382,7 @@ h1 {
     position: relative;
     top: 1px;
     font-size: 30px;
+    text-decoration: underline;
 }
 
 .com-form input {
