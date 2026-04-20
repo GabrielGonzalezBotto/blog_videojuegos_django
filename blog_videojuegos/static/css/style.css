@@ -1099,11 +1099,11 @@ h1 {
 /*------GRID------*/
 
 .grid-container {
-    /*position: relative;*/
+    position: relative;
     display: grid;
+    margin: 50px;
     border: 1px solid red;
-    /*grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));*/
-    grid-template-columns: repeat(3, 400px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 5px;
     justify-content: center;
 }
@@ -1440,7 +1440,7 @@ h1 {
     border-radius: 5px;
     margin-bottom: 5px;
     color: #d0eaff;
-    font-size: 14px;
+    font-size: 15px;
     border-left: 5px solid #66ccee;
 }
 
@@ -1453,8 +1453,8 @@ h1 {
 
 .post-actions, .comment-actions {
     position: absolute;
-    top: 5px;
-    right: 5px;
+    top: 4px;
+    right: 4px;
 }
 
 .menu-checkbox {
@@ -3148,14 +3148,14 @@ hr {
 
     .container-search {
         position:absolute;
-        left: 80%;
+        left: 65%;
         top: 55%;
         transform: translate(-50%, -50%);
         padding: 10px;
     }
 
     .container-search:hover input {
-        width: 150px;
+        width: 250px;
     }
 
     .main-title {
