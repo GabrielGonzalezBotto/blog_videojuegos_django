@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Starforge Gaming | Login{% endblock %}
+
+{% block content %}
+
+    <div class="signup-container">
+
+        {% if form %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div style="color: red;">{{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div style="color: red;">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" enctype="multipart/form-data" id="registro-form">
+            {% csrf_token %}
+            <input type="checkbox" class="input-check" id="input-check">
+            <label for="input-check"></label>
+
+            <span><h2 class="login-title">Registro</h2></span>
+
+            <!-- Usuario -->
+            <div class="input-box">
+                <span class="icon"><i class="fa-solid fa-user"></i></span>
+                <input type="text" name="username" required value="{{ request.POST.username }}" required>
+                <label>Usuario</label>
+                <div class="input-line"></div>
+            </div>
+
+            <!-- Email -->
+            <div class="input-box">
+                <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+                <input type="email" name="email" required value="{{ request.POST.email }}" required>
+                <label>Email</label>
+                <div class="input-line"></div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="input-box">
+                <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" name="password" id="password" required>
+                <label>Contraseña</label>
+                <div class="input-line"></div>
+            </div>
+
+            <!-- Requisitos de contraseña -->
+            <div class="password-requisitos">
+                <ul>
+                    <li id="req-length">Mínimo 8 caracteres</li>
+                    <li id="req-uppercase">Al menos una letra mayúscula</li>    
+                    <li id="req-number">Al menos un número</li>
+                    <li id="req-special">Al menos un carácter especial (!@#$%&*)</li>
+                    <li id="req-match">Las contraseñas deben coincidir</li>
+                </ul>
+            </div>
+
+            <!-- Confirmar contraseña -->
+            <div class="input-box">
+                <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                <input type="password" name="confirmar_password" id="confirmar_password" required>
+                <label>Confirmar Contraseña</label>
+                <div class="input-line"></div>
+            </div>
+
+            <!-- Apellido -->
+            <div class="input-box">
+                <span class="icon"><i class="fa-solid fa-id-card"></i></span>
+                <input type="text" name="apellido" value="{{ request.POST.apellido }}" required>
+                <label>Apellido</label>
+                <div class="input-line"></div>
+            </div>
+
+            <!-- Fecha de nacimiento -->
+            <div class="input-box">
+                <span class="icon"><i class="fa-solid fa-calendar-days"></i></span>
+                <input type="date" name="fecha_nacimiento" value="{{ request.POST.fecha_nacimiento }}" required>
+                <label>Fecha de nacimiento</label>
+                <div class="input-line"></div>
+            </div>
+
+            <!-- Imagen -->
+            <div class="input-box">
+                <span class="icon"><i class="fa-solid fa-image"></i></span>
+                <input type="file" name="imagen" required>
+                <label>Imagen</label>
+                <div class="input-line"></div>
+            </div>
+
+            <!-- Superusuario -->
+            <!--{% if request.user.is_staff %}-->
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox" name="is_superuser">
+                    ¿Es superusuario?
+                </label>
+            </div>
+            <!--{% endif %}-->
+
+            <div class="superuser">
+                <label>
+                    ¿Es superusuario?
+                    <input type="checkbox" name="superuser" id="superuser">
+                </label>
+            </div>
+
+            <div class="account">
+                <label>
+                    ¿Ya tenés cuenta?
+                </label>
+                <a href="{% url 'login' %}">Inicia sesión aquí</a>
+            </div>
+
+            <button type="submit" class="login-btn">Registrar</button>
+
+            <!--<div class="register-link">
+                <p>¿Ya tenés cuenta? <a href="/login/signin/">Iniciar sesión</a></p>
+            </div>-->
+
+            {% if mensaje %}
+                <div style="color:white;text-align:center;margin-top:10px">{{ mensaje }}</div>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- Validación visual -->
+    <script>
+        document.getElementById("registro-form").addEventListener("submit", function(e) {
+            const pass = document.getElementById("password").value;
+            const confirm = document.getElementById("confirmar_password").value;
+            if (pass !== confirm) {
+                alert("Las contraseñas no coinciden");
+                e.preventDefault();
+            }
+        });
+    </script>
+    <script src="blog.js"></script>
+
+{% endblock %}
