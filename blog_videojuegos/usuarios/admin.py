@@ -18,10 +18,10 @@ class UsuarioAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email', 'password', 'password2', 'is_staff', 'is_active')
+            'fields': ('username', 'email', 'password', 'is_staff', 'is_active')
         }),
     )
     search_fields = ('username', 'email')
-    ordering = ('username')
+    ordering = ('username',)
 
 admin.site.register(Usuario, UsuarioAdmin)
