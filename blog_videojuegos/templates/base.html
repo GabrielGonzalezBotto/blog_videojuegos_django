@@ -31,11 +31,11 @@
             <div class="dropdown-login">
                 <h3>si ya sos parte de nuestra armada</h3>
                 <img src="{% static 'img/img-blog/soldier2.webp' %}" class="img-login" alt="SOLDIER 2 LOGIN">
-                <a href="#" class="btn-login">INICIÁ SESIÓN</a>
+                <a href="{% url 'login' %}" class="btn-login">INICIÁ SESIÓN</a>
                 <!--<button class="btn-login" type="submit">INICIÁ SESIÓN</button>-->
             </div>
 
-        <!--<a href="" class="btn-login">INICIAR SESIÓN</a>-->
+        <!--<a href="{% url 'login' %}" class="btn-login">INICIAR SESIÓN</a>-->
 
             
 
@@ -46,13 +46,13 @@
                     
                         <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil por defecto">
             
-                        <span>JUAN GAMER</span>
+                        <span>{{ user.username }}</span>
                     </label>
                     <div class="dropdown-menu">
                         <a href="#" class="dropdown-item">Ver Perfil</a>
                         <a href="#" class="dropdown-item">Editar Perfil</a>
                         <a href="#" class="dropdown-item">Crear Posteo</a>
-                        <a href="#" class="dropdown-item">Cerrar Sesión</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Cerrar Sesión</a>
                     </div>
                 </div>
             <ul class="nav-links">
@@ -61,14 +61,14 @@
                         <label class="menu-label" for="perfil-menu-mobile">
                             <div class="perfil-usuario-mobile">
                                 <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil de Juan Gamer">
-                                <span>Juan Gamer</span>
+                                <span>{{ user.username }}</span>
                             </div>
                         </label>
                         <ul class="perfil-submenu">
                             <li><a href="#" class="dropdown-item">Ver Perfil</a></li>
                             <li><a href="#" class="dropdown-item">Editar Perfil</a></li>
                             <li><a href="#" class="dropdown-item">Crear Posteo</a></li>
-                            <li><a href="#" class="dropdown-item">Cerrar Sesión</a></li>
+                            <li><a href="{% url 'logout' %}" class="dropdown-item">Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 <li><a href="{% url 'inicio'%}">INICIO</a></li>
