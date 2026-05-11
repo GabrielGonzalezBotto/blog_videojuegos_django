@@ -12,23 +12,39 @@
                 
                 <span><h2 class="login-title">Auth Login</h2></span>
 
-                <div class="input-box">
-                    <span class="icon">
-                        <ion-icon name="mail"><i class="fa-solid fa-user"></i></ion-icon>
-                    </span>
-                    <input type="email" name="email" value="{{ user.email }}" required>
-                    <label for="email">Email</label>
-                    <div class="input-line"></div>
+                <!-- Email -->
+
+            <div class="input-box">
+                <label for="{{ form.email.id_for_label
+                }}">Email</label>
+                <input type="text" name="{{ form.email.html_name}}" 
+                                    id="{{ form.email.id_for_label}}"
+                                    value="{{ form.email.value|default_if_none:'' }}" >
+                <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+                {% if form.email.error %}
+                <div class="invalid-feedback d-block">
+                    {{form.email.errors|striptags }}
                 </div>
+                {% endif %}
+                <div class="input-line"></div>
+            </div>
 
                 <div class="input-box">
-                    <span class="icon">
-                        <ion-icon name="lock-closed"><i class="fa-solid fa-lock"></i></ion-icon>
-                    </span>
-                    <input type="password" name="password" value="{{ user.email }}" required>
-                    <label for="password">Password</label>
-                    <div class="input-line"></div>
+                <label for="{{ form.password1.id_for_label
+                }}">Contraseña</label>
+                <input type="password" name="{{ form.password1.html_name}}" 
+                                    id="{{ form.password1.id_for_label}}"
+                                    value="{{ form.password1.value|default_if_none:'' }}" >
+                <span class="icon" onclick="togglePassword('{{ form.password1.id_for_label }}')">
+                    <i class="fa fa-eye" id="icon-{{ form.password1.id_for_label }}"></i>
+                </span>
+                {% if form.password1.error %}
+                <div class="invalid-feedback d-block">
+                    {{form.password1.errors|striptags }}
                 </div>
+                {% endif %}
+                <div class="input-line"></div>
+            </div>
 
                 <div class="remember-forgot">
                     <label>

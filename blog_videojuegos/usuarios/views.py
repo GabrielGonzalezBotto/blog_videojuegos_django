@@ -11,7 +11,7 @@ def registro_view(request):
         if form.is_valid():
             usuario = form.save()
             login(request, usuario)
-            return redirect('home')
+            return redirect('index.html')
     else:
         form = RegistroForm()
     return render(request, 'usuarios/registro.html', {'form': form})
@@ -22,7 +22,7 @@ def login_view(request):
         if form.is_valid():
             usuario = form.get_user()
             login(request, usuario)
-            return redirect('home')
+            return redirect('index.html')
         else:
             #Mostrar errores generales en consola para debug
             print(form.errors)
