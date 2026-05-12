@@ -27,7 +27,7 @@
                 <li><a href="{% url 'contacto'%}">CONTACTO</a></li>
             </ul>-->
             <input type="checkbox" class="check-login" id="my-login">
-            <!--<label for="my-login" class="login-label">INICIAR SESIÓN</label>-->
+            <label for="my-login" class="login-label">INICIAR SESIÓN</label>
             <div class="dropdown-login">
                 <h3>si ya sos parte de nuestra armada</h3>
                 <img src="{% static 'img/img-blog/soldier2.webp' %}" class="img-login" alt="SOLDIER 2 LOGIN">
@@ -43,8 +43,12 @@
                     <input type="checkbox" class="menu-checkbox" id="perfil-menu">
                     <label class="menu-label" for="perfil-menu">
                         <!--<img src="#" alt="Perfil user logeado">-->
+
+                        <img src="{{ user.imagen_perfil.url }}" 
+                            alt="Foto de {{ user.username }}" 
+                            class="profile-image">
                     
-                        <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil por defecto">
+                        <!--<img src="{{ form.imagen_perfil }}" alt="Perfil por defecto">-->
             
                         <span>{{ user.username }}</span>
                     </label>

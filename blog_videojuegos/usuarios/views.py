@@ -7,11 +7,11 @@ from django.contrib import messages
 # Create your views here.
 def registro_view(request):
     if request.method == 'POST':
-        form = RegistroForm(request.POST)
+        form = RegistroForm(request.POST, request.FILES)
         if form.is_valid():
             usuario = form.save()
             login(request, usuario)
-            return redirect('index.html')
+            return redirect('inicio')
     else:
         form = RegistroForm()
     return render(request, 'usuarios/registro.html', {'form': form})
@@ -22,7 +22,7 @@ def login_view(request):
         if form.is_valid():
             usuario = form.get_user()
             login(request, usuario)
-            return redirect('index.html')
+            return redirect('inicio')
         else:
             #Mostrar errores generales en consola para debug
             print(form.errors)

@@ -23,6 +23,12 @@ class UsuarioManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
+    imagen_perfil = models.ImageField(
+    upload_to='perfiles/',
+    null=True,
+    blank=True,
+    default='perfiles/default.jpg'
+)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 

@@ -7,62 +7,56 @@
 
 <div class="login-container">
 
-        <form action="#" method="POST" id="edit-perfil-form" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                <span><h2 class="login-title">Auth Login</h2></span>
+    <form method="POST" action="{% url 'login' %}">  <!-- Cambia 'login' por el nombre de tu url si es diferente -->
+        {% csrf_token %}
+        
+        <span><h2 class="login-title">Auth Login</h2></span>
 
-                <!-- Email -->
-
-            <div class="input-box">
-                <label for="{{ form.email.id_for_label
-                }}">Email</label>
-                <input type="text" name="{{ form.email.html_name}}" 
-                                    id="{{ form.email.id_for_label}}"
-                                    value="{{ form.email.value|default_if_none:'' }}" >
-                <span class="icon"><i class="fa-solid fa-envelope"></i></span>
-                {% if form.email.error %}
-                <div class="invalid-feedback d-block">
-                    {{form.email.errors|striptags }}
-                </div>
-                {% endif %}
-                <div class="input-line"></div>
+        <!-- Usuario -->
+        <div class="input-box">
+            <label for="{{ form.username.id_for_label }}">Usuario / Email</label>
+            <input type="text" 
+                    name="{{ form.username.html_name }}" 
+                    id="{{ form.username.id_for_label }}"
+                    value="{{ form.username.value|default_if_none:'' }}" >
+            <span class="icon"><i class="fa-solid fa-user"></i></span>
+            
+            {% if form.username.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.username.errors|striptags }}
             </div>
+            {% endif %}
+            <div class="input-line"></div>
+        </div>
 
-                <div class="input-box">
-                <label for="{{ form.password1.id_for_label
-                }}">Contraseña</label>
-                <input type="password" name="{{ form.password1.html_name}}" 
-                                    id="{{ form.password1.id_for_label}}"
-                                    value="{{ form.password1.value|default_if_none:'' }}" >
-                <span class="icon" onclick="togglePassword('{{ form.password1.id_for_label }}')">
-                    <i class="fa fa-eye" id="icon-{{ form.password1.id_for_label }}"></i>
-                </span>
-                {% if form.password1.error %}
-                <div class="invalid-feedback d-block">
-                    {{form.password1.errors|striptags }}
-                </div>
-                {% endif %}
-                <div class="input-line"></div>
+        <!-- Contraseña -->
+        <div class="input-box">
+            <label for="{{ form.password.id_for_label }}">Contraseña</label>
+            <input type="password" 
+                   name="{{ form.password.html_name }}" 
+                   id="{{ form.password.id_for_label }}"
+                   value="{{ form.password.value|default_if_none:'' }}" >
+            <span class="icon" onclick="togglePassword('{{ form.password.id_for_label }}')">
+                <i class="fa fa-eye" id="icon-{{ form.password.id_for_label }}"></i>
+            </span>
+            
+            {% if form.password.errors %}
+            <div class="invalid-feedback d-block">
+                {{ form.password.errors|striptags }}
             </div>
+            {% endif %}
+            <div class="input-line"></div>
+        </div>
 
-                <div class="remember-forgot">
-                    <label>
-                        <input type="checkbox" name="remember_me" id="remember_me">
-                        Recuérdame 
-                    </label>
-                    <a href="#">¿Olvidaste tu contraseña?</a>
-                </div>
+        <div class="remember-forgot">
+            <label>
+                <input type="checkbox" name="remember_me"> Recuérdame 
+            </label>
+            <a href="#">¿Olvidaste tu contraseña?</a>
+        </div>
 
-                <div class="account">
-                    <label>
-                        ¿Aún no tienes cuenta?
-                    </label>
-                    <a href="#">Regístrate aquí</a>
-                </div>
-
-                <button type="submit" class="login-btn">Login</button>
-            </form>
-    </div>
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+</div>
 
 {% endblock %}
