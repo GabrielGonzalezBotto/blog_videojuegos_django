@@ -2949,8 +2949,8 @@ hr {
     .hamburger-label {
     display: block;
     position: relative;
-    left: 23%;
-    /*top: 5px;*/
+    left: 53%;
+    top: 10px;
     }
 
     .perfil-mobile{
@@ -2987,7 +2987,7 @@ hr {
 
     .login-label{
         position: relative;
-        left: 5%;
+        left: 35%;
         bottom: 15px;
         color: #66ccff;
         font-family: 'Orbitron', sans-serif;
@@ -3002,7 +3002,7 @@ hr {
         display: none;
         position: absolute;
         top: 100%;
-        left: 6%;
+        left: 13%;
         max-height: 250px;
         text-align: center;
         font-family: 'Orbitron', sans-serif;
@@ -3024,7 +3024,7 @@ hr {
     }
 
     .container-search:hover input {
-        width: 200px;
+        width: 210px;
     }
 
     .btn-volver{
@@ -3108,6 +3108,15 @@ hr {
         overflow: hidden;
     }*/
 
+    .profile-image {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid white !important;
+    display: block !important;
+}
+
     .news-content {
         display: flex;
         flex-direction: column;
@@ -3148,14 +3157,14 @@ hr {
 
     .container-search {
         position:absolute;
-        left: 65%;
+        left: 80%;
         top: 55%;
         transform: translate(-50%, -50%);
         padding: 10px;
     }
 
     .container-search:hover input {
-        width: 250px;
+        width: 180px;
     }
 
     .main-title {
