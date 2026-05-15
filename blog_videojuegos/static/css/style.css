@@ -2949,7 +2949,7 @@ hr {
     .hamburger-label {
     display: block;
     position: relative;
-    left: 53%;
+    left: 44%;
     top: 10px;
     }
 
@@ -2987,11 +2987,11 @@ hr {
 
     .login-label{
         position: relative;
-        left: 35%;
+        left: 39%;
         bottom: 15px;
         color: #66ccff;
         font-family: 'Orbitron', sans-serif;
-        padding: 5px 15px 5px 10px;
+        padding: 3px 3px 3px 3px;
         border: 2px solid #66ccff;
         border-radius: 10px;
         cursor: pointer;
@@ -3107,15 +3107,6 @@ hr {
         min-height: auto;
         overflow: hidden;
     }*/
-
-    .profile-image {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
-    border: 2px solid white !important;
-    display: block !important;
-}
 
     .news-content {
         display: flex;
