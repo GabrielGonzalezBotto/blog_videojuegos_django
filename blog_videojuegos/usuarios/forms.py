@@ -11,3 +11,8 @@ class RegistroForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     # No hace falta Meta
     pass
+
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['username', 'email', 'imagen_perfil']

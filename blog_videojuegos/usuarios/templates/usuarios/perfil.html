@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Starforge Gaming | Perfil{% endblock %}
+
+{% block content %}
+
+<div class="hero">
+    <div class="neon-text flickering">
+        <h2 class="perfil-title">
+            <span>PE</span><span class="flickering-a">RF</span><span>I</span><span class="flickering-s">L</span>
+        </h2>
+    </div>
+</div>
+
+<section class="perfil">
+
+    <section class="filtros-container">
+        <h3>Filtrar y ordenar</h3>
+        <!-- Botones de tipo de filtro -->
+        <div class="filtro-tipo-container">
+            <button class="filtro-tipo-btn active" data-tipo="categoria">Categorías</button>
+            <button class="filtro-tipo-btn" data-tipo="fecha">Post</button>
+            <button class="filtro-tipo-btn" data-tipo="comentarios">Comentarios</button>
+        </div>
+    </section>
+
+    <!-- Carrusel de filtros -->
+    <div class="carrusel-filtros">
+        <button class="carrusel-btn prev-btn" aria-label="Deslizar hacia la izquierda">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="carrusel-track">
+        <!-- Grupo de filtros: Categoría -->
+            <div class="filtro-grupo categoria active">
+                <button class="filtro-btn active" data-filtro="categoria" data-categoria="all">Todos</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="nes">NES</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="sega">SEGA</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="playstation">PlayStation</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="xbox">XBOX</button>
+                <button class="filtro-btn" data-filtro="categoria" data-categoria="pc">PC</button>
+            </div>
+        <!-- Grupo de filtros: Fecha -->
+            <div class="filtro-grupo fecha">
+                <button class="filtro-btn" data-filtro="fecha" data-orden="reciente">Post Más recientes</button>
+                <button class="filtro-btn" data-filtro="fecha" data-orden="antiguo">Post Más antiguos</button>
+            </div>
+        <!-- Grupo de filtros: Comentarios -->
+            <div class="filtro-grupo comentarios">
+                <button class="filtro-btn" data-filtro="comentarios" data-orden="mas">Más comentados</button>
+                <button class="filtro-btn" data-filtro="comentarios" data-orden="menos">Menos comentados</button>
+            </div>
+        </div>
+        <button class="carrusel-btn next-btn" aria-label="Deslizar hacia la derecha">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+
+    <div class="perfil-content">
+        <div class="perfil-header">
+            <img src="{{ user.imagen_perfil.url|default:'Sin imagen' }}" alt="Foto de perfil" class="img-perfil">
+            <h3><span class="nombre-usuario">{{ request.user.first_name|default:request.user.username }}</span></h3>
+            <!--<div class="arroba">#{{ request.user.email }}</div>-->
+            <p class="biografia"></p>
+            <div class="perfil-stats">
+                <span><strong>Posteos:</strong> {{ juegos.count }}</span>
+                <span><strong>Likes:</strong> {{ total_likes }}</span>
+            </div>
+            <a href="#" class="btn">EDITAR PERFIL</a>
+        </div>
+
+        <h3 class="mis-posteos">Mis Posteos</h3>
+        <div class="post-list">
+           <!--{% for juego in juegos %}-->
+            <div class="card" id="post-{{ juego.id }}">
+                <div class="post-actions">
+                    <input type="checkbox" class="menu-checkbox" id="post-menu-{{ juego.id }}">
+                    <label class="menu-label" for="post-menu-{{ juego.id }}"><i class="fas fa-ellipsis-v"></i></label>
+                    <div class="dropdown-menu">
+                        <a href="#" class="edit-btn"><i class="fas fa-edit"></i> Editar</a>
+                        <form action="#" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="post-usuario">
+                    <!--<a href="#">
+                        <img src="{% static 'img/profiles/perfil 7.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
+                        <span>{{ request.user.first_name|default:request.user.username }}</span>
+                        <div class="arroba">@{{ request.user.username }}</div>
+                    </a>-->
+                </div>
+                <div class="content-container">
+                    <!--{% if juego.imagen %}-->
+                        <img src="{{ juego.imagen.url }}" alt="{{ juego.titulo }}" class="main-img">
+                    <!--{% else %}-->
+                        <img src="{ static 'img/perfiles/default.png '}" alt="img predefinida" class="main-img">
+                    <!--{% endif %}-->
+                    <div class="text-content">
+                        <h3>{{ juego.titulo }}</h3>
+                        <span class="categoria">{{ juego.categoria }}</span>
+                        <span class="fecha-post">{{ juego.fecha_agregado|date:"F d, Y" }}</span>
+                        <p>{{ juego.descripcion }}
+
+                        </p>
+                        <!--{% if juego.archivo %}-->
+                        <a href="{{ juego.archivo.url }}" class="btn-descarga"><i class="fas fa-download"></i> Descargar</a>
+                        <!--{% endif %}-->
+                        <!-- Like solo lectura -->
+                        <div class="like-container readonly">
+                            <!-- Ícono del corazón -->
+                            <i class="fas fa-heart {% if user.is_authenticated and user in juego.likes.all %}liked{% endif %}"></i>
+                            <span class="sr-only">Me gusta</span>
+
+                            <!-- Contador -->
+                            <span class="like-count" id="like-count-{{ juego.id }}">{{ juego.total_likes }}</span>
+                        </div>
+
+                    </div>
+                </div>
+                <!--formulario inicio-->
+                <div class="comentario-container">
+                <!--{% if user.is_authenticated %}-->
+                    <form action="{% url 'apps.comentarios:agregar_comentario' juego.id %}"
+                        method="post"
+                        class="com-form"
+                        id="com-form-{{ juego.id }}">
+                        <!--{% csrf_token %}-->
+                        <label for="comentario-{{ juego.id }}" class="com-label">Comentar</label>
+                        <input type="text" id="comentario-{{ juego.id }}" name="texto" placeholder="Escribe tu comentario...">
+                        <button type="submit" class="com-btn">Enviar</button>
+                    </form>
+                <!--{% else %}-->
+                        <p><a href="{% url 'signin' %}">Inicia sesión</a> para comentar</p>
+                <!--{% endif %}-->
+                </div>
+                <!--COMENTARIOS inicio-->
+                <div class="lista-com">
+                    <!--{% for item in juego.comentarios.all %}-->
+                    <div class="comentarios" id="comentario-{{ item.id }}">
+                        <span>{{ item.usuario.user.username }}:</span> {{ item.texto }}                                
+                        <!--{% if user.is_authenticated and user.id == item.usuario.user.id or user.is_authenticated and user.is_staff %}-->
+                            <div class="comment-actions">
+                                <input type="checkbox" class="menu-checkbox" id="menu-{{ item.pk }}">
+                                <label class="menu-label" for="menu-{{ item.pk }}"><i class="fas fa-ellipsis-v"></i></label>
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-item">
+
+                                        <form action="{% url 'apps.comentarios:modificar_comentario' item.pk %}" method="get">
+                                            <input type="hidden" name="next" value="{% url 'perfil' %}#post-{{ item.blog.id }}">
+                                            <button type="submit" class="edit-btn" aria-label="Editar comentario">
+                                                <i class="fas fa-edit"></i> Editar
+                                            </button>
+                                        </form>
+
+                                        <form action="{% url 'apps.comentarios:eliminar_comentario' item.pk %}" method="get">
+                                            <input type="hidden" name="next" value="{% url 'perfil' %}#post-{{ item.blog.id }}">
+                                            <button type="submit" class="delete-btn" aria-label="Eliminar comentario">
+                                                <i class="fas fa-trash"></i>Eliminar
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        <!--{% endif %}-->
+                    </div>
+                    <!--{% empty %}-->
+                    <p>No hay comentarios aún. ¡Sé el primero en opinar!</p>
+                    <!--{% endfor %}-->
+                </div>
+                <!--fin comentarios -->
+            </div>
+            <!--{% empty %}-->
+
+        <div class="card-blog">
+
+        <!--REUTILIZACION DEL CODIGOPARA OPCIONES DEL POST-->
+        <div class="post-actions">
+            <input type="checkbox" class="menu-checkbox" id="post-menu-1">
+            <label class="menu-label" for="post-menu-1"><i class="fas fa-ellipsis-v"></i></label>
+            <div class="dropdown-menu">
+                <form action="#" method="get">
+                    <button type="submit" class="edit-btn"><i class="fas fa-edit"></i> Editar</button>
+                </form>
+                <form action="#" method="post">
+                    <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Eliminar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="post-usuario">
+            <a href="#">
+                <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
+                <span>{{ request.user.first_name|default:request.user.username }}</span>
+                <!--<div class="arroba">@maria_gamer1234</div>-->
+            </a>
+        </div>
+        <div class="content-container">
+            <img src="{% static 'img/img-blog/Battletoads.webp'%}" alt="BATTLETOADS" class="main-img" loading="lazy">
+            <div class="text-content">
+                <h3>BATTLETOADS</h3>
+                <span class="categoria">NES</span>
+                <span class="fecha-post">Julio 20, 2025 - 6:33 pm</span>
+                <p>Battletoads es un videojuego del género beat 'em up donde el personaje principal debe luchar contra muchos enemigos (como en Double Dragon o Final Fight). 
+                    Fue publicado por primera vez para la videoconsola Nintendo Entertainment System, en el año 1991.
+                    En este juego, debíamos manejar a unos sapos, los cuales debían luchar contra distintos enemigos, con caracteres de monstruos. 
+                    El haber usado anfibios como personajes principales luchadores, les significó críticas, 
+                    al ser similares a sus competidoras reptiles las Tortugas Ninja.
+                    Battletoads fue desarrollado en respuesta al auge de las Tortugas Ninja.
+                </p>
+                <a href="#" class="btn-descarga"><i class="fas fa-download"></i>Descargar</a>
+                <div class="rating-container">
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <i class="fas fa-star filled"></i>
+                    <span class="rating-score">5/5</span>
+                </div>
+                <div class="like-container"><!--BOTON LIKE-->
+                    <input type="checkbox" class="like-checkbox" id="like-1">
+                    <label class="like-label" for="like-1">
+                        <i class="fas fa-heart"></i>
+                        <span class="sr-only">Me gusta</span>
+                    </label>
+                    <span class="like-count">0</span>
+                </div><!--TERMINA BOTON LIKE-->
+            </div>
+        </div>
+        <div class="comentario-container">
+            <form class="com-form" action="#" method="post" id="com-form">
+                <label for="comment-input-1" class="com-label">Comentar</label>
+                <input type="text" name="comentario" placeholder="Comenta aquí...">
+                <button type="submit" class="com-btn">ENVIAR</button>
+            </form>
+        </div>
+        <div class="lista-com">
+            <div class="comentarios">
+                <span>Usuario1:</span> Batteltoads! orem ipsum dolor sit amet consectetur adipisicing elit. 
+                Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
+                temporibus debitis quod obcaecati fugiat dolorem placeat. 
+                <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
+                    <input type="checkbox" class="menu-checkbox" id="menu-1">
+                    <label class="menu-label" for="menu-1"><i class="fas fa-ellipsis-v"></i></label>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item">
+                            <form action="#" method="get">
+                                <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
+                            </form>
+                            <form action="#" method="post">
+                                <button type="submit" class="delete-btn" aria-label="Eliminar comentario"><i class="fas fa-trash"></i>Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!--TERMINA ACA-->
+            </div>
+            <div class="comentarios"><span>Usuario1:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
+            temporibus debitis quod obcaecati fugiat dolorem placeat. 
+            Dolorum, dolore.
+            <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
+                    <input type="checkbox" class="menu-checkbox" id="menu-2">
+                    <label class="menu-label" for="menu-2"><i class="fas fa-ellipsis-v"></i></label>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item">
+                            <form action="#" method="get">
+                                <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
+                            </form>
+                            <form action="#" method="post">
+                                <button type="submit" class="edit-btn" aria-label="Eliminar comentario"><i class="fas fa-edit"></i> Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!--TERMINA ACA-->
+            </div>
+            <div class="comentarios"><span>Usuario1:</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
+            temporibus debitis quod obcaecati fugiat dolorem placeat. 
+            Dolorum, dolore.orem ipsum dolor sit amet consectetur adipisicing elit. 
+            Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
+            temporibus debitis quod obcaecati fugiat dolorem placeat. 
+            Dolorum, dolore.
+            <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
+                    <input type="checkbox" class="menu-checkbox" id="menu-3">
+                    <label class="menu-label" for="menu-3"><i class="fas fa-ellipsis-v"></i></label>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item">
+                            <form action="#" method="get">
+                                <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
+                            </form>
+                            <form action="#" method="post">
+                                <button type="submit" class="edit-btn" aria-label="Eliminar comentario"><i class="fas fa-edit"></i> Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div><!--TERMINA ACA-->
+            </div>
+        </div>
+    </div>
+            <!--<p>No tienes posteos todavía.</p>-->
+            <!--{% endfor %}-->
+        </div>
+    </div>
+</section>
+
+<!-- Agrega aquí el contenido específico de esta página -->
+{% endblock %}
