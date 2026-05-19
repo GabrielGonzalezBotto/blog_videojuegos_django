@@ -18,7 +18,7 @@
             {% endfor %}
         {% endif %}
 
-        <form method="post"  enctype="multipart/form-data" id="registro-form">
+        <form method="post"   id="registro-form">
             {% csrf_token %}
             <input type="checkbox" class="input-check" id="input-check">
             <label for="input-check"></label>
@@ -146,7 +146,7 @@
             </div>-->
 
             <!-- Imagen de Perfil -->
-        <div class="input-box">
+        <!--<div class="input-box">
             <label for="{{ form.imagen_perfil.id_for_label }}">Foto de Perfil <small>(opcional)</small></label>
             <input type="file" 
                     name="{{ form.imagen_perfil.html_name }}" 
@@ -156,7 +156,7 @@
                 <div class="invalid-feedback d-block">{{ form.imagen_perfil.errors|striptags }}</div>
             {% endif %}
             <small class="text-muted">Formatos permitidos: JPG, PNG, GIF (máx. 5MB)</small>
-        </div>
+        </div>-->
 
             <!-- Superusuario -->
             <!--{% if request.user.is_staff %}-->

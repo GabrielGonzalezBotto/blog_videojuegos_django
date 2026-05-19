@@ -37,8 +37,8 @@ def logout_view(request):
 
 @login_required
 #def perfil_view(request):
-    #return render(request, 'usuarios/perfil.html')
-def perfil_view(request):
+    #return render(request, 'usuarios/editar_perfil.html')
+def perfil(request):
     if request.method == 'POST':
         # instance=request.user le indica a Django que actualice al usuario actual en vez de crear uno nuevo
         # request.FILES es obligatorio para recibir archivos multimedia como imágenes
@@ -51,4 +51,4 @@ def perfil_view(request):
         # Carga el formulario con los datos actuales del usuario logueado
         form = EditarPerfilForm(instance=request.user)
         
-    return render(request, 'usuarios/perfil.html', {'form': form})
+    return render(request, 'usuarios/editar_perfil.html', {'form': form})

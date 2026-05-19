@@ -118,14 +118,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS=[BASE_DIR / 'static']
 
 # ================== MEDIA FILES ==================
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+#AUTH_USER_MODEL = 'usuarios.Usuario'
+#LOGIN_URL = 'login'
+#LOGIN_REDIRECT_URL = 'inicio'
+#LOGOUT_REDIRECT_URL = 'login'
+
 AUTH_USER_MODEL = 'usuarios.Usuario'
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'inicio'
-LOGOUT_REDIRECT_URL = 'login'
+
+# Le agregamos 'usuarios:' antes del nombre de la ruta
+LOGIN_URL = 'usuarios:login'
+LOGIN_REDIRECT_URL = 'inicio:inicio' if 'inicio' in INSTALLED_APPS else 'inicio' 
+# Si tu app principal de inicio se llama 'inicio' y su url tiene name='inicio', ponelo directo así:
+LOGIN_REDIRECT_URL = 'inicio' 
+LOGOUT_REDIRECT_URL = 'usuarios:login'
