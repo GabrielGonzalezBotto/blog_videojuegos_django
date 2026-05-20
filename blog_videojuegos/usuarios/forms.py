@@ -15,4 +15,7 @@ class LoginForm(AuthenticationForm):
 class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['username', 'email', 'imagen_perfil']
+        fields = ['imagen_perfil', 'descripcion']
+        widgets = {
+            'descripcion': forms.Textarea(attrs={'row': 3, 'placeholder': 'Contanos sobre vos...'}),
+        }

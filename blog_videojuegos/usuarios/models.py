@@ -23,6 +23,7 @@ class UsuarioManager(BaseUserManager):
 class Usuario(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
+    descripcion = models.TextField(max_length=300, blank=True, null=True, default="¡Hola! estoy en The Glitch Zone.")
     imagen_perfil = models.ImageField(
     upload_to='perfiles/',
     null=True,

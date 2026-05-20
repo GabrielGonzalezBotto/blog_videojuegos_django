@@ -51,4 +51,4 @@ def perfil(request):
         # Carga el formulario con los datos actuales del usuario logueado
         form = EditarPerfilForm(instance=request.user)
         
-    return render(request, 'usuarios/editar_perfil.html', {'form': form})
+    return render(request, 'usuarios/perfil.html', {'form': form})
