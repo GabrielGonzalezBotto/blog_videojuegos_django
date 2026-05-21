@@ -40,6 +40,23 @@ def logout_view(request):
     #return render(request, 'usuarios/editar_perfil.html')
 def perfil(request):
     if request.method == 'POST':
+        if 'eliminar_imagen' in request.POST:
+            usuario = request.user
+            usuario.imagen_perfil = 'profiles/perfil-default.jpg'
+            usuario.save()
+            messages.success(request, "¡Tu foto de perfil fue eliminada!")
+            return redirect('perfil')
+        
+        form = EditarPerfilForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "¡Tu perfil se actualizó correctamente!")
+            return redirect('perfil')
+        else:
+            form = EditarPerfilForm(instance=request.user)
+            return render(request, 'perfil', {'form': form})
+
+    if request.method == 'POST':
         # instance=request.user le indica a Django que actualice al usuario actual en vez de crear uno nuevo
         # request.FILES es obligatorio para recibir archivos multimedia como imágenes
         form = EditarPerfilForm(request.POST, request.FILES, instance=request.user)

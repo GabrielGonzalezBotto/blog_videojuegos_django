@@ -50,10 +50,10 @@
             
             <!-- CONTENEDOR MODO VISTA NORMAL -->
             <div id="vista-perfil">
-                {% if user.imagen_perfil %}
+                {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
                     <img src="{{ user.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil">
                 {% else %}
-                    <img src="{% static 'img/profiles/perfil-5.jpg' %}" alt="Foto por defecto" class="img-perfil">
+                    <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Foto por defecto" class="img-perfil">
                 {% endif %}
                 
                 <h3><span class="nombre-usuario">{{ request.user.username }}</span></h3>
@@ -82,10 +82,16 @@
 
             <div class="img-perfil" style="position: relative; width: 150px; height: 150px; margin: 0 auto;"> 
                 <!-- Si el usuario ya tiene foto la muestra; si no, muestra la de por defecto -->
-                {% if user.imagen_perfil %} 
+                {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %} 
                     <img src="{{ user.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"> 
                 {% else %}
-                    <img src="{% static 'img/profiles/perfil-5.jpg' %}" alt="Foto por defecto" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                    <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Foto por defecto" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                {% endif %}
+
+                {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
+                    <button type="submit" name="eliminar_imagen" style="margin-top: 10px; background: #ff3333; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        <i class="fas fa-trash"></i> Eliminar Foto Actual
+                    </button>
                 {% endif %}
                 
                 <!-- Icono sobre la foto para hacer click -->

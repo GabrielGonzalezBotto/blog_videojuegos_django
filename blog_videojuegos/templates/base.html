@@ -40,14 +40,10 @@
 
                         <!--<small style="color:red; font-size:10px;">DEBUG: {{ user.imagen_perfil.url|default:'Sin imagen' }}</small><br>-->
 
-                        {% if user.imagen_perfil and user.imagen_perfil.url %}
-                            <img src="{{ user.imagen_perfil.url }}" 
-                                alt="Foto de {{ user.username }}" 
-                                class="profile-image">
+                        {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
+                            <img src="{{ user.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil">
                         {% else %}
-                            <img src="{{ user.imagen_perfil.url|default:'Sin imagen' }}" 
-                                alt="Default" 
-                                class="profile-image">
+                            <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Foto por defecto" class="img-perfil">
                         {% endif %}
                         <span>{{ user.username }}</span>
                     </label>
