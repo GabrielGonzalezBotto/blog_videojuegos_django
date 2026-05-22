@@ -1575,6 +1575,8 @@ h1 {
 }
 
 .img-perfil {
+    /*position: relative;
+    bottom: 1%;*/
     height: 150px;
     width: 150px;
     border-radius: 50%;
@@ -1591,6 +1593,9 @@ h1 {
 }
 
 .nombre-usuario {
+   /* position: absolute;
+    left: 41%;
+    top: 31%;*/
     color: #ffffff;
     text-shadow: 0 0 10px #66ccee;
     font-size: 24px;
@@ -1598,8 +1603,9 @@ h1 {
 
 .biografia {
     color: #d0eaff;
+    text-shadow: 0 0 10px #66ccee;
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .perfil-stats {

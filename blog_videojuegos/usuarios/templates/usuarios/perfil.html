@@ -70,7 +70,7 @@
             </div>
 
             <!-- CONTENEDOR MODO EDICIÓN OCULTO (Solo foto y biografía) -->
-            <div id="formulario-perfil" style="display: none; max-width: 400px; margin: 0 auto;">
+            <div id="formulario-perfil" style="display: none; max-width: 400px; margin: 0 auto 15px;">
                 <h4 style="color: #66ccee; margin-bottom: 15px;">AJUSTES DE PERFIL</h4>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -80,7 +80,7 @@
                         {{ form.imagen_perfil }}
                     </div>-->
 
-            <div class="img-perfil" style="position: relative; width: 150px; height: 150px; margin: 0 auto;"> 
+            <div class="img-perfil" style="position: relative; width: 150px; height: 150px; margin: 0 auto 15px;"> 
                 <!-- Si el usuario ya tiene foto la muestra; si no, muestra la de por defecto -->
                 {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %} 
                     <img src="{{ user.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"> 
@@ -95,18 +95,27 @@
                 {% endif %}
                 
                 <!-- Icono sobre la foto para hacer click -->
-                <label for="profile-pic-input" class="icon-container" style="position: absolute; bottom: 0; right: 0; cursor: pointer;  padding: 1px; border-radius: 70%;"> 
+                <label for="id_imagen_perfil" class="icon-container" style="position: absolute; bottom: 0; right: 0; cursor: pointer;  padding: 1px; border-radius: 70%;"> 
                     <span style="font-size: 20px;">📷</span>
                 </label> 
                 <!-- El input oculto que Django leerá mediante el name -->
-                <input type="file" id="profile-pic-input" accept="image/*" name="imagen_perfil" style="display: none;"> 
+                <input type="file" id="id_imagen_perfil" accept="image/*" name="imagen_perfil" style="display: none;"> 
             </div>
 
-                    <div style="margin-top: 25px; text-align: left;">
-                        <label style="display: block; margin-bottom: 15px; font-weight: bold; color: #66ccee;">Sobre mí (Biografía):</label>
+                    <!--<div style="margin-top: 25px; text-align: left;">
+                        <label style="display: block; margin-bottom: 15px; font-weight: bold; color: #66ccee;">Sobre mí (Biografía):</label>-->
                         <!-- Forzamos estilos oscuros en el textarea de Django para que no desentone -->
-                        <textarea name="descripcion"  rows="3" maxlength="300" style="width: 90%; padding: 10px; background: #222; border: 1px solid #66ccee; color: #66ccee; border-radius: 4px;">{{ form.descripcion.value|default:request.user.descripcion }}</textarea>
-                    </div>
+                        <!--<textarea  name="descripcion"  rows="3" maxlength="300" style="width: 90%; padding: 10px; background: transparent; border: 1px solid #66ccee; color: #66ccee; border-radius: 4px;">{{ form.descripcion.value|default:request.user.descripcion }}</textarea>
+                    </div>-->
+
+                <div class="input-box">
+                    <span class="icon">
+                        
+                    </span>
+                    <textarea class="biografia" name="descripcion" rows="3">{{ form.descripcion.value|default:request.user.descripcion }}</textarea>
+                    <label for="biografia">Biografía (sobre mi...)</label>
+                    <div class="input-line"></div>
+                </div>
 
                     <div style="margin-top: 20px;">
                         <button type="submit" class="btn" style="background: transparent; color: #66ccee; font-weight: bold;">GUARDAR</button>

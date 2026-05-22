@@ -54,7 +54,7 @@ def perfil(request):
             return redirect('perfil')
         else:
             form = EditarPerfilForm(instance=request.user)
-            return render(request, 'perfil', {'form': form})
+            return render(request, 'usuarios/perfil.html', {'form': form})
 
     if request.method == 'POST':
         # instance=request.user le indica a Django que actualice al usuario actual en vez de crear uno nuevo
