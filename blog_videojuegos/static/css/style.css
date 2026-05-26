@@ -1551,6 +1551,15 @@ h1 {
     }
 }
 
+
+.hero-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0px;
+    height: 70vh;
+}
+
 .perfil {
     display: flex;
     flex-direction: column;
