@@ -84,7 +84,7 @@
             </div>
 
             <!-- CONTENEDOR MODO EDICIÓN OCULTO (Solo foto y biografía) -->
-            <div id="formulario-perfil" style="display: none; max-width: 400px; margin: 0 auto 15px;">
+            <div id="formulario-perfil" class="formulario-perfil">
                 <h4 style="color: #66ccee; margin-bottom: 15px;">AJUSTES DE PERFIL</h4>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -103,9 +103,14 @@
                 {% endif %}
 
                 {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
-                    <button type="submit" name="eliminar_imagen" style="margin-top: 10px; background: #ff3333; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+
+                <div class="eliminar-foto-container">
+                    <button type="submit" name="eliminar_imagen" class="btn-dlt-perf" >
                         <i class="fas fa-trash"></i> Eliminar Foto Actual
                     </button>
+                </div>
+                {% else %}
+                    <div style="height: 15px; width: 100%;"></div>
                 {% endif %}
                 
                 <!-- Icono sobre la foto para hacer click -->
