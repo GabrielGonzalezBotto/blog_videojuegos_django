@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Starforge Gaming | Perfil{% endblock %}
+{% block title %}The Glitch Zone | Perfil{% endblock %}
 
 {% block content %}
 
@@ -15,7 +15,6 @@
 
 <section class="perfil">
 
-    <!-- Carrusel de filtros (Queda intacto para cuando listes los juegos) -->
     <section class="filtros-container">
         <h3>Filtrar y ordenar</h3>
         <!-- Botones de tipo de filtro -->
@@ -59,7 +58,6 @@
 </div>
 
     <div class="perfil-content">
-        <!-- Bloque Principal de Información -->
         <div class="perfil-header">
             
             <!-- CONTENEDOR MODO VISTA NORMAL -->
@@ -72,71 +70,57 @@
                 
                 <h3><span class="nombre-usuario">{{ request.user.username }}</span></h3>
                 
-                <!-- Mostramos la descripción dinámica de la base de datos -->
-                <p class="biografia">{{ request.user.descripcion|default:"¡Hola! estoy detro de The Glitch Zone." }}</p>
+                <p class="biografia">{{ request.user.descripcion|default:"¡Hola! estoy dentro de The Glitch Zone." }}</p>
                 
                 <div class="perfil-stats" style="margin-bottom: 15px;">
                     <span><strong>Posteos:</strong> {{ juegos.count|default:0 }}</span>
                     <span><strong>Likes:</strong> {{ total_likes|default:0 }}</span>
                 </div>
-                <!-- Este botón oculta la información y muestra el formulario abajo mediante JS -->
                 <button type="button" class="btn" id="btn-activar-edicion">EDITAR PERFIL</button>
             </div>
 
-            <!-- CONTENEDOR MODO EDICIÓN OCULTO (Solo foto y biografía) -->
-            <div id="formulario-perfil" class="formulario-perfil">
+            <!-- CONTENEDOR MODO EDICIÓN OCULTO -->
+            <div id="formulario-perfil" style="display: none; max-width: 400px; margin: 0 auto;">
                 <h4 style="color: #66ccee; margin-bottom: 15px;">AJUSTES DE PERFIL</h4>
+                
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     
-                    <!--<div style="margin-bottom: 15px; text-align: left;">
-                        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Nueva Foto:</label>
-                        {{ form.imagen_perfil }}
-                    </div>-->
-
-            <div class="img-perfil" style="position: relative; width: 150px; height: 150px; margin: 0 auto 15px;"> 
-                <!-- Si el usuario ya tiene foto la muestra; si no, muestra la de por defecto -->
-                {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %} 
-                    <img src="{{ user.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"> 
-                {% else %}
-                    <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Foto por defecto" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-                {% endif %}
-
-                {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
-
-                <div class="eliminar-foto-container">
-                    <button type="submit" name="eliminar_imagen" class="btn-dlt-perf" >
-                        <i class="fas fa-trash"></i> Eliminar Foto Actual
-                    </button>
-                </div>
-                {% else %}
-                    <div style="height: 15px; width: 100%;"></div>
-                {% endif %}
-                
-                <!-- Icono sobre la foto para hacer click -->
-                <label for="id_imagen_perfil" class="icon-container" style="position: absolute; bottom: 0; right: 0; cursor: pointer;  padding: 1px; border-radius: 70%;"> 
-                    <span style="font-size: 20px;">📷</span>
-                </label> 
-                <!-- El input oculto que Django leerá mediante el name -->
-                <input type="file" id="id_imagen_perfil" accept="image/*" name="imagen_perfil" style="display: none;"> 
-            </div>
-
-                    <!--<div style="margin-top: 25px; text-align: left;">
-                        <label style="display: block; margin-bottom: 15px; font-weight: bold; color: #66ccee;">Sobre mí (Biografía):</label>-->
-                        <!-- Forzamos estilos oscuros en el textarea de Django para que no desentone -->
-                        <!--<textarea  name="descripcion"  rows="3" maxlength="300" style="width: 90%; padding: 10px; background: transparent; border: 1px solid #66ccee; color: #66ccee; border-radius: 4px;">{{ form.descripcion.value|default:request.user.descripcion }}</textarea>
-                    </div>-->
-
-                <div class="input-box">
-                    <span class="icon">
+                    <!-- Contenedor de la foto con ícono de cámara -->
+                    <div class="img-perfil-edit-container" style="position: relative; width: 150px; height: 150px; margin: 0 auto 15px;"> 
+                        {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %} 
+                            <img src="{{ user.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"> 
+                        {% else %}
+                            <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Foto por defecto" class="img-perfil" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                        {% endif %}
                         
-                    </span>
-                    <textarea class="biografia" name="descripcion" rows="3">{{ form.descripcion.value|default:request.user.descripcion }}</textarea>
-                    <label for="biografia">Biografía (sobre mi...)</label>
-                    <div class="input-line"></div>
-                </div>
+                        <label for="id_imagen_perfil" class="icon-container" style="position: absolute; bottom: 0; right: 0; cursor: pointer; padding: 1px; border-radius: 70%;"> 
+                            <span style="font-size: 20px;">📷</span>
+                        </label> 
+                        <input type="file" id="id_imagen_perfil" accept="image/*" name="imagen_perfil" style="display: none;"> 
+                    </div>
 
-                    <div style="margin-top: 20px;">
+                    <!-- Botón de eliminar con su propio contenedor y espacio inferior -->
+                    {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
+                        <div class="eliminar-foto-container" style="text-align: center; margin-bottom: 35px; display: block; width: 100%;">
+                            <button type="submit" name="eliminar_imagen" style="background: #ff3333; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                                <i class="fas fa-trash"></i> Eliminar Foto Actual
+                            </button>
+                        </div>
+                    {% else %}
+                        <div style="height: 15px; width: 100%;"></div>
+                    {% endif %}
+
+                    <!-- Tu diseño neón para la Biografía -->
+                    <div class="input-box" style="margin-top: 20px; clear: both; width: 100%;">
+                        <span class="icon"></span>
+                        <textarea class="biografia" name="descripcion" rows="3" maxlength="300">{{ form.descripcion.value|default:request.user.descripcion }}</textarea>
+                        <label for="biografia">Biografía (sobre mi...)</label>
+                        <div class="input-line"></div>
+                    </div>
+
+                    <!-- Botones de Guardar y Cancelar adentro del formulario -->
+                    <div style="margin-top: 25px; text-align: center;">
                         <button type="submit" class="btn" style="background: transparent; color: #66ccee; font-weight: bold;">GUARDAR</button>
                         <button type="button" class="btn" id="btn-cancelar-edicion" style="background: transparent; color: #66ccee; margin-left: 10px;">CANCELAR</button>
                     </div>
@@ -147,55 +131,27 @@
 
         <h3 class="mis-posteos">Mis Posteos</h3>
         <div class="post-list">
-            <!-- El bucle queda preparado para cuando crees las publicaciones mañana -->
             {% for juego in juegos %}
             <div class="card" id="post-{{ juego.id }}">
                 <div class="post-actions">
                     <input type="checkbox" class="menu-checkbox" id="post-menu-{{ juego.id }}">
                     <label class="menu-label" for="post-menu-{{ juego.id }}"><i class="fas fa-ellipsis-v"></i></label>
-                    <div class="dropdown-menu">
-                        <a href="#" class="edit-btn"><i class="fas fa-edit"></i> Editar</a>
-                        <form action="#" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Eliminar</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="content-container">
-                    {% if juego.imagen %}
-                        <img src="{{ juego.imagen.url }}" alt="{{ juego.titulo }}" class="main-img">
-                    {% else %}
-                        <img src="{% static 'img/perfiles/default.png' %}" alt="img predefinida" class="main-img">
-                    {% endif %}
-                    <div class="text-content">
-                        <h3>{{ juego.titulo }}</h3>
-                        <span class="categoria">{{ juego.categoria }}</span>
-                        <span class="fecha-post">{{ juego.fecha_agregado|date:"F d, Y" }}</span>
-                        <p>{{ juego.descripcion }}</p>
-                        
-                        <div class="like-container readonly">
-                            <i class="fas fa-heart"></i>
-                            <span class="like-count" id="like-count-{{ juego.id }}">{{ juego.total_likes|default:0 }}</span>
-                        </div>
-                    </div>
                 </div>
             </div>
-            {% empty %}
-            <p style="text-align: center; color: #aaa; width: 100%; margin-top: 20px;">Todavía no publicaste ningún videojuego.</p>
             {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- Un mini script integrado para cambiar entre ver el perfil y editarlo en un segundo -->
+<!-- Scripts unificados (Alternancia de paneles + Vista previa en tiempo real) -->
 <script>
+    // Script 1: Ocultar y mostrar contenedores
     const btnActivar = document.getElementById('btn-activar-edicion');
     const btnCancelar = document.getElementById('btn-cancelar-edicion');
     const vistaPerfil = document.getElementById('vista-perfil');
     const formPerfil = document.getElementById('formulario-perfil');
 
-    if (btnActivar && btnCancelar) {
+    if (btnActivar && btnCancelar && vistaPerfil && formPerfil) {
         btnActivar.addEventListener('click', () => {
             vistaPerfil.style.display = 'none';
             formPerfil.style.display = 'block';
@@ -204,6 +160,25 @@
         btnCancelar.addEventListener('click', () => {
             formPerfil.style.display = 'none';
             vistaPerfil.style.display = 'block';
+        });
+    }
+
+    // Script 2: Vista previa en tiempo real de la imagen elegida
+    const inputFoto = document.getElementById('id_imagen_perfil');
+    const imagenesPerfil = document.querySelectorAll('.img-perfil');
+
+    if (inputFoto && imagenesPerfil.length > 0) {
+        inputFoto.addEventListener('change', function() {
+            const archivo = this.files[0];
+            if (archivo) {
+                const lector = new FileReader();
+                lector.onload = function(e) {
+                    imagenesPerfil.forEach(img => {
+                        img.setAttribute('src', e.target.result);
+                    });
+                }
+                lector.readAsDataURL(archivo);
+            }
         });
     }
 </script>
