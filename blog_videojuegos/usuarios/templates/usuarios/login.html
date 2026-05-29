@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Starforge Gaming | Login{% endblock %}
+{% block title %}The Glitch Zone | Login{% endblock %}
 
 {% block content %}
 
 <div class="login-container">
+
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
     <form method="POST" action="{% url 'login' %}">  <!-- Cambia 'login' por el nombre de tu url si es diferente -->
         {% csrf_token %}
@@ -14,7 +24,7 @@
 
         <!-- Usuario -->
         <div class="input-box">
-            <label for="{{ form.username.id_for_label }}">Usuario / Email</label>
+            <label for="{{ form.username.id_for_label }}">Usuario</label>
             <input type="text" 
                     name="{{ form.username.html_name }}" 
                     id="{{ form.username.id_for_label }}"
@@ -33,9 +43,9 @@
         <div class="input-box">
             <label for="{{ form.password.id_for_label }}">Contraseña</label>
             <input type="password" 
-                   name="{{ form.password.html_name }}" 
-                   id="{{ form.password.id_for_label }}"
-                   value="{{ form.password.value|default_if_none:'' }}" >
+                    name="{{ form.password.html_name }}" 
+                    id="{{ form.password.id_for_label }}"
+                    value="{{ form.password.value|default_if_none:'' }}" >
             <span class="icon" onclick="togglePassword('{{ form.password.id_for_label }}')">
                 <i class="fa fa-eye" id="icon-{{ form.password.id_for_label }}"></i>
             </span>
@@ -52,7 +62,7 @@
             <label>
                 <input type="checkbox" name="remember_me"> Recuérdame 
             </label>
-            <a href="#">¿Olvidaste tu contraseña?</a>
+            <a href="{% url 'registro' %}">¿Olvidaste tu contraseña?</a>
         </div>
 
         <button type="submit" class="login-btn">Login</button>

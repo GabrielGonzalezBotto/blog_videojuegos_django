@@ -103,9 +103,11 @@
                     <!-- Botón de eliminar con su propio contenedor y espacio inferior -->
                     {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
                         <div class="eliminar-foto-container" style="text-align: center; margin-bottom: 35px; display: block; width: 100%;">
-                            <button type="submit" name="eliminar_imagen" style="background: #ff3333; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
-                                <i class="fas fa-trash"></i> Eliminar Foto Actual
-                            </button>
+                            <span>
+                                <button type="submit" name="eliminar_imagen" class="btn-eliminar-foto">
+                                    <i class="fas fa-trash"></i> Eliminar Foto Actual
+                                </button>
+                            </span>
                         </div>
                     {% else %}
                         <div style="height: 15px; width: 100%;"></div>

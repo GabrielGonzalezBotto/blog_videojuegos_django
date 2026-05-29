@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Starforge Gaming | Login{% endblock %}
+{% block title %}The Glitch Zone | Login{% endblock %}
 
 {% block content %}
 
@@ -9,11 +9,11 @@
 
         {% if form %}
             {% for field in form %}
-                {% for error in field.errors %}
+                {% for errors in field.errors %}
                     <div style="color: red;">{{ error }}</div>
                 {% endfor %}
             {% endfor %}
-            {% for error in form.non_field_errors %}
+            {% for errors in form.non_field_errors %}
                 <div style="color: red;">{{ error }}</div>
             {% endfor %}
         {% endif %}

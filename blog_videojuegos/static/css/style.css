@@ -1667,17 +1667,26 @@ h1 {
 
 /* style="margin-top: 10px; background: #ff3333; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;"*/
 
-.btn-dlt-perf{
-    width: 100%;
+.btn-eliminar-foto{
+    width: 50%;
     margin-top: 10px;
-    background: #ff3333;
-    color: #fff;
+    background: transparent;
+    color: #ff3333;
     padding: 5px 10px;
     border: none;
-    border-radius: 4px;
+    border-radius: 4px #ff3333;
     cursor: pointer;
     font-size: 12px;
 }
+
+.btn-eliminar-foto:hover{
+    color: #fff;
+    background: #ff3333;
+    box-shadow: 0 0 10px #ff3333,
+                0 0 10px #ff3333;
+}
+
+/*style="background: #ff3333; color: #fff; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;"*/
 
 /*------LISTA DE POSTS------*/
 
@@ -1831,7 +1840,7 @@ h2 {
 
 .input-box .input-line {
     position: absolute;
-    width: 100%;
+    width: 90% !important;
     bottom: -2px;
     height: 2.5px;
     background: rgb(82, 84, 84);
@@ -2028,6 +2037,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-decoration: underline;
     color: #66ccff;
     text-shadow: 0 0 15px #66ccff;
+}
+
+.messages-container{
+    margin-top: 35px;
+    text-align: center;
+}
+
+.alert{
+    color: #ff3333;
+    text-shadow: 0 0 10px #ff3333;
+    font-size: 14px;
+    font-family: 'Orbitron', sans-serif;
 }
 
 /*------REGISTRO------*/
