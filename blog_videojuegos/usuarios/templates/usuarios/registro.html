@@ -7,19 +7,23 @@
 
     <div class="signup-container">
 
-        {% if form %}
-            {% for field in form %}
-                {% for errors in field.errors %}
-                    <div style="color: red;">{{ error }}</div>
-                {% endfor %}
-            {% endfor %}
-            {% for errors in form.non_field_errors %}
-                <div style="color: red;">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
+        
 
         <form method="post"   id="registro-form">
             {% csrf_token %}
+            {% if form.errors %}
+            <div class="alert">
+                <h4>⚠ ERROR EN EL REGISTRO</h4>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p><strong>{{ field.label }}</strong>{{ error|striptags }}</p>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <p>{{ error|striptags }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
             <input type="checkbox" class="input-check" id="input-check">
             <label for="input-check"></label>
 
