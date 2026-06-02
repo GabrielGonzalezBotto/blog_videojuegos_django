@@ -7,11 +7,7 @@
 
     <div class="signup-container">
 
-        
-
-        <form method="post"   id="registro-form">
-            {% csrf_token %}
-            {% if form.errors %}
+        {% if form.errors %}
             <div class="alert">
                 <h4>⚠ ERROR EN EL REGISTRO</h4>
                 {% for field in form %}
@@ -24,6 +20,9 @@
                 {% endfor %}
             </div>
         {% endif %}
+
+        <form method="post"   id="registro-form">
+            {% csrf_token %}
             <input type="checkbox" class="input-check" id="input-check">
             <label for="input-check"></label>
 
