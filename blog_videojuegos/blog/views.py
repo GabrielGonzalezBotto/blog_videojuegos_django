@@ -1,11 +1,14 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
-from blog.models import Juego
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Juego
+from .forms import PostJuego
 
 # Create your views here.
     
 def lista_juegos(request):
-    juegos = Juego.objects.all().order_by('id') #Mantenemos un orden consistente
+    juegos = Juego.objects.all().order_by('-id') #Mantenemos un orden consistente
     paginator = Paginator(juegos, 8) #Mostramos 8 juegos por paginas
     #Obtenbemos el numero de paginas desde la URL (?page=2)
     page_number = request.GET.get('page')
@@ -25,16 +28,21 @@ def detalle_juego(request, pk):
     #Renderizamos la pantillade detalle
     return render(request, 'blog/detalle_juego.html', contexto)
 
-#def post_juego(request):
-    #juegos = Juego.objects.all()
-    #contexto_post_juego = {'post_juego': juegos}
-    #return render(request, 'blog/blog.html', contexto_post_juego)
+# Vista Crear_post
+@login_required
+def crear_post(request):
+    if request.method == 'POST': 
+        form = PostJuego(request.POST, request.FILES) #Recibimos los datos del formulario
+        if form.is_valid():
+            juego = form.save(commit=False) #Frenamos el guardado para inyectar el autor de la sesion
+            juego.autor = request.user # Asignacion segura del usuario logueado
+            juego.save() #Guardado en base de datos
 
-#def lista_post(request):
-    #juegos = Juego.objects.all().order_by('id') #Mantenemos un orden consistente
-    #paginator = Paginator(Juego, 1) #Mostramos juegos por pagina
-    #page_number = request.GET.get('page') #Obtenemos el numero de pagina desde la URL (?page=2)
-    #page_obj = paginator.get_page(page_number) #Obtenemos los objetos de esa pagina
-     #Pasamos a plantilla como 'lista_post'
-    #contexto_post_juego = {'post_juego': page_obj}
-    #return render(request, 'blog/blog.html', contexto_post_juego)
+            messages.success(request, "¡Tu juego se publicó con éxito en The Glitch Zone!")
+            return redirect('blog:blog') # Reddireccion a la lista de videojuegos
+        else:
+            form = PostJuego()
+
+
+        return render(request, 'blog/crear_post.html', {'form': form})
+
