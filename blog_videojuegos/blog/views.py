@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Juego
 from .forms import PostJuego
+from .models import Categoria
 
 # Create your views here.
     
@@ -40,8 +41,8 @@ def crear_post(request):
 
             messages.success(request, "¡Tu juego se publicó con éxito en The Glitch Zone!")
             return redirect('blog:blog') # Reddireccion a la lista de videojuegos
-        else:
-            form = PostJuego()
+    else:
+        form = PostJuego()
 
 
         return render(request, 'blog/crear_post.html', {'form': form})

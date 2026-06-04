@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}The Glitch Zone | Crear Post{% endblock %}
+
+{% block content %}
+
+    <section class="crear-posteo">
+        <div class="posteo-content">
+
+            <h3>Crear Nuevo Posteo</h3>
+
+            <form method="post" enctype="multipart/form-data" id="crear-posteo-form">
+                {% csrf_token %}
+                <div class="img-posteo-container">
+                    <img src="{% static 'img/profiles/no-img.jpg' %}" alt="Vista previa" class="img-posteo">
+                    <label for="post-pic-input" class="icon-container-post">
+                        <i class="fa-regular fa-image"></i>
+                    </label>
+                    {{ form.imagen }}
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><i class="fa-regular fa-pen-to-square"></i></span>
+                    {{ form.titulo }}
+                    <label for="titulo">Título</label>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><i class="fa-regular fa-pen-to-square"></i></span>
+                    {{ form.descripcion }}
+                    <label for="descripcion">Descripción</label>
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><i class="fa-solid fa-list"></i></span>
+                    {{ categoria }}
+                    <label for="categoria">Categoría</label>
+                    <!--<div class="input-line"></div>-->
+                </div>
+
+                <!-- Campo extra para nueva categoría -->
+                <div class="input-box">
+                    <span class="icon"><i class="fa-solid fa-plus"></i></span>
+                    <input type="text" name="nueva_categoria" id="nueva_categoria" placeholder="O crear nueva categoría">
+                    <div class="input-line"></div>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit" class="btn-edit">PUBLICAR</button>
+                    <button type="button" class="btn-edit">CANCELAR</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}
