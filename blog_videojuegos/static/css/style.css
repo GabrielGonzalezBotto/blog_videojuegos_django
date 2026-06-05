@@ -2211,7 +2211,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     gap: 20px;
     padding: 20px;
-    height: 780px;
+    height: 1000px;
     width: 400px;
     padding: 20px;
     margin-top: 120px;

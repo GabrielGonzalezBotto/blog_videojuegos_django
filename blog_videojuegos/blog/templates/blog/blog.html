@@ -65,7 +65,7 @@
                     <div class="post-usuario">
                         <a href="#">
                             <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
-                            <p class="card-text">{{ juego.nombre_usuario }}</p>
+                            <p class="card-text">{{ user.username }}</p>
                         </a>
                     </div>
                     <p class="card-text">Fecha: {{ juego.fecha }}</p>
@@ -79,9 +79,9 @@
                         <span class="like-count">0</span>
                     </div><!--TERMINA BOTON LIKE-->
                     <!--<div class="card-body">-->
-                        <h3 class="card-title">{{ juego.nombre }}</h3>
+                        <h3 class="card-title">{{ juego.titulo }}</h3>
                         <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
-                        <a href="{% url 'detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
+                        <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
                         <!--<button class="btn-post">Ver Post</button>-->
                     <!--</div>-->
                 </div>

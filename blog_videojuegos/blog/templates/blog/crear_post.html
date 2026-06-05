@@ -6,6 +6,20 @@
 {% block content %}
 
     <section class="crear-posteo">
+
+{% if form.errors %}
+    <div style="background-color: #ff0055; color: white; padding: 15px; border-radius: 5px; font-family: monospace; margin-bottom: 20px; box-shadow: 0 0 15px rgba(255,0,85,0.5);">
+        <strong>¡Alerta en la Matrix! El formulario tiene errores:</strong>
+        <ul>
+        {% for field in form %}
+            {% if field.errors %}
+                <li><strong>{{ field.label }}:</strong> {{ field.errors|striptags }}</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+
         <div class="posteo-content">
 
             <h3>Crear Nuevo Posteo</h3>
@@ -34,19 +48,31 @@
                     <div class="input-line"></div>
                 </div>
 
-                <div class="input-box">
-                    <span class="icon"><i class="fa-solid fa-list"></i></span>
-                    {{ categoria }}
-                    <label for="categoria">Categoría</label>
-                    <!--<div class="input-line"></div>-->
-                </div>
+                <!-- Selector de Categorías Existentes -->
+<div class="input-box">
+    <span class="icon"><i class="fa-solid fa-list"></i></span>
+    <select name="categoria" id="categoria" class="select-field" style="width: 100%; background: black; color: white; border: 1px solid #4b5563; padding: 10px; border-radius: 5px;">
+        <option value="">-- Selecciona una categoría opcional --</option>
+        {% for cat in categorias %}
+            <option value="{{ cat.id }}">{{ cat.nombre }}</option>
+        {% endfor %}
+    </select>
+    <label for="categoria">Categoría</label>
+    <div class="input-line"></div>
+</div>
 
-                <!-- Campo extra para nueva categoría -->
-                <div class="input-box">
+<!-- Campo extra para nueva categoría manual -->
+<div class="input-box">
+    <span class="icon"><i class="fa-solid fa-plus"></i></span>
+    <input type="text" name="nueva_categoria" id="nueva_categoria" placeholder="O crear nueva categoría">
+    <div class="input-line"></div>
+</div>
+
+                <!--<div class="input-box">
                     <span class="icon"><i class="fa-solid fa-plus"></i></span>
-                    <input type="text" name="nueva_categoria" id="nueva_categoria" placeholder="O crear nueva categoría">
+                    <input type="text" name="nueva_plataforma" id="nueva_plataforma" placeholder="Agregar nueva plataforma">
                     <div class="input-line"></div>
-                </div>
+                </div>-->
 
                 <div class="btn-container">
                     <button type="submit" class="btn-edit">PUBLICAR</button>
