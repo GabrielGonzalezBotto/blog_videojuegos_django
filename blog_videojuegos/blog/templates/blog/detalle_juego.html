@@ -22,7 +22,10 @@
         <div class="post-usuario">
             <a href="#">
                 <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
-                <p class="card-text">{{ juego.nombre_usuario }}</p>
+                <p class="card-text">
+                    {% if juego.autor %}
+                        {{}}
+                </p>
             </a>
         </div>
         <p class="card-text">Fecha: {{ juego.fecha }}</p>
@@ -30,7 +33,7 @@
 
         <!--<div class="card-body">-->
             <h3 class="card-title">{{ juego.nombre }}</h3>
-            <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+            <p class="card-text">Plataforma: {{ juego.categoria }}</p>
         <!--</div>-->
 
         <div class="like-container"><!--BOTON LIKE-->
@@ -53,13 +56,7 @@
         
         <div class="text-content">
             <label class="com-label" for="">DESCRIPCIÓN:</label>
-            <p>Battletoads es un videojuego del género beat 'em up donde el personaje principal debe luchar contra muchos enemigos (como en Double Dragon o Final Fight). 
-                    Fue publicado por primera vez para la videoconsola Nintendo Entertainment System, en el año 1991.
-                    En este juego, debíamos manejar a unos sapos, los cuales debían luchar contra distintos enemigos, con caracteres de monstruos. 
-                    El haber usado anfibios como personajes principales luchadores, les significó críticas, 
-                    al ser similares a sus competidoras reptiles las Tortugas Ninja.
-                    Battletoads fue desarrollado en respuesta al auge de las Tortugas Ninja.
-                </p>
+            <p>{{ descripcion }}</p>
         </div>
 
         <div class="comentario-container">

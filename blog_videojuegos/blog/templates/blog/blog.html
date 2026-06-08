@@ -60,16 +60,27 @@
 
     <div class="grid-container">
     {% for juego in lista_juegos %}
-            <!--<div class="col">-->
                 <div class="card">
                     <div class="post-usuario">
                         <a href="#">
-                            <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
-                            <p class="card-text">{{ user.username }}</p>
+                            <img src="{{ user.imagen_perfil.url }}" alt="Perfil del Usuario" class="perfil-img">
+                            <p class="card-text">
+                                {% if juego.autor %}
+                                    {{ juego.autor.username }}
+                                {% else %}
+                                    Anónimo
+                                {% endif %}
+                            </p>
                         </a>
                     </div>
-                    <p class="card-text">Fecha: {{ juego.fecha }}</p>
-                    <img class="main-img" src="{% static 'img/img-blog/' %}{{ juego.imagen }}" alt="imagen juego">
+                    <p class="card-text">Fecha de publicación: {{ juego.fecha }}</p>
+                    
+                    {% if juego.imagen %}
+                        <img class="main-img" src="{{ juego.imagen.url }}" alt="{{ juego.titulo }}">
+                    {% else %}
+                        <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="Sin imagen">
+                    {% endif %}
+
                     <div class="like-container"><!--BOTON LIKE-->
                         <input type="checkbox" class="like-checkbox" id="like-1">
                         <label class="like-label" for="like-1">
@@ -78,75 +89,16 @@
                         </label>
                         <span class="like-count">0</span>
                     </div><!--TERMINA BOTON LIKE-->
-                    <!--<div class="card-body">-->
+
+                    <!--BODY CARD-->
                         <h3 class="card-title">{{ juego.titulo }}</h3>
-                        <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                        <p class="card-text">Plataforma: {{ juego.categoria }}</p>
                         <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
-                        <!--<button class="btn-post">Ver Post</button>-->
-                    <!--</div>-->
                 </div>
-            <!--</div>-->
     {% endfor %}
     </div>
-<!--</div>-->
 
     <!--PAGINACIÓN-->
-
-    <!--<nav aria-label="Paginación" class="pagination">
-        <ul class="pagination justify-content-center">
-            {% if lista_post.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page=1">Primera</a>
-            </li>
-            
-            <li class="page-item">
-                <a class="page-link" href="?page={{ lista_post.previous_page_number }}">
-                    Anterior
-                </a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">Primera</span>
-            </li>
-
-            <li class="page-item disabled">
-                <span class="page-link">Anterior</span>
-            </li>
-            {% endif %}
-
-            {% for num in lista_post.paginator.page_range %}
-            {% if lista_post.number == num %}
-            <li class="page-item active">
-                <span class="page-link">{{ num }}</span>
-            </li>
-            {% elif num > post.juego.number|add:'-3' and num < post.juego.number|add:'3' %}
-            <li class="page-item">
-                <a class="link-page" href="?page={{ num }}">{{ num }}</a>
-            </li>
-            {% endif %}
-            {% endfor %}
-
-            {% if lista_post.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ lista_post.paginator.next_page_number }}">Siguiente</a>
-            </li>
-
-            <li class="page-item">
-                <a class="page-link" href="?page={{ lista_post.paginator.num_pages }}">Ultima</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">Siguente</span>
-            </li>
-
-            <li class="page-item disabled">
-                <span class="page-link">Ultima</span>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>-->
-
-     <!--PAGINACIÓN-->
 
     <nav aria-label="Paginación" class="pagination">
         <ul class="pagination justify-content-center">
