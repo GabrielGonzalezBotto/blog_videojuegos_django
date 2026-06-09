@@ -138,3 +138,4 @@ LOGIN_REDIRECT_URL = 'inicio:inicio' if 'inicio' in INSTALLED_APPS else 'inicio'
 # Si tu app principal de inicio se llama 'inicio' y su url tiene name='inicio', ponelo directo así:
 LOGIN_REDIRECT_URL = 'inicio' 
 LOGOUT_REDIRECT_URL = 'usuarios:login'
+

@@ -63,7 +63,11 @@
                 <div class="card">
                     <div class="post-usuario">
                         <a href="#">
-                            <img src="{{ user.imagen_perfil.url }}" alt="Perfil del Usuario" class="perfil-img">
+                            {% if juego.autor.perfil.avatar %}
+                                <img src="{{ juego.autor.perfil.avatar.url  }}" alt="Perfil del Usuario" class="perfil-img">
+                            {% else %}
+                                <img src="{% static 'img/profiles/perfil-default.jpg'%}" alt="Imagen de perfil default" class="perfil-img">
+                            {% endif %}
                             <p class="card-text">
                                 {% if juego.autor %}
                                     {{ juego.autor.username }}

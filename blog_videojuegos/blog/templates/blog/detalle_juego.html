@@ -21,42 +21,47 @@
 
         <div class="post-usuario">
             <a href="#">
-                <img src="{% static 'img/profiles/perfil 5.jpg'%}" alt="Perfil del Usuario" class="perfil-img">
+                {% if juego.autor.perfil and juego.autor.perfil.avatar %}
+                    <img src="{{ juego.autor.perfil.avatar.url }}" alt="Perfil" class="perfil-img">
+                {% else %}
+                    <img src="{% static 'img/profiles/perfil 5.jpg' %}" alt="Perfil por defecto" class="perfil-img">
+                {% endif %}
                 <p class="card-text">
                     {% if juego.autor %}
-                        {{}}
+                        {{ juego.autor.username }}
+                    {% else %}
+                        Anónimo
+                    {% endif %}
                 </p>
             </a>
         </div>
         <p class="card-text">Fecha: {{ juego.fecha }}</p>
-        <img class="main-img" src="{% static 'img/img-blog/' %}{{ juego.imagen }}" alt="imagen juego">
+
+        {% if juego.imagen %}
+            <img class="main-img" src="{{ juego.imagen.url}}" alt="{{ juego.titulo }}">
+        {% else %}
+            <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="Sin imagen">
+        {% endif %}
 
         <!--<div class="card-body">-->
-            <h3 class="card-title">{{ juego.nombre }}</h3>
+            <h3 class="card-title">{{ juego.titulo }}</h3>
             <p class="card-text">Plataforma: {{ juego.categoria }}</p>
         <!--</div>-->
-
-        <div class="like-container"><!--BOTON LIKE-->
+        
+        <!--BOTON LIKE-->
+        <div class="like-container">
             <input type="checkbox" class="like-checkbox" id="like-1">
             <label class="like-label" for="like-1">
                 <i class="fas fa-heart"></i>
                 <span class="sr-only">Me gusta</span>
             </label>
             <span class="like-count">0</span>
-        </div><!--TERMINA BOTON LIKE-->
-        <a href="#" class="btn-descarga"><i class="fas fa-download"></i>Descargar</a>
-                <div class="rating-container">
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <i class="fas fa-star filled"></i>
-                    <span class="rating-score">5/5</span>
-                </div>
+        </div>
+        <!--TERMINA BOTON LIKE-->
         
         <div class="text-content">
             <label class="com-label" for="">DESCRIPCIÓN:</label>
-            <p>{{ descripcion }}</p>
+            <p>{{ juego.descripcion }}</p>
         </div>
 
         <div class="comentario-container">

@@ -10,5 +10,5 @@ class PostJuego(forms.ModelForm):
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'inputfield', 'id': 'titulo', 'placeholder': 'Título', 'required': 'required'}),
             'imagen': forms.ClearableFileInput(attrs={'class': 'file-input', 'id': 'post-pic-input', 'accept': 'image/*', 'style': 'display:none;'}),
-            'descripcion': forms.Textarea(attrs={'class': 'descripcion', 'id': 'descripcion', 'rows': 3, 'placeholder': 'Cuentanos sobre el juego...', 'required': 'required', 'maxlength': '300'})
+            'descripcion': forms.Textarea(attrs={'class': 'descripcion', 'id': 'descripcion', 'rows': 3, 'placeholder': 'Cuentanos sobre el juego...', 'required': 'required', 'maxlength': '2000'})
         }
