@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings 
 from django.contrib.auth.models import User
 
+
 class Perfil(models.Model):
     usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='perfil')
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True, default='profiles/perfil-default.jpg')
@@ -36,8 +37,21 @@ class Juego(models.Model):
     es_reseña = models.BooleanField(default=False)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', blank=True)
 
+    @property
+    def obtener_avatar_url(self):
+        try:
+            # Si el autor tiene perfil y subió un avatar, devolvemos su URL multimedia
+            if self.autor and self.autor.perfil and self.autor.perfil.avatar:
+                return self.autor.perfil.avatar.url
+        except Exception:
+            pass
+        
+        # ⚡ SOLUCIÓN: Si no hay perfil o avatar, devolvemos la ruta exacta a tus archivos estáticos
+        return f"{settings.STATIC_URL}img/profiles/perfil-default.jpg"
+
     def __str__(self):
         return self.titulo
     
     def total_likes(self):
         return self.likes.count()
+    
