@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Juego, Categoria
+from .models import Juego, Categoria, Comentario
 from .forms import PostJuego
 
 # Create your views here.
@@ -18,7 +18,23 @@ def lista_juegos(request):
 
 def detalle_juego(request, pk):
     juego = get_object_or_404(Juego, pk=pk)
-    contexto = {'juego': juego}
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        texto_comentario = request.POST.get('comentario', '').strip()
+
+        if texto_comentario: #Si el usuario envia un comentario y no un espacoi vacio
+            Comentario.objects.create(
+                usuario=request.user,
+                blog=juego,
+                texto=texto_comentario
+            )
+            messages.success(request, "¡Tu comentario se publicó con exito!")
+            return redirect('blog:detalle_juego', pk=juego.pk)
+    
+    comentarios = juego.comentario.all()
+
+    contexto = {'juego': juego,
+                'comnetarios': comentarios}
     return render(request, 'blog/detalle_juego.html', contexto)
 
 # Vista Crear_post

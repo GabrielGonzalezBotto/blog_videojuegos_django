@@ -139,3 +139,4 @@ LOGIN_REDIRECT_URL = 'inicio:inicio' if 'inicio' in INSTALLED_APPS else 'inicio'
 LOGIN_REDIRECT_URL = 'inicio' 
 LOGOUT_REDIRECT_URL = 'usuarios:login'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

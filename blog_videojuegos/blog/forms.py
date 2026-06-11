@@ -6,6 +6,7 @@ class PostJuego(forms.ModelForm):
         model = Juego
         # 💡 Sincronizado con la base de datos: sacamos el campo del validador para hacerlo manual
         fields = ['titulo', 'imagen', 'descripcion']
+        
 
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'inputfield', 'id': 'titulo', 'placeholder': 'Título', 'required': 'required'}),

@@ -11,9 +11,11 @@
             <label class="menu-label" for="post-menu-1"><i class="fas fa-ellipsis-v"></i></label>
             <div class="dropdown-menu">
                 <form action="#" method="get">
+                {% csrf_token %} 
                     <button type="submit" class="edit-btn"><i class="fas fa-edit"></i> Editar</button>
                 </form>
                 <form action="#" method="post">
+                {% csrf_token %} 
                     <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Eliminar</button>
                 </form>
             </div>
@@ -67,56 +69,55 @@
         </div>
 
         <div class="comentario-container">
-            <form class="com-form" action="#" method="post" id="com-form">
-                <label for="comment-input-1" class="com-label">comentar</label>
-                <input type="text" name="comentario" placeholder="Comenta aquí...">
-                <button type="submit" class="btn-post">ENVIAR</button>
-            </form>
+            {% if user.is_authenticated%}
+                <form class="com-form" action="#" method="post" id="com-form">
+                {% csrf_token %} 
+                    <label for="comment-input-1" class="com-label">comentar</label>
+                    <input type="text" name="comentario" placeholder="Comenta aquí...">
+                    <button type="submit" class="btn-post">ENVIAR</button>
+                </form>
+            {% else %}
+                <p class="com-label" style="text-align: center; padding: 10px;">
+                    <a href="{% url 'login' %}" style="color: #ff0055; text-decoration: underline;">Inicia sesión</a> para dejar un comentario.
+                </p>
+            {% endif %}
         </div>
 
-        <div class="lista-com">
-
+    <div class="lista-com">
+        {% for com in juego.comentario.all %}
             <div class="comentarios">
-                <span><a href="#">Usuario1:</a></span> Batteltoads! orem ipsum dolor sit amet consectetur adipisicing elit. 
-                Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
-                temporibus debitis quod obcaecati fugiat dolorem placeat. 
+                <a href="#">
+                    {% if com.usuario.imagen_perfil %}
+                        <img src="{{ com.usuario.imagen_perfil.url }}" alt="Perfil" class="perfil-img" style="width: 25px; height: 25px; border-radius: 50%; vertical-align: middle; margin-right: 5px;">
+                    {% else %}
+                        <img src="{% static 'img/profiles/perfil-default.jpg'%}" alt="Perfil" class="perfil-img">
+                    {% endif %}
+                    <strong>{{ com.usuario.username }}</strong>
+                </a>
+
+                {{ com.texto }}
+
+                <span>{{ com.fecha|date:"d/m/Y H:i" }}</span>
+
+            {% if com.usuario == request.user %}    
                 <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
-                    <input type="checkbox" class="menu-checkbox" id="menu-1">
-                    <label class="menu-label" for="menu-1"><i class="fas fa-ellipsis-v"></i></label>
+                    <input type="checkbox" class="menu-checkbox" id="menu-{{ com.id }}">
+                    <label class="menu-label" for="menu-{{ com.id }}"><i class="fas fa-ellipsis-v"></i></label>
                     <div class="dropdown-menu">
                         <div class="dropdown-item">
                             <form action="#" method="get">
+                                {% csrf_token %}
                                 <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
                             </form>
                             <form action="#" method="post">
+                                {% csrf_token %} 
                                 <button type="submit" class="delete-btn" aria-label="Eliminar comentario"><i class="fas fa-trash"></i>Eliminar</button>
                             </form>
                         </div>
                     </div>
                 </div><!--TERMINA ACA-->
+            {% endif %}
             </div>
-
-            <div class="comentarios"><span><a href="#">Usuario1:</a></span> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Et rerum, facere accusamus soluta non rem corrupti aliquam optio possimus alias nulla, 
-                temporibus debitis quod obcaecati fugiat dolorem placeat. 
-                Dolorum, dolore.
-                <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
-                    <input type="checkbox" class="menu-checkbox" id="menu-2">
-                    <label class="menu-label" for="menu-2"><i class="fas fa-ellipsis-v"></i></label>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-item">
-                            <form action="#" method="get">
-                                <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
-                            </form>
-                            <form action="#" method="post">
-                                <button type="submit" class="edit-btn" aria-label="Eliminar comentario"><i class="fas fa-edit"></i> Eliminar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div><!--TERMINA ACA-->
-            </div>
-        </div>
-    </div>
-</div>
-
+        {% endfor %}
+            <p class="com-label" style="text-align: center; padding: 15px; color: #888;">Nadie ha comentado aún. ¡Sé el primero!</p>
 {% endblock %}

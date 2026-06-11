@@ -1951,7 +1951,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .remember-forgot {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     color: rgb(82, 84, 84);
     font-size: 14px;
