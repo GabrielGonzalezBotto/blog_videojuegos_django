@@ -1734,6 +1734,7 @@ h1 {
     border-radius: 50%;
     border: 2px solid #393939;
     margin-right: 10px;
+    object-fit:cover;
 }
 
 .post-usuario .perfil-img:hover {

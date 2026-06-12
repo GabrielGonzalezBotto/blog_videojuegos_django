@@ -5,7 +5,7 @@
 
 <div class="content-container">
     <div class="card-blog">
-
+    {% if juego.autor == request.user %}
         <div class="post-actions">
             <input type="checkbox" class="menu-checkbox" id="post-menu-1">
             <label class="menu-label" for="post-menu-1"><i class="fas fa-ellipsis-v"></i></label>
@@ -20,14 +20,15 @@
                 </form>
             </div>
         </div>
+    {% endif %}
 
         <div class="post-usuario">
             <a href="#">
-                <!-- ⚡ LLAMADA SEGURA: Si tiene avatar real lo muestra, sino carga el estático por defecto -->
+                <!--Si tiene avatar real lo muestra, sino carga el estático por defecto -->
                 {% if juego.autor.imagen_perfil %}
-                    <img src="{{ juego.autor.imagen_perfil.url }}" alt="Perfil" class="perfil-img">
+                    <img src="{{ juego.autor.imagen_perfil.url }}" alt="Perfil" class="perfil-img" style="object-fit: cover;">
                 {% else %}
-                    <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Perfil por defecto" class="perfil-img">
+                    <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Perfil por defecto" class="perfil-img" style="object-fit: cover;">
                 {% endif %}
     
                 <p class="card-text">
@@ -88,36 +89,42 @@
             <div class="comentarios">
                 <a href="#">
                     {% if com.usuario.imagen_perfil %}
-                        <img src="{{ com.usuario.imagen_perfil.url }}" alt="Perfil" class="perfil-img" style="width: 25px; height: 25px; border-radius: 50%; vertical-align: middle; margin-right: 5px;">
+                        <img src="{{ com.usuario.imagen_perfil.url }}" alt="Perfil" class="img=perfil" style="width: 25px; height: 25px; border-radius: 50%; vertical-align: middle; margin-right: 5px;">
                     {% else %}
-                        <img src="{% static 'img/profiles/perfil-default.jpg'%}" alt="Perfil" class="perfil-img">
+                        <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Perfil" class="perfil-img">
                     {% endif %}
-                    <strong>{{ com.usuario.username }}</strong>
+                    <span><strong>{{ com.usuario.username }}:</strong></span>
                 </a>
 
                 {{ com.texto }}
+                <span class="fecha-comentario" style="font-size: 11px; color: #888; margin-left: 10px;">{{ com.fecha|date:"d/m/Y H:i" }}</span>
 
-                <span>{{ com.fecha|date:"d/m/Y H:i" }}</span>
-
-            {% if com.usuario == request.user %}    
-                <div class="comment-actions"> <!--BOTON EDIT/ELIMINAR, TODO ESTE CODIGO ESTA DENTRO DEL DIV "COMENTARIOS"-->
-                    <input type="checkbox" class="menu-checkbox" id="menu-{{ com.id }}">
-                    <label class="menu-label" for="menu-{{ com.id }}"><i class="fas fa-ellipsis-v"></i></label>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-item">
-                            <form action="#" method="get">
-                                {% csrf_token %}
-                                <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
-                            </form>
-                            <form action="#" method="post">
-                                {% csrf_token %} 
-                                <button type="submit" class="delete-btn" aria-label="Eliminar comentario"><i class="fas fa-trash"></i>Eliminar</button>
-                            </form>
+                <!-- Acciones del comentario (Editar/Eliminar) -->
+                {% if com.usuario == request.user %}    
+                    <div class="comment-actions"> 
+                        <input type="checkbox" class="menu-checkbox" id="menu-{{ com.id }}">
+                        <label class="menu-label" for="menu-{{ com.id }}"><i class="fas fa-ellipsis-v"></i></label>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item">
+                                <form action="#" method="get">
+                                    {% csrf_token %}
+                                    <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
+                                </form>
+                                <form action="#" method="post">
+                                    {% csrf_token %} 
+                                    <button type="submit" class="delete-btn" aria-label="Eliminar comentario"><i class="fas fa-trash"></i> Eliminar</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div><!--TERMINA ACA-->
-            {% endif %}
-            </div>
+                {% endif %}
+            </div> 
+        {% empty %}
+            <!-- El uso de  empty  asegura que esto SOLO se muestre si la lista está vacía -->
+            <p class="alert" style="text-align: center; padding: 15px; color: #ff0055;">Nadie ha comentado aún. ¡Sé el primero!</p>
         {% endfor %}
-            <p class="com-label" style="text-align: center; padding: 15px; color: #888;">Nadie ha comentado aún. ¡Sé el primero!</p>
-{% endblock %}
+    </div> <!-- Cierra lista-com -->
+
+    </div>
+</div> 
+{% endblock%}
