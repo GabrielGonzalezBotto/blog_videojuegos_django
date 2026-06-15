@@ -73,6 +73,39 @@ def crear_post(request):
         'categorias': Categoria.objects.all() # Pasamos las categorías existentes
     })
 
+@login_required
+def editar_post(request,pk):
+    juego = get_object_or_404(Juego, pk=pk) #Buscamos el juego o tiramos 404 si no existe
+
+    if juego.autor != request.user:
+        messages.error(request, "No tenés permisos para editar este videojuego.")
+        return redirect ('blog:blog')
+    
+    if request.method == 'POST':
+        form = PostJuego(request.POST, request.FILES, instance=juego) #Pasamos instance=juego para que django actualice y no cree uno nuevo
+        if form.is_valid():
+            form.save()
+            messages.success(request, "¡Tu post se actualizó correctamente!")
+            return redirect('blog:detalle_juego', pk=juego.pk)
+    else:
+        form = PostJuego(instance=juego) #Cargamos el form con los datos actuales
+
+    return render(request, 'blog/crear_post.html', {'form': form, 'editando': True})
+
+@login_required
+def eliminar_post(request, pk):
+    juego = get_object_or_404(Juego, pk=pk)
+
+    if juego.autor != request.user: #Borrado fisico de  datos
+        messages.error(request,"No tenés permisos para eliminar este videojuego.")
+        return redirect('blog:blog') #Volvemos a blog
+    
+    if request.method == 'POST':
+        juego.delete() #borrado fisico de la base de datos
+        messages.success(request, "El post fue eliminado correctamente.")
+        return redirect('blog:blog') #Volvemos a blog
+    
+    return render(request, 'blog/confirmar_eliminar.html', {'juego': juego})
 
 
 #def crear_post(request):

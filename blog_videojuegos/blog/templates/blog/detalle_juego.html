@@ -10,11 +10,8 @@
             <input type="checkbox" class="menu-checkbox" id="post-menu-1">
             <label class="menu-label" for="post-menu-1"><i class="fas fa-ellipsis-v"></i></label>
             <div class="dropdown-menu">
-                <form action="#" method="get">
-                {% csrf_token %} 
-                    <button type="submit" class="edit-btn"><i class="fas fa-edit"></i> Editar</button>
-                </form>
-                <form action="#" method="post">
+                <a href="{% url 'blog:editar_post' juego.pk %}" class="edit-btn" style="display: block; padding: 5px 10px;"><i class="fas fa-edit"></i> Editar</a>
+                <form action="{% url 'blog:eliminar_post' juego.pk %}" method="post">
                 {% csrf_token %} 
                     <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Eliminar</button>
                 </form>
