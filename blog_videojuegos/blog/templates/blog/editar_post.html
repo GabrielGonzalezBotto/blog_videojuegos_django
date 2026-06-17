@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}The Glitch Zone | Edtar Post{% endblock %}
+
+{% block content %}
+
+<section class="crear-posteo">
+    <div class="posteo-content">
+        <!-- 💡 Usamos juego.titulo de forma dinámica para mostrar qué se está editando -->
+        <h3>Editar Posteo: {{ juego.titulo }}</h3>
+
+        <!-- IMPORTANTE: enctype="multipart/form-data" para que no se rompa al editar la imagen -->
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="img-posteo-container">
+                <!-- Mostramos la imagen actual del juego en la vista previa -->
+                {% if juego.imagen %}
+                    <img src="{{ juego.imagen.url }}" alt="Vista previa" class="img-posteo">
+                {% else %}
+                    <img src="{% static 'img/profiles/no-img.jpg' %}" alt="Vista previa" class="img-posteo">
+                {% endif %}
+                <label for="post-pic-input" class="icon-container-post">
+                    <i class="fa-regular fa-image"></i>
+                </label>
+                {{ form.imagen }}
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><i class="fa-regular fa-pen-to-square"></i></span>
+                {{ form.titulo }}
+                <label for="titulo">Título</label>
+                <div class="input-line"></div>
+            </div>
+
+            <div class="input-box">
+                <span class="icon"><i class="fa-regular fa-pen-to-square"></i></span>
+                {{ form.descripcion }}
+                <label for="descripcion">Descripción</label>
+                <div class="input-line"></div>
+            </div>
+
+            <div class="btn-container">
+                <!-- Confirma los cambios -->
+                <button type="submit" class="btn-edit">GUARDAR CAMBIOS</button>
+                <!-- Cancela y vuelve al detalle del juego original -->
+                <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-edit" style="text-decoration: none; text-align: center; line-height: 40px;">CANCELAR</a>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
