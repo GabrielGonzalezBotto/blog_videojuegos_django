@@ -84,13 +84,33 @@ def editar_post(request,pk):
     if request.method == 'POST':
         form = PostJuego(request.POST, request.FILES, instance=juego) #Pasamos instance=juego para que django actualice y no cree uno nuevo
         if form.is_valid():
-            form.save()
-            messages.success(request, "¡Tu post se actualizó correctamente!")
+            juego_editado = form.save(commit=False) #Frenamos el guardado un segundo para ingresar la categoria(plataforma), manualmente
+            nombre_manual = request.POST.get('nueva_categoria', '').strip() #Logica de categoria manual(igual a crear_post)
+            id_desplegable = request.POST.get('categoria')
+            
+            if nombre_manual:
+                categoria_objeto, creada = Categoria.objects.get_or_create(nombre=nombre_manual)
+                juego_editado.categoria = categoria_objeto
+            elif id_desplegable:
+                try:
+                    juego_editado.categoria = categoria_objeto.get(id=id_desplegable)
+                except Categoria.DoesNotExist:
+                    pass
+            else:
+                juego_editado.categoria = None #Si usuario borra todo y no selecciona nada, podems dejar en None
+
+            juego_editado.save()
+
+            messages.success(request, "¡El posteo se actualizó correctamente!")
             return redirect('blog:detalle_juego', pk=juego.pk)
     else:
-        form = PostJuego(instance=juego) #Cargamos el form con los datos actuales
+        form = PostJuego(instance=juego)
 
-    return render(request, 'blog/crear_post.html', {'form': form, 'editando': True})
+    return render(request, 'blog/editar_post.html', {
+        'form': form,
+        'juego': juego,
+        'categoria': Categoria.objects.all()
+    })
 
 @login_required
 def eliminar_post(request, pk):
