@@ -4,6 +4,7 @@ from django.db import models
 from django.conf import settings 
 from django.contrib.auth.models import User
 from django.templatetags.static import static
+from datetime import datetime
 
 class Perfil(models.Model):
     usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='perfil')
@@ -16,7 +17,9 @@ class Perfil(models.Model):
 def generar_ruta_unica(instance, filename):
     extension = filename.split('.')[-1]
     nombre_unico = f"{uuid.uuid4()}.{extension}"
-    return os.path.join('juegos_imagenes', models.functions.Now().date().strftime('%Y/%m'), nombre_unico)
+    fecha_actual = datetime.now()
+    ruta_fecha = fecha_actual.strftime('%y/%m')
+    return os.path.join('juegos_imagenes', ruta_fecha, nombre_unico)
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=45)
