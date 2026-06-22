@@ -1208,7 +1208,7 @@ h1 {
 }
 
 .main-img {
-    max-height: 400px;
+    height: 100%;
     width: 55%;
     background-color: #333;
     border-radius: 20px;

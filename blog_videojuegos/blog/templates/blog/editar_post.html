@@ -16,7 +16,7 @@
             
             <div class="img-posteo-container">
                 <!-- Mostramos la imagen actual del juego en la vista previa -->
-                {% if juego.imagen %}
+                {% if juego.imagen and "perfil-default.jpg" not in juego.imagen.url %}
                     <img src="{{ juego.imagen.url }}" alt="Vista previa" class="img-posteo">
                 {% else %}
                     <img src="{% static 'img/profiles/no-img.jpg' %}" alt="Vista previa" class="img-posteo">

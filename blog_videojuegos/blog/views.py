@@ -101,8 +101,8 @@ def editar_post(request,pk):
 
             juego_editado.save()
 
-            messages.success(request, "¡El posteo se actualizó correctamente!")
-            return redirect('blog:detalle_juego', pk=juego.pk)
+            messages.success(request, "¡Tu posteo se actualizó correctamente!")
+            return redirect('blog:blog')
     else:
         form = PostJuego(instance=juego)
 

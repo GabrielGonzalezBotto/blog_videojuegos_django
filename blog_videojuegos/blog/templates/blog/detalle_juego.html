@@ -7,15 +7,7 @@
 
     <div class="card-blog">
 
-    {% if messages %}
-        <div class="messages-container">
-            {% for message in messages %}
-                <div class="alert {{ message.tags }}" style="color: #26ff00; text-shadow: 0px 0px 15px rgba(60, 255, 0, 0.529), 0px 0px 15px rgba(60, 255, 0, 0.529); font-size: 30px;">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+    
 
     {% if juego.autor == request.user %}
         <div class="post-actions">
@@ -50,12 +42,14 @@
             </a>
         </div>
         <p class="card-text">Fecha: {{ juego.fecha }}</p>
-
-        {% if juego.imagen %}
-            <img class="main-img" src="{{ juego.imagen.url}}" alt="{{ juego.titulo }}">
-        {% else %}
-            <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="Sin imagen">
-        {% endif %}
+        <!--<div class="img-posteo-container">-->
+            {% if juego.imagen %}
+                <img class="main-img" src="{{ juego.imagen.url}}" alt="{{ juego.titulo }}">
+            {% else %}
+                <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="Sin imagen">
+            {% endif %}
+        <!--</div>-->
+        
 
         <!--<div class="card-body">-->
             <h3 class="card-title">{{ juego.titulo }}</h3>
