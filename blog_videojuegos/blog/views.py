@@ -34,7 +34,7 @@ def detalle_juego(request, pk):
     comentarios = juego.comentario.all()
 
     contexto = {'juego': juego,
-                'comnetarios': comentarios}
+                'comenetarios': comentarios}
     return render(request, 'blog/detalle_juego.html', contexto)
 
 # Vista Crear_post
@@ -93,7 +93,7 @@ def editar_post(request,pk):
                 juego_editado.categoria = categoria_objeto
             elif id_desplegable:
                 try:
-                    juego_editado.categoria = categoria_objeto.get(id=id_desplegable)
+                    juego_editado.categoria = Categoria.objeto.get(id=id_desplegable)
                 except Categoria.DoesNotExist:
                     pass
             else:
@@ -116,8 +116,8 @@ def editar_post(request,pk):
 def eliminar_post(request, pk):
     juego = get_object_or_404(Juego, pk=pk)
 
-    if juego.autor != request.user: #Borrado fisico de  datos
-        messages.error(request,"No tenés permisos para eliminar este videojuego.")
+    if juego.autor != request.user: 
+        messages.error(request, "No tenés permisos para eliminar este videojuego.")
         return redirect('blog:blog') #Volvemos a blog
     
     if request.method == 'POST':
@@ -125,7 +125,7 @@ def eliminar_post(request, pk):
         messages.success(request, "El post fue eliminado correctamente.")
         return redirect('blog:blog') #Volvemos a blog
     
-    return render(request, 'blog/confirmar_eliminar.html', {'juego': juego})
+    return render(request, 'blog/eliminar_post.html', {'juego': juego})
 
 
 #def crear_post(request):
