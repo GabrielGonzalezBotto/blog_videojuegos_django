@@ -1248,6 +1248,8 @@ h1 {
     max-height: 200px; 
     overflow-y: auto;
     scrollbar-color: #66ccee rgba(0, 0, 0, 0);
+    white-space: pre-line;
+    /*text-align: justify;*/
 }
 
 /*------BOTON DESCARGA------*/
@@ -2391,6 +2393,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
 }
 
+.btn-dlt {
+    padding: 10px 15px;
+    font-family: 'Orbitron', sans-serif;
+    border-radius: 15px;
+    border: 2px solid #575757;
+    background: transparent;
+    color: #575757;
+    cursor: pointer;
+    margin: 5px;
+    text-decoration: none;
+}
+
+.btn-dlt:hover {
+    border: #ff0055;
+    color:  #ff0055;
+    text-shadow: 0 0 15px #ff0055;
+    box-shadow: 0 0 10px #ff0055;
+}
+
+
 .btn-edit {
     padding: 10px 15px;
     font-family: 'Orbitron', sans-serif;
@@ -2409,7 +2431,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-shadow: 0 0 15px #66ccee;
     box-shadow: 0 0 10px #66ccee;
 }
-
 /*------EDITAR PERFIL------*/
 
 .editar-perfil-container {

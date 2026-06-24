@@ -15,13 +15,15 @@
             <label class="menu-label" for="post-menu-1"><i class="fas fa-ellipsis-v"></i></label>
             <div class="dropdown-menu">
                 <a href="{% url 'blog:editar_post' juego.pk %}" class="edit-btn" style="display: block; padding: 5px 10px;"><i class="fas fa-edit"></i> Editar</a>
-                <form action="{% url 'blog:eliminar_post' juego.pk %}" method="post">
-                {% csrf_token %} 
-                    <button type="submit" class="delete-btn"><i class="fas fa-trash"></i> Eliminar</button>
+                <form action="{% url 'blog:eliminar_post' juego.pk %}" method="get">
+                    <button type="submit" class="delete-btn">
+                        <i class="fas fa-trash"></i> Eliminar</button>
                 </form>
             </div>
         </div>
     {% endif %}
+
+    
 
 
         <div class="post-usuario">
@@ -70,7 +72,7 @@
         
         <div class="text-content">
             <label class="com-label" for="">DESCRIPCIÓN:</label>
-            <p>{{ juego.descripcion }}</p>
+            <p>{{ juego.descripcion|linebreaks }}</p>
         </div>
 
         <div class="comentario-container">
