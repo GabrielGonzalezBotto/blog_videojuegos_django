@@ -53,7 +53,8 @@
 <!-- Campo extra para nueva categoría manual -->
 <div class="input-box">
     <span class="icon"><i class="fa-solid fa-plus"></i></span>
-    <input type="text" name="nueva_categoria" id="nueva_categoria" placeholder="O crear nueva categoría">
+    <input type="text" name="nueva_categoria" id="nueva_categoria" placeholder="Introduce plataforma...">
+    <label for="categoria">Plataforma</label>
     <div class="input-line"></div>
 </div>
 
@@ -84,6 +85,24 @@
                     profileImg.setAttribute('src', e.target.result);
                 }
                 reader.readAsDataURL(file);
+            }
+        });
+
+
+        document.getElementById('post-pic-input').addEventListener('change', function() {
+            // 2 MB en bytes
+            const limiteBytes = 2 * 1024 * 1024; 
+    
+            if (this.files && this.files[0]) {
+                const pesoArchivo = this.files[0].size;
+        
+                if (pesoArchivo > limiteBytes) {
+                    alert("⚠️ ¡Imagen muy pesada! El límite en The Glitch Zone es de 2 MB. Elige otra imagen o tu posteo será rechazado.");
+                    this.value = ""; // Limpia el input para obligarlo a elegir otra
+            
+                    //Si tienes un tag <img> de vista previa, puedes resetearlo aquí a la default:
+                    document.querySelector('.img-posteo').src = "{% static 'img/profiles/no-img.jpg' %}";
+                }
             }
         });
     </script>

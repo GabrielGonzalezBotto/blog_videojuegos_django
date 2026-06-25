@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.templatetags.static import static
 from datetime import datetime
+from django.core.exceptions import ValidationError
 
 class Perfil(models.Model):
     usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='perfil')
@@ -27,13 +28,20 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nombre
     
+def validar_peso_imagen(file):
+    limite_megabytes = 2
+    limite_bytes = limite_megabytes * 1024 * 1024
+
+    if file.size > limite_bytes:
+        raise ValidationError(f"¡Alerta en la Matrix! El archivo no puede superar los {limite_megabytes} MB. El tuyo pesa {round(file.size / (1024*1024), 2)} MB.")
+    
 class Juego(models.Model):
     autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='juego', null=True, blank=True)
     titulo = models.CharField(max_length=45, null=False, blank=False)
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True) 
     descripcion = models.TextField(null=True, blank=True)
     fecha = models.DateField(auto_now_add=True)
-    imagen = models.ImageField(upload_to=generar_ruta_unica, null=True, blank=True, default='profiles/perfil-default.jpg')
+    imagen = models.ImageField(upload_to=generar_ruta_unica, null=True, blank=True, default='profiles/perfil-default.jpg', validators=[validar_peso_imagen])
     archivo = models.FileField(upload_to='juego/', null=True, blank=True)
     es_reseña = models.BooleanField(default=False)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='likes', blank=True)
