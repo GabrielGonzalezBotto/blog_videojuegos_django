@@ -1502,7 +1502,7 @@ h1 {
     display: block;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn {
     color: #d0eaff;
     background: none;
     border: none;
@@ -1515,10 +1515,29 @@ h1 {
     text-align: left;
 }
 
-.edit-btn:hover, .delete-btn:hover {
+.edit-btn:hover {
     background: rgba(0, 255, 255, 0.1);
     color: #66ccee;
     text-shadow: 0 0 10px #66ccee;
+}
+
+.delete-btn{
+    color: #d0eaff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    padding: 8px 12px;
+    display: block;
+    width: 100%;
+    text-align: left;
+}
+
+.delete-btn:hover{
+    background: rgba(0, 255, 255, 0.1);
+    color: #ff0055;
+    text-shadow: 0 0 10px #ff0055;
 }
 
 /*------PERFIL------*/

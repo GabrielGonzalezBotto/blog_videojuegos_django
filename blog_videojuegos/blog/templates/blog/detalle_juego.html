@@ -116,7 +116,7 @@
                                     {% csrf_token %}
                                     <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
                                 </form>
-                                <form action="#" method="post">
+                                <form action="{% url 'blog:eliminar_comentario' com.id %}" method="get">
                                     {% csrf_token %} 
                                     <button type="submit" class="delete-btn" aria-label="Eliminar comentario"><i class="fas fa-trash"></i> Eliminar</button>
                                 </form>

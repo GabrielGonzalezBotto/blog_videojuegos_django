@@ -127,6 +127,26 @@ def eliminar_post(request, pk):
     
     return render(request, 'blog/eliminar_post.html', {'juego': juego})
 
+@login_required
+def eliminar_comentario(request, pk):
+    comentario = get_object_or_404(Comentario, pk=pk)
+    id_juego = comentario.blog.pk
+
+    if comentario.usuario != request.user:
+        messages.error(request, "No tienes permisos para borrar este comentario.")
+        return redirect('blog:detalle_juego', pk=id_juego)
+    
+    if request.method == 'POST':
+        comentario.delete()
+        messages.success(request, "¡Tu comentario fue eliminado con éxito!")
+        return redirect('blog:detalle_juego', pk=id_juego)
+    
+    return render(request, 'blog/eliminar_comentario.html',{
+        'comentario':comentario,
+        'id_juego': id_juego
+    })
+
+
 
 #def crear_post(request):
     #if request.method == 'POST': 
