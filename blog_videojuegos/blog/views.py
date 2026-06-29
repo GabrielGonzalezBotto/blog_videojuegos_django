@@ -146,6 +146,32 @@ def eliminar_comentario(request, pk):
         'id_juego': id_juego
     })
 
+@login_required
+def editar_comentario(request, pk):
+    comentario = get_object_or_404(Comentario, pk=pk)
+    id_juego = comentario.blog.pk
+
+    if comentario.usuario != request.user:
+        messages.error(request, "No tenés permisos para editar este comentario.")
+        return redirect('blog:detalle_juego', pk=id_juego)
+    
+    if request.method == 'POST':
+        nuevo_texto = request.POST.get('texto_comentario', '').strip()
+
+        if nuevo_texto:
+            comentario.texto = nuevo_texto
+            comentario.save()
+            messages.success(request, "¡Tu comentario se actualizó correctamente!")
+        else:
+            messages.error(request, "El comentario no puede estar vacío.")
+        
+        return redirect('blog:detalle_juego', pk=id_juego)
+    
+    return render(request, 'blog/editar_comentario.html', {
+        'comentario': comentario,
+        'id_juego': id_juego
+    })
+
 
 
 #def crear_post(request):

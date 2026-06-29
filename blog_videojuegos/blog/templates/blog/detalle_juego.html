@@ -112,7 +112,7 @@
                         <label class="menu-label" for="menu-{{ com.id }}"><i class="fas fa-ellipsis-v"></i></label>
                         <div class="dropdown-menu">
                             <div class="dropdown-item">
-                                <form action="#" method="get">
+                                <form action="{% url 'blog:editar_comentario' com.id %}" method="get">
                                     {% csrf_token %}
                                     <button type="submit" class="edit-btn" aria-label="Editar comentario"><i class="fas fa-edit"></i> Editar</button>
                                 </form>

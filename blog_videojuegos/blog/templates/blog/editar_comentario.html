@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}The Glitch Zone | Editar Comentario{% endblock %}
+
+{% block content %}
+<div class="content-container" style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+    <div class="card-blog" style="max-width: 600px; margin: 50px auto; padding: 30px;">
+    
+        <h3 style="color: #fff; margin-bottom: 20px; text-align: center;"><i class="fas fa-edit"></i> EDITAR COMENTARIO</h3>
+    
+        <!-- El formulario apunta por POST a la URL de edición pasándole el ID del comentario -->
+        <form method="POST" action="{% url 'blog:editar_comentario' comentario.id %}">
+            {% csrf_token %}
+        
+            <div class="input-box" style="margin-bottom: 25px;">
+                <label for="texto_comentario" class="#" ><span> Tu comentario:</span></label>
+                <!-- ⚡ TRUCO: El textarea carga de forma automática el comentario.texto viejo en el medio de sus etiquetas -->
+                <textarea name="texto_comentario" id="texto_comentario" class="descripcion" rows="5" required style="width: 100%; padding: 15px; border-radius: 5px; resize: none;">{{ comentario.texto }}</textarea>
+                <div class="input-line"></div>
+            </div>
+
+            <!--<div class="btn-container" style="display: flex; gap: 15px; justify-content: center;">-->
+                <!-- Envía el método POST para guardar el texto modificado -->
+                <button type="submit" class="btn-edit">
+                    Guardar Cambios
+                </button>
+                <!-- Cancela la edición y devuelve al usuario a salvo al detalle del juego original -->
+                <a href="{% url 'blog:detalle_juego' id_juego %}" class="btn-edit">
+                    Cancelar
+                </a>
+            <!--</div>-->
+        </form>
+    </div>
+</div>
+{% endblock %}
