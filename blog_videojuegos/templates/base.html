@@ -69,6 +69,12 @@
             {% endif %}
         </div>
 
+        <label class="ir">
+            <input type="checkbox" class="toggle-neon">
+            <i class="arriba fa-solid fa-angles-up"></i>
+        </label>
+
+
         <!-- Links de navegación -->
 
         <ul class="nav-links">
@@ -102,7 +108,11 @@
     </nav>
 </header>
 
+
+    <button  onclick="window.history.back()" class="volver"><i class="fa-solid fa-angles-left"></i>Volver</button>
+
     {% block content %}
+
 
     {% endblock %}
 
