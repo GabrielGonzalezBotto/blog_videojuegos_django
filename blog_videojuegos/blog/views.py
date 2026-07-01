@@ -4,16 +4,44 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Juego, Categoria, Comentario
 from .forms import PostJuego
+from  django.db.models import Count
 
 # Create your views here.
     
 def lista_juegos(request):
-    juegos = Juego.objects.all().order_by('-id')
-    paginator = Paginator(juegos, 8)
+    juegos_queryset = Juego.objects.all().annotate(total_comentarios=Count('comentario'))
+    categoria_filtrada = request.GET.get('categoria')
+    if categoria_filtrada:
+        juegos_queryset = juegos_queryset.filter(categoria__nombre__iexact=categoria_filtrada)
+
+    #ORDEN POR FECHA
+    orden_fecha = request.GET.get('orden_fecha')
+    if orden_fecha == 'reciente':
+        juegos_queryset = juegos_queryset.order_by('-id')
+    elif orden_fecha == 'antiguo':
+        juegos_queryset = juegos_queryset.order_by('id')
+
+    #ORDEN POR COMENTARIOS
+    orden_comentarios = request.GET.get('orden_comentarios')
+    if orden_comentarios == 'mas':
+        juegos_queryset = juegos_queryset.order_by('-total_comentarios')
+    elif orden_comentarios == 'menos':
+        juegos_queryset = juegos_queryset.order_by('total_comentarios')
+    
+    #ID DESCENDENTE, SI NO HAY ORDEN
+    if not orden_fecha and not orden_comentarios:
+        juegos_queryset = juegos_queryset.order_by('-id')
+
+    #PAGINATOR
+    paginator = Paginator(juegos_queryset, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
-    contexto_blog_juegos = {'lista_juegos': page_obj}
+
+    #ENVIAMOS CATEGORIAS PARA QUE FUNCIONEN LOS BOTONES
+    contexto_blog_juegos = {
+        'lista_juegos': page_obj,
+        'categorias': Categoria.objects.all()
+    }
     return render(request, 'blog/blog.html', contexto_blog_juegos)
 
 def detalle_juego(request, pk):

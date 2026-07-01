@@ -1,22 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Posts{% endblock %}
+{% block title %}The Glitch Zone | Posts{% endblock %}
 {% block content %}
 
 <div class="hero-post">
     <h2 class="blog-title">
-        <span class="flickering-h1"><h2 class="contacto-title">PO<span class="flickering-o">S</span>TE<span class="flickering-a">O</span><span class="flickering-c">S</span><span class="flickering-o"></span></h2></span>
+        <span class="flickering-h1"><h2 class="contacto-title">PO<span class="flickering-o">S</span>TE<span class="flickering-a">O</span><span class="flickering-c">S</span></h2></span>
     </h2>
-    
 
-
-
-
-<!--<div class="blog">-->
-
+    <!-- CONTAINER DEL FILTRO COMPLETAMENTE SEPARADO -->
     <section class="filtros-container">
         <h3>Filtrar y ordenar</h3>
-        <!-- Botones de tipo de filtro -->
         <div class="filtro-tipo-container">
             <button class="filtro-tipo-btn active" data-tipo="categoria">Categorías</button>
             <button class="filtro-tipo-btn" data-tipo="fecha">Post</button>
@@ -24,37 +18,36 @@
         </div>
     </section>
 
-    <!-- Carrusel de filtros -->
+    <!-- CARRUSEL DE FILTROS LIMPIO SIN ENLACES ROTOS -->
     <div class="carrusel-filtros">
         <button class="carrusel-btn prev-btn" aria-label="Deslizar hacia la izquierda">
             <i class="fas fa-chevron-left"></i>
         </button>
         <div class="carrusel-track">
-        <!-- Grupo de filtros: Categoría -->
             <div class="filtro-grupo categoria active">
                 <button class="filtro-btn active" data-filtro="categoria" data-categoria="all">Todos</button>
-                <button class="filtro-btn" data-filtro="categoria" data-categoria="nes">NES</button>
-                <button class="filtro-btn" data-filtro="categoria" data-categoria="sega">SEGA</button>
-                <button class="filtro-btn" data-filtro="categoria" data-categoria="playstation">PlayStation</button>
-                <button class="filtro-btn" data-filtro="categoria" data-categoria="xbox">XBOX</button>
-                <button class="filtro-btn" data-filtro="categoria" data-categoria="pc">PC</button>
+                {% for categoria in categorias %}
+                    <button class="filtro-btn" data-filtro="categoria" data-categoria="{{ categoria.nombre }}">
+                        {{ categoria.nombre }}
+                    </button>
+                {% endfor %}
             </div>
-        <!-- Grupo de filtros: Fecha -->
             <div class="filtro-grupo fecha">
                 <button class="filtro-btn" data-filtro="fecha" data-orden="reciente">Post Más recientes</button>
                 <button class="filtro-btn" data-filtro="fecha" data-orden="antiguo">Post Más antiguos</button>
             </div>
-        <!-- Grupo de filtros: Comentarios -->
             <div class="filtro-grupo comentarios">
                 <button class="filtro-btn" data-filtro="comentarios" data-orden="mas">Más comentados</button>
                 <button class="filtro-btn" data-filtro="comentarios" data-orden="menos">Menos comentados</button>
             </div>
         </div>
+        <!-- Flecha derecha normalizada como botón puro -->
         <button class="carrusel-btn next-btn" aria-label="Deslizar hacia la derecha">
             <i class="fas fa-chevron-right"></i>
         </button>
     </div>
 </div>
+
 
     {% if messages %}
         <div class="messages-container">
@@ -66,109 +59,80 @@
         </div>
     {% endif %}
 
-    <div class="grid-container">
-    {% for juego in lista_juegos %}
-                <div class="card">
-                    <div class="post-usuario">
-                        <a href="#">
-                            <!-- ⚡ LLAMADA SEGURA: Si tiene avatar real lo muestra, sino carga el estático por defecto -->
-                            {% if juego.autor.imagen_perfil %}
-                                <img src="{{ juego.autor.imagen_perfil.url }}" alt="Perfil" class="perfil-img">
-                            {% else %}
-                                <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Perfil por defecto" class="perfil-img">
-                            {% endif %}
-    
-                            <p class="card-text">
-                                {% if juego.autor %}
-                                    {{ juego.autor.username }}
-                                {% else %}
-                                    Anónimo
-                                {% endif %}
-                            </p>
-                        </a>
-                    </div>
-                    <p class="card-text">Fecha de publicación: {{ juego.fecha }}</p>
-                    
-                    {% if juego.imagen %}
-                        <img class="main-img" src="{{ juego.imagen.url }}" alt="{{ juego.titulo }}">
-                    {% else %}
-                        <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="Sin imagen">
-                    {% endif %}
+<!-- GRILLA DE CARDS DE VIDEOJUEGOS -->
+<div class="grid-container">
+{% for juego in lista_juegos %}
+    <div class="card">
+        <div class="post-usuario">
+            <a href="#">
+                {% if juego.autor.imagen_perfil %}
+                    <img src="{{ juego.autor.imagen_perfil.url }}" alt="Perfil" class="perfil-img">
+                {% else %}
+                    <img src="{% static 'img/profiles/perfil-DEFAULT.jpg' %}" alt="Perfil por defecto" class="perfil-img">
+                {% endif %}
+                <p class="card-text">{{ juego.autor.username }}</p>
+            </a>
+        </div>
+        <p class="card-text">Fecha: {{ juego.fecha }}</p>
+        
+        {% if juego.imagen %}
+            <img class="main-img" src="{{ juego.imagen.url }}" alt="imagen juego">
+        {% else %}
+            <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="imagen juego">
+        {% endif %}
 
-                    <div class="like-container"><!--BOTON LIKE-->
-                        <input type="checkbox" class="like-checkbox" id="like-1">
-                        <label class="like-label" for="like-1">
-                            <i class="fas fa-heart"></i>
-                            <span class="sr-only">Me gusta</span>
-                        </label>
-                        <span class="like-count">0</span>
-                    </div><!--TERMINA BOTON LIKE-->
-
-                    <!--BODY CARD-->
-                        <h3 class="card-title">{{ juego.titulo }}</h3>
-                        <p class="card-text">Plataforma: {{ juego.categoria }}</p>
-                        <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
-                </div>
-    {% endfor %}
+        <div class="like-container">
+            <input type="checkbox" class="like-checkbox" id="like-{{ juego.id }}">
+            <label class="like-label" for="like-{{ juego.id }}">
+                <i class="fas fa-heart"></i>
+                <span class="sr-only">Me gusta</span>
+            </label>
+            <span class="like-count">0</span>
+        </div>
+        <h3 class="card-title">{{ juego.titulo }}</h3>
+        <p class="card-text">Plataforma: {{ juego.categoria.nombre|default:"Sin plataforma" }}</p>
+        <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
     </div>
+{% endfor %}
+</div>
 
-    <!--PAGINACIÓN-->
+<!-- PAGINACIÓN CORREGIDA CON ENLACES DE RECUERDO -->
+<nav aria-label="Paginación" class="pagination">
+    <ul class="pagination justify-content-center">
+        {% if lista_juegos.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.orden_fecha %}&orden_fecha={{ request.GET.orden_fecha }}{% endif %}{% if request.GET.orden_comentarios %}&orden_comentarios={{ request.GET.orden_comentarios }}{% endif %}">Primera</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ lista_juegos.previous_page_number }}{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.orden_fecha %}&orden_fecha={{ request.GET.orden_fecha }}{% endif %}{% if request.GET.orden_comentarios %}&orden_comentarios={{ request.GET.orden_comentarios }}{% endif %}">Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Primera</span></li>
+        <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+        {% endif %}
 
-    <nav aria-label="Paginación" class="pagination">
-        <ul class="pagination justify-content-center">
-            {% if lista_juegos.has_previous %}
-            <li class="page-item">
-                <a class="page-link" href="?page=1">Primera</a>
-            </li>
-            
-            <li class="page-item">
-                <a class="page-link" href="?page={{ lista_juegos.previous_page_number }}">
-                    Anterior
-                </a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">Primera</span>
-            </li>
+        {% for num in lista_juegos.paginator.page_range %}
+        {% if lista_juegos.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > lista_juegos.number|add:'-3' and num < lista_juegos.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.orden_fecha %}&orden_fecha={{ request.GET.orden_fecha }}{% endif %}{% if request.GET.orden_comentarios %}&orden_comentarios={{ request.GET.orden_comentarios }}{% endif %}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
 
-            <li class="page-item disabled">
-                <span class="page-link">Anterior</span>
-            </li>
-            {% endif %}
-
-            {% for num in lista_juegos.paginator.page_range %}
-            {% if lista_juegos.number == num %}
-            <li class="page-item active">
-                <span class="page-link">{{ num }}</span>
-            </li>
-            {% elif num > lista_juegos.number|add:'-3' and num < lista_juegos.number|add:'3' %}
-            <li class="page-item">
-                <a class="link-page" href="?page={{ num }}">{{ num }}</a>
-            </li>
-            {% endif %}
-            {% endfor %}
-
-            {% if lista_juegos.has_next %}
-            <li class="page-item">
-                <a class="page-link" href="?page={{ lista_juegos.next_page_number }}">Siguiente</a>
-            </li>
-
-            <li class="page-item">
-                <a class="page-link" href="?page={{ lista_juegos.num_pages }}">Ultima</a>
-            </li>
-            {% else %}
-            <li class="page-item disabled">
-                <span class="page-link">Siguiente</span>
-            </li>
-
-            <li class="page-item disabled">
-                <span class="page-link">Ultima</span>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-
-
-
+        {% if lista_juegos.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ lista_juegos.next_page_number }}{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.orden_fecha %}&orden_fecha={{ request.GET.orden_fecha }}{% endif %}{% if request.GET.orden_comentarios %}&orden_comentarios={{ request.GET.orden_comentarios }}{% endif %}">Siguiente</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ lista_juegos.paginator.num_pages }}{% if request.GET.categoria %}&categoria={{ request.GET.categoria }}{% endif %}{% if request.GET.orden_fecha %}&orden_fecha={{ request.GET.orden_fecha }}{% endif %}{% if request.GET.orden_comentarios %}&orden_comentarios={{ request.GET.orden_comentarios }}{% endif %}">Ultima</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+        <li class="page-item disabled"><span class="page-link">Ultima</span></li>
+        {% endif %}
+    </ul>
+</nav>
 
 {% endblock %}
