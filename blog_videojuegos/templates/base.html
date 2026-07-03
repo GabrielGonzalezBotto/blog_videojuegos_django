@@ -23,12 +23,19 @@
         </label>
 
         <!-- Barra de búsqueda -->
-        <div class="container-search" role="search">
+        <!--<div class="container-search" role="search">
             <input type="search" name="q" placeholder="Buscar..." value="{{ request.GET.q|default:'' }}">
             <div class="btn-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-        </div>
+        </div>-->
+
+        <form action="{% url 'blog:blog' %}" method="GET" role="search" class="container-search" style="display: flex; align-items: center;">
+            <input type="search" name="q" placeholder="Buscar..." value="{{ request.GET.q|default:''}}">
+            <button type="submit" class="btn-search" style="background: #000; border: solid 3px; cursor: pointer; color:#66ccff; padding: 0 5px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
 
         <!-- ==================== ZONA DE USUARIO ==================== -->
         <div class="nav-user-section">
