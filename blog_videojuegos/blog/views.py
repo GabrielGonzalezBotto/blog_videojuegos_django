@@ -4,12 +4,18 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Juego, Categoria, Comentario
 from .forms import PostJuego
-from  django.db.models import Count
+from  django.db.models import Count, Q
 
 # Create your views here.
     
 def lista_juegos(request):
     juegos_queryset = Juego.objects.all().annotate(total_comentarios=Count('comentario'))
+    palabra_clave = request.GET.get('q', '').strip()
+    if palabra_clave:
+        juegos_queryset = juegos_queryset.filter(
+            Q(titulo__icontains=palabra_clave) |
+            Q(descripcion__icontains=palabra_clave)
+        ).distinct()
     categoria_filtrada = request.GET.get('categoria')
     if categoria_filtrada:
         juegos_queryset = juegos_queryset.filter(categoria__nombre__iexact=categoria_filtrada)
