@@ -5,6 +5,7 @@ from django.contrib import messages
 from .models import Juego, Categoria, Comentario
 from .forms import PostJuego
 from  django.db.models import Count, Q
+from django.http import JsonResponse
 
 # Create your views here.
     
@@ -204,6 +205,28 @@ def editar_comentario(request, pk):
     return render(request, 'blog/editar_comentario.html', {
         'comentario': comentario,
         'id_juego': id_juego
+    })
+
+#LIKES
+
+@login_required
+def like_post(request, juego_id):
+
+    juego = get_object_or_404(Juego, id=juego_id)
+    user = request.user
+
+    if user in juego.likes.all():
+        # Si ya dio like, lo quitamos
+        juego.likes.remove(user)
+        liked = False
+    else:
+        # Si no, lo agregamos
+        juego.likes.add(user)
+        liked = True
+
+    return JsonResponse({
+        "liked": liked,
+        "total_likes": juego.likes.count()
     })
 
 
