@@ -87,43 +87,67 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //LIKES
+document.addEventListener('DOMContentLoaded', function () {
+    const likeForms = document.querySelectorAll('.like-form');
 
-document.addEventListener("DOMContentLoaded", () => {
-    const csrftoken = window.csrfToken;
+    likeForms.forEach(form => {
+        form.addEventListener('submit', function (e) {
+            // 1. Frenamos el envío tradicional del formulario para que NO se recargue la página
+            e.preventDefault(); 
 
-    document.querySelectorAll(".like-checkbox").forEach(checkbox => {
-        checkbox.addEventListener("change", function () {
-            const postId = this.dataset.id;
-            fetch(`/like/${postId}/`, {
-                method: "POST",
+            // 2. Obtenemos la URL de la acción del formulario y el token de seguridad CSRF
+            const url = this.getAttribute('action');
+            const csrfToken = this.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            // 3. Buscamos el checkbox, el ícono del corazón y el contador de ESTA card específica
+            const checkbox = this.querySelector('.like-checkbox');
+            const juegoId = checkbox.dataset.id;
+            const corazonIcono = this.querySelector('.fa-heart');
+            const contadorSpan = document.getElementById(`like-count-${juegoId}`);
+
+            // 4. Hacemos la petición mágica (Fetch) al servidor de Django en segundo plano
+            fetch(url, {
+                method: 'POST',
                 headers: {
-                    "X-CSRFToken": csrftoken,
-                    "X-Requested-With": "XMLHttpRequest",
-                },
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
             })
             .then(response => {
-                if (!response.ok) throw new Error("Error en la petición AJAX");
+                // Si el servidor responde que no está autorizado (ej: no está logueado), lo mandamos al login
+                if (response.status === 402 || response.status === 403) {
+                    window.location.href = '/usuarios/login/'; // Cambia la ruta si tu login se llama diferente
+                    return;
+                }
                 return response.json();
             })
             .then(data => {
-                console.log("Respuesta del servidor:", data);  // 👈
-                // Actualizar contador
-                const countEl = document.getElementById(`like-count-${postId}`);
-                if (countEl) {
-                    countEl.textContent = data.total_likes;
-                }
+                if (data) {
+                    // 5. ¡MÁGICO! Actualizamos el estado visual en la pantalla al instante
+                    checkbox.checked = data.liked;
+                    contadorSpan.textContent = data.total_likes;
 
-                // Cambiar estado del corazón
-                const label = document.querySelector(`label[for='like-${postId}'] i`);
-                if (data.liked) {
-                    this.checked = true;
-                    if (label) label.classList.add("liked");
-                } else {
-                    this.checked = false;
-                    if (label) label.classList.remove("liked");
+                    // Si da like pintamos de rojo, si lo quita se lo sacamos
+                    if (data.liked) {
+                        corazonIcono.classList.add('liked');
+                    } else {
+                        corazonIcono.classList.remove('liked');
+                    }
                 }
             })
-            .catch(error => console.error("Error:", error));
+            .catch(error => console.error('Error en la Matrix de Likes:', error));
+        });
+    });
+
+    // ⚡ TRUCO EXTRA: Para que el label funcione como botón submit real,
+    // hacemos que al hacer clic en el corazón se dispare el envío del formulario.
+    const likeLabels = document.querySelectorAll('.like-label');
+    likeLabels.forEach(label => {
+        label.addEventListener('click', function(e) {
+            e.preventDefault(); // Evitamos doble clic del checkbox nativo
+            const formAsociado = this.closest('.like-form');
+            // Disparamos el submit del formulario que nuestro código de arriba ya está escuchando
+            formAsociado.dispatchEvent(new Event('submit')); 
         });
     });
 });

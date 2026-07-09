@@ -80,15 +80,29 @@
         {% else %}
             <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="imagen juego">
         {% endif %}
+        <form action="{% url 'blog:like_post' juego.id %}" method="post" class="like-form">
+            <!-- CSRF global para los likes -->
+            {% csrf_token %}
 
-        <div class="like-container">
-            <input type="checkbox" class="like-checkbox" id="like-{{ juego.id }}">
-            <label class="like-label" for="like-{{ juego.id }}">
-                <i class="fas fa-heart"></i>
-                <span class="sr-only">Me gusta</span>
-            </label>
-            <span class="like-count">0</span>
-        </div>
+            <div class="like-container">
+                <!-- Checkbox oculto (estado del like) -->
+                <input type="checkbox"
+                    class="like-checkbox"
+                    id="like-{{ juego.id }}"
+                    data-id="{{ juego.id }}"
+                    {% if user.is_authenticated and user in juego.likes.all %}checked{% endif %}
+                    style="display:none;">
+
+                    <!-- Label que actúa como botón -->
+                    <label class="like-label" for="like-{{ juego.id }}">
+                            <i class="fas fa-heart {% if user.is_authenticated and user in juego.likes.all %}liked{% endif %}"></i>
+                            <span class="sr-only">Me gusta</span>
+                    </label>
+
+                    <!-- Contador dinámico -->
+                    <span class="like-count" id="like-count-{{ juego.id }}">{{ juego.total_likes }}</span>
+            </div>
+        </form>
         <h3 class="card-title">{{ juego.titulo }}</h3>
         <p class="card-text">Plataforma: {{ juego.categoria.nombre|default:"Sin plataforma" }}</p>
         <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
