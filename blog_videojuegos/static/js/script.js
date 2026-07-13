@@ -106,35 +106,36 @@ document.addEventListener('DOMContentLoaded', function () {
             const contadorSpan = document.getElementById(`like-count-${juegoId}`);
 
             // 4. Hacemos la petición mágica (Fetch) al servidor de Django en segundo plano
-            // Hacemos la petición mágica
             fetch(url, {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "X-CSRFToken": csrfToken,
-                    "X-Requested-With": "XMLHttpRequest",
-                },
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
             })
             .then(response => {
-                // ⚡ DETECTOR DE ANÓNIMOS: Si Django rechaza la petición por falta de login (Error 402, 403 o redirección)
-                if (!response.ok || response.status === 403) {
-                    // Disparamos nuestro cartel flotante personalizado
-                    mostrarModalLogin();
-                    throw new Error("Usuario no autenticado");
+                // Si el servidor responde que no está autorizado (ej: no está logueado), lo mandamos al login
+                if (response.status === 402 || response.status === 403) {
+                    window.location.href = '/usuarios/login/'; // Cambia la ruta si tu login se llama diferente
+                    return;
                 }
                 return response.json();
             })
             .then(data => {
                 if (data) {
-                    if (countEl) countEl.textContent = data.total_likes;
+                    // 5. ¡MÁGICO! Actualizamos el estado visual en la pantalla al instante
                     checkbox.checked = data.liked;
+                    contadorSpan.textContent = data.total_likes;
+
+                    // Si da like pintamos de rojo, si lo quita se lo sacamos
                     if (data.liked) {
-                        if (corazonIcono) corazonIcono.classList.add("liked");
+                        corazonIcono.classList.add('liked');
                     } else {
-                        if (corazonIcono) corazonIcono.classList.remove("liked");
+                        corazonIcono.classList.remove('liked');
                     }
                 }
             })
-            .catch(error => console.warn(error.message));
+            .catch(error => console.error('Error en la Matrix de Likes:', error));
         });
     });
 
@@ -151,4 +152,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-//Cartel Regitro/Login
+//CARTEL REGISTRO/LOGIN LIKE
+function mostrarModalLogin() {
+    document.getElementById('modal-login-glitch').style.display = 'flex';
+}
+function cerrarModalLogin() {
+    document.getElementById('modal-login-glitch').style.display = 'none';
+}
+// Cierra también si hacen clic afuera del cuadro negro
+window.onclick = function(event) {
+    const modal = document.getElementById('modal-login-glitch');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}

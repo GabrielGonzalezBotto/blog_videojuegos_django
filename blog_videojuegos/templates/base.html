@@ -174,22 +174,5 @@
         </div>
     </div>
 </div>
-
-<!-- Funciones rápidas de JS para prender y apagar el cartel -->
-<script>
-function mostrarModalLogin() {
-    document.getElementById('modal-login-glitch').style.display = 'flex';
-}
-function cerrarModalLogin() {
-    document.getElementById('modal-login-glitch').style.display = 'none';
-}
-// Cierra también si hacen clic afuera del cuadro negro
-window.onclick = function(event) {
-    const modal = document.getElementById('modal-login-glitch');
-    if (event.target == modal) {
-        modal.style.display = 'none';
-    }
-}
-</script>
 </body>
 </html>
