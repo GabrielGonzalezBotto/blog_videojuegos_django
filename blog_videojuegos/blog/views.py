@@ -6,6 +6,7 @@ from .models import Juego, Categoria, Comentario
 from .forms import PostJuego
 from  django.db.models import Count, Q
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_protect
 
 # Create your views here.
     
@@ -209,8 +210,11 @@ def editar_comentario(request, pk):
 
 #LIKES
 
-@login_required
+@csrf_protect
 def like_post(request, juego_id):
+
+    if not request.user.is_authenticated:
+        return JsonResponse({"error": "No autenticado"}, status=403)
 
     juego = get_object_or_404(Juego, id=juego_id)
     user = request.user

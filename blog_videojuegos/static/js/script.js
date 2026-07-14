@@ -92,61 +92,52 @@ document.addEventListener('DOMContentLoaded', function () {
 
     likeForms.forEach(form => {
         form.addEventListener('submit', function (e) {
-            // 1. Frenamos el envío tradicional del formulario para que NO se recargue la página
             e.preventDefault(); 
 
-            // 2. Obtenemos la URL de la acción del formulario y el token de seguridad CSRF
             const url = this.getAttribute('action');
             const csrfToken = this.querySelector('[name=csrfmiddlewaretoken]').value;
 
-            // 3. Buscamos el checkbox, el ícono del corazón y el contador de ESTA card específica
             const checkbox = this.querySelector('.like-checkbox');
             const juegoId = checkbox.dataset.id;
             const corazonIcono = this.querySelector('.fa-heart');
-            const contadorSpan = document.getElementById(`like-count-${juegoId}`);
+            const contadorSpan = document.getElementById(`like-count-${juegoId}`); // ⚡ Nombre base: contadorSpan
 
-            // 4. Hacemos la petición mágica (Fetch) al servidor de Django en segundo plano
             fetch(url, {
-                method: 'POST',
+                method: "POST",
                 headers: {
-                    'X-CSRFToken': csrfToken,
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
+                    "X-CSRFToken": csrfToken,
+                    "X-Requested-With": "XMLHttpRequest",
+                },
             })
             .then(response => {
-                // Si el servidor responde que no está autorizado (ej: no está logueado), lo mandamos al login
-                if (response.status === 402 || response.status === 403) {
-                    window.location.href = '/usuarios/login/'; // Cambia la ruta si tu login se llama diferente
-                    return;
+                if (!response.ok || response.status === 403) {
+                    mostrarModalLogin(); 
+                    throw new Error("Usuario no autenticado");
                 }
                 return response.json();
             })
             .then(data => {
                 if (data) {
-                    // 5. ¡MÁGICO! Actualizamos el estado visual en la pantalla al instante
+                    // ⚡ CORREGIDO: Cambiamos 'countEl' por 'contadorSpan' para que matchee con la variable de arriba
+                    if (contadorSpan) contadorSpan.textContent = data.total_likes;
+                    
                     checkbox.checked = data.liked;
-                    contadorSpan.textContent = data.total_likes;
-
-                    // Si da like pintamos de rojo, si lo quita se lo sacamos
                     if (data.liked) {
-                        corazonIcono.classList.add('liked');
+                        if (corazonIcono) corazonIcono.classList.add("liked");
                     } else {
-                        corazonIcono.classList.remove('liked');
+                        if (corazonIcono) corazonIcono.classList.remove("liked");
                     }
                 }
             })
-            .catch(error => console.error('Error en la Matrix de Likes:', error));
+            .catch(error => console.warn(error.message));
         });
     });
 
-    // ⚡ TRUCO EXTRA: Para que el label funcione como botón submit real,
-    // hacemos que al hacer clic en el corazón se dispare el envío del formulario.
     const likeLabels = document.querySelectorAll('.like-label');
     likeLabels.forEach(label => {
         label.addEventListener('click', function(e) {
-            e.preventDefault(); // Evitamos doble clic del checkbox nativo
+            e.preventDefault(); 
             const formAsociado = this.closest('.like-form');
-            // Disparamos el submit del formulario que nuestro código de arriba ya está escuchando
             formAsociado.dispatchEvent(new Event('submit')); 
         });
     });
