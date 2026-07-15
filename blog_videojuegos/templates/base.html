@@ -159,18 +159,18 @@
     </footer>
 
     <!-- CARTEL FLOTANTE NEÓN PARA INVITAR A LOGUEARSE -->
-<div id="modal-login-glitch" class="modal-glitch-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+<div id="modal-login-glitch" class="content-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); z-index: 9999; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
     <div class="modal-glitch-content" style="background: #0d0d0d; border: 2px solid #ff0055; box-shadow: 0 0 20px #ff0055; padding: 40px; border-radius: 10px; max-width: 450px; text-align: center; position: relative;">
         
         <!-- Botón de cruz para cerrar -->
         <span onclick="cerrarModalLogin()" style="position: absolute; top: 15px; right: 20px; color: #888; cursor: pointer; font-size: 1.5rem; transition: 0.3s;" onmouseover="this.style.color='#ff0055'" onmouseout="this.style.color='#888'">&times;</span>
         
-        <h2 style="color: #15f4ee; text-shadow: 0 0 10px #15f4ee; margin-bottom: 20px; font-family: sans-serif; letter-spacing: 2px;">⚠️ ALERTA EN LA MATRIX</h2>
-        <p style="color: #fff; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;">Para poder dar 'Me gusta' y guardar tus juegos favoritos en The Glitch Zone necesitas estar logueado.</p>
+        <h3 style="color: #ff0055; text-shadow: 0 0 10px #ff0055; margin-bottom: 20px; font-family: sans-serif; letter-spacing: 2px;">⚠️ ALERTA EN LA MATRIX</h3>
+        <p style="color: #66ccee; text-shadow: 0 0 10px #66ccee; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;">Para poder dar 'Me gusta' y guardar tus juegos favoritos en The Glitch Zone necesitas estar logueado.</p>
         
         <div style="display: flex; gap: 15px; justify-content: center;">
             <a href="{% url 'login' %}" style="background: #ff0055; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; box-shadow: 0 0 10px #ff0055; transition: 0.3s; width: 100%;">LOGIN</a>
-            <a href="{% url 'registro' %}" style="background: #222; color: #15f4ee; border: 1px solid #15f4ee; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; width: 100%;">REGISTRO</a>
+            <a href="{% url 'registro' %}" style="background: #222; color: #66ccee; border: 1px solid #66ccee; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s; width: 100%;">REGISTRO</a>
         </div>
     </div>
 </div>
