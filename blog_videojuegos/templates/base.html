@@ -107,10 +107,10 @@
                         </ul>
                 </li>
         {% endif %}
-            <li><a href="{% url 'inicio' %}">INICIO</a></li>
+            <li><a href="{% url 'inicio:index' %}">INICIO</a></li>
             <li><a href="{% url 'blog:blog' %}">BLOG</a></li>
-            <li><a href="{% url 'nosotros' %}">NOSOTROS</a></li>
-            <li><a href="{% url 'contacto' %}">CONTACTO</a></li>
+            <li><a href="{% url 'inicio:nosotros' %}">NOSOTROS</a></li>
+            <li><a href="{% url 'inicio:contacto' %}">CONTACTO</a></li>
         </ul>
     </nav>
 </header>
