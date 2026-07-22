@@ -53,6 +53,7 @@
             <i class="fas fa-chevron-right"></i>
         </button>
     </div>
+</div>
 
 
     {% if messages %}
@@ -140,16 +141,37 @@
         </div>
 
         <h3 class="mis-posteos">Mis Posteos</h3>
-        <div class="post-list">
-            {% for juego in juegos %}
-            <div class="card" id="post-{{ juego.id }}">
-                <div class="post-actions">
-                    <input type="checkbox" class="menu-checkbox" id="post-menu-{{ juego.id }}">
-                    <label class="menu-label" for="post-menu-{{ juego.id }}"><i class="fas fa-ellipsis-v"></i></label>
+
+        <div class="grid-container">
+        <!-- ⚡ LA MAGIA: Recorremos los juegos del usuario de la sesión directo desde el HTML -->
+        {% for juego in user.juego.all %}
+            <div class="card">
+                <p class="card-text">Fecha: {{ juego.fecha|date:"d/m/Y" }}</p>
+                
+                {% if juego.imagen %}
+                    <img class="main-img" src="{{ juego.imagen.url }}" alt="{{ juego.titulo }}">
+                {% else %}
+                    <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="Sin imagen">
+                {% endif %}
+
+                <h3 class="card-title" style="margin-top: 10px;">{{ juego.titulo }}</h3>
+                <p class="card-text">Plataforma: {{ juego.categoria.nombre|default:"Sin plataforma" }}</p>
+                
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post" style="width: 100%; text-align: center; text-decoration: none;">Ver</a>
+                    <!-- ⚡ BOTONES RÁPIDOS DE CONTROL: Ya que estás en TU perfil, te dejamos editar o borrar tus juegos desde acá -->
+                    <a href="{% url 'blog:editar_post' juego.pk %}" class="btn-post" style="width: 100%; text-align: center; text-decoration: none;">Editar</a>
                 </div>
             </div>
-            {% endfor %}
-        </div>
+        {% empty %}
+            <!-- Cartel por si el usuario es nuevo y todavía no publicó ningún juego -->
+            <p style="color: #888; font-style: italic; text-align: center; width: 100%; padding: 20px;">
+                Todavía no has publicado ningún videojuego en Checkpoint Games. ¡Anímate a subir el primero!
+            </p>
+        {% endfor %}
+    </div>
+        
+    </div>
     </div>
 </section>
 

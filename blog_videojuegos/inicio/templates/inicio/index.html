@@ -107,7 +107,7 @@
                     <h3 style="margin-top: 15px; font-size: 1.2rem;">{{ juego.titulo }}</h3>
                     <!-- Cortamos la descripción a 80 caracteres con el filtro 'slice' para que no rompa tu tarjeta de noticias -->
                     <p style="font-size: 0.9rem; color: #ccc;">{{ juego.descripcion|slice:":80" }}...</p>
-                    <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post">Leer +</a>
+                    <a href="{% url 'blog:detalle_juego' juego.pk %}" class="btn-post">Ver Post</a>
                 </div>
             {% empty %}
                 <p style="text-align: center; width: 100%; color: #888;">No hay novedades recientes.</p>
