@@ -3,6 +3,8 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from  .forms import RegistroForm, LoginForm, EditarPerfilForm
 from django.contrib import messages
+from django.core.paginator import Paginator
+from blog.models import Juego 
 
 # Create your views here.
 def registro_view(request):
@@ -36,36 +38,37 @@ def logout_view(request):
     return redirect('login')
 
 @login_required
-#def perfil_view(request):
-    #return render(request, 'usuarios/editar_perfil.html')
 def perfil(request):
+    usuario_actual = request.user
+
+    # 1. CONTROLES DE FORMULARIOS POST (Tu código exacto intacto)
     if request.method == 'POST':
         if 'eliminar_imagen' in request.POST:
-            usuario = request.user
-            usuario.imagen_perfil = 'profiles/perfil-default.jpg'
-            usuario.save()
+            usuario_actual.imagen_perfil = 'profiles/perfil-default.jpg'
+            usuario_actual.save()
             messages.success(request, "¡Tu foto de perfil fue eliminada!")
             return redirect('perfil')
         
-        form = EditarPerfilForm(request.POST, request.FILES, instance=request.user)
+        form = EditarPerfilForm(request.POST, request.FILES, instance=usuario_actual)
         if form.is_valid():
             form.save()
             messages.success(request, "¡Tu perfil se actualizó correctamente!")
             return redirect('perfil')
-        else:
-            form = EditarPerfilForm(instance=request.user)
-            return render(request, 'usuarios/perfil.html', {'form': form})
-
-    if request.method == 'POST':
-        # instance=request.user le indica a Django que actualice al usuario actual en vez de crear uno nuevo
-        # request.FILES es obligatorio para recibir archivos multimedia como imágenes
-        form = EditarPerfilForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "¡Tu perfil e imagen se actualizaron correctamente!")
-            return redirect('perfil')
     else:
-        # Carga el formulario con los datos actuales del usuario logueado
-        form = EditarPerfilForm(instance=request.user)
-        
-    return render(request, 'usuarios/perfil.html', {'form': form})
+        form = EditarPerfilForm(instance=usuario_actual)
+
+    # 2. ⚡ REPARACIÓN MAESTRA DEL PAGINADOR EN PYTHON
+    # Le pedimos a Python que agarre tus juegos directos vinculados a tu sesión
+    lista_juegos_directa = usuario_actual.juego.all().order_by('-id')
+
+    # Activamos el recorte de a 4 tarjetas por página
+    paginator = Paginator(lista_juegos_directa, 6) 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    # 3. CONTEXTO ÚNICO PARA RENDERIZAR LA PANTALLA
+    contexto = {
+        'form': form,
+        'mis_juegos': page_obj  # Reutilizamos tu variable para el bucle
+    }
+    return render(request, 'usuarios/perfil.html', contexto)
