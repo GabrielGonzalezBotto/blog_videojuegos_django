@@ -164,32 +164,51 @@
             {% endfor %}
             
         </div>
-
-        <!-- ⚡ BOTONERA DEL PAGINADOR NEÓN (Abajo del div de las cards) -->
-        {% if mis_juegos.has_other_pages %}
-            <nav aria-label="Paginación" class="pagination" style="margin: 20px 0 50px; text-align: center; width: 100%;">
-                <ul class="pagination justify-content-center" style="display: flex; list-style: none; gap: 10px; justify-content: center; padding: 0;">
-                    {% if mis_juegos.has_previous %}
-                        <li><a class="page-link" href="?page=1" style="color: white; background: #111; padding: 8px 12px; border-radius: 4px; text-decoration: none; border: 1px solid #333;">Primera</a></li>
-                        <li><a class="page-link" href="?page={{ mis_juegos.previous_page_number }}" style="color: white; background: #111; padding: 8px 12px; border-radius: 4px; text-decoration: none; border: 1px solid #333;">Anterior</a></li>
-                    {% endif %}
-
-                    {% for num in mis_juegos.paginator.page_range %}
-                        {% if mis_juegos.number == num %}
-                            <li><span class="page-link" style="background: #ff0055; color: white; padding: 8px 12px; border-radius: 4px; font-weight: bold; box-shadow: 0 0 10px #ff0055;">{{ num }}</span></li>
-                        {% elif num > mis_juegos.number|add:'-3' and num < mis_juegos.number|add:'3' %}
-                            <li><a class="page-link" href="?page={{ num }}" style="color: white; background: #111; padding: 8px 12px; border-radius: 4px; text-decoration: none; border: 1px solid #333;">{{ num }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if mis_juegos.has_next %}
-                        <li><a class="page-link" href="?page={{ mis_juegos.next_page_number }}" style="color: white; background: #111; padding: 8px 12px; border-radius: 4px; text-decoration: none; border: 1px solid #333;">Siguiente</a></li>
-                        <li><a class="page-link" href="?page={{ mis_juegos.paginator.num_pages }}" style="color: white; background: #111; padding: 8px 12px; border-radius: 4px; text-decoration: none; border: 1px solid #333;">Última</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        {% endif %}
 </div>
+
+        {% if mis_juegos.has_other_pages %}
+        <nav aria-label="Paginación" class="pagination" style="margin: 30px 0 50px;">
+            <ul class="pagination justify-content-center">
+        
+                <!-- Botones: Primera y Anterior -->
+                {% if mis_juegos.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1">Primera</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ mis_juegos.previous_page_number }}">Anterior</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">Primera</span></li>
+                <li class="page-item disabled"><span class="page-link">Anterior</span></li>
+                {% endif %}
+
+                <!-- Bucle de Números de Página Centrales -->
+                {% for num in mis_juegos.paginator.page_range %}
+                {% if mis_juegos.number == num %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                {% elif num > mis_juegos.number|add:'-3' and num < mis_juegos.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                <!-- Botones: Siguiente y Última -->
+                {% if mis_juegos.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ mis_juegos.next_page_number }}">Siguiente</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ mis_juegos.paginator.num_pages }}">Ultima</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+                <li class="page-item disabled"><span class="page-link">Ultima</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
 
     </div>
     </div>
