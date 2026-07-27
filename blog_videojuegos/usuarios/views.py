@@ -4,7 +4,8 @@ from django.contrib.auth.decorators import login_required
 from  .forms import RegistroForm, LoginForm, EditarPerfilForm
 from django.contrib import messages
 from django.core.paginator import Paginator
-from blog.models import Juego 
+from django.db.models import Count
+from blog.models import Juego, Categoria
 
 # Create your views here.
 def registro_view(request):
@@ -41,7 +42,7 @@ def logout_view(request):
 def perfil(request):
     usuario_actual = request.user
 
-    # 1. CONTROLES DE FORMULARIOS POST (Tu código exacto intacto)
+    # --- 1. LÓGICA DE EDICIÓN POST (Dejas quieto todo tu código actual aquí) ---
     if request.method == 'POST':
         if 'eliminar_imagen' in request.POST:
             usuario_actual.imagen_perfil = 'profiles/perfil-default.jpg'
@@ -57,18 +58,42 @@ def perfil(request):
     else:
         form = EditarPerfilForm(instance=usuario_actual)
 
-    # 2. ⚡ REPARACIÓN MAESTRA DEL PAGINADOR EN PYTHON
-    # Le pedimos a Python que agarre tus juegos directos vinculados a tu sesión
-    lista_juegos_directa = usuario_actual.juego.all().order_by('-id')
+    # --- 2. ⚡ NUEVO: MOTOR DE FILTRADO, ORDENAMIENTO Y PAGINACIÓN DEL PERFIL ---
+    # Traemos todos tus juegos directos anotando el conteo de comentarios de fondo
+    mis_juegos_queryset = usuario_actual.juego.all().annotate(total_comentarios=Count('comentario'))
 
-    # Activamos el recorte de a 4 tarjetas por página
-    paginator = Paginator(lista_juegos_directa, 6) 
+    # A. ATAJAR EL FILTRO DE CATEGORÍA DEL CARRUSEL
+    categoria_filtrada = request.GET.get('categoria')
+    if categoria_filtrada:
+        mis_juegos_queryset = mis_juegos_queryset.filter(categoria__nombre__iexact=categoria_filtrada)
+
+    # B. ATAJAR EL ORDEN POR FECHA
+    orden_fecha = request.GET.get('orden_fecha')
+    if orden_fecha == 'reciente':
+        mis_juegos_queryset = mis_juegos_queryset.order_by('-id')
+    elif orden_fecha == 'antiguo':
+        mis_juegos_queryset = mis_juegos_queryset.order_by('id')
+
+    # C. ATAJAR EL ORDEN POR COMENTARIOS
+    orden_comentarios = request.GET.get('orden_comentarios')
+    if orden_comentarios == 'mas':
+        mis_juegos_queryset = mis_juegos_queryset.order_by('-total_comentarios')
+    elif orden_comentarios == 'menos':
+        mis_juegos_queryset = mis_juegos_queryset.order_by('total_comentarios')
+    
+    # ID DESCENDENTE SI NO HAY NINGÚN ORDEN ACTIVO
+    if not orden_fecha and not orden_comentarios:
+        mis_juegos_queryset = mis_juegos_queryset.order_by('-id')
+
+    # D. EL PAGINADOR (Corta en 4 tarjetas por página)
+    paginator = Paginator(mis_juegos_queryset, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    # 3. CONTEXTO ÚNICO PARA RENDERIZAR LA PANTALLA
+    # 3. CONTEXTO COMPLETO PARA EL RENDERING
     contexto = {
         'form': form,
-        'mis_juegos': page_obj  # Reutilizamos tu variable para el bucle
+        'mis_juegos': page_obj,
+        'categorias': Categoria.objects.all()  # ⚡ ENVIAMOS LAS CATEGORÍAS para que el bucle del carrusel dibuje los botones
     }
     return render(request, 'usuarios/perfil.html', contexto)
