@@ -82,8 +82,8 @@
                 <p class="biografia">{{ request.user.descripcion|default:"¡Hola! estoy dentro de The Glitch Zone." }}</p>
                 
                 <div class="perfil-stats" style="margin-bottom: 15px;">
-                    <span><strong>Posteos:</strong> {{ juegos.count|default:0 }}</span>
-                    <span><strong>Likes:</strong> {{ total_likes|default:0 }}</span>
+                    <span><strong>Posteos:</strong> {{ mis_juegos.paginator.count }}</span>
+                    <span><strong>Likes:</strong> {{ total_likes }}</span>
                 </div>
                 <button type="button" class="btn" id="btn-activar-edicion">EDITAR PERFIL</button>
             </div>
