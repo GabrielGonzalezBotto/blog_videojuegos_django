@@ -62,7 +62,7 @@ def perfil(request):
     # --- 2. ⚡ NUEVO: MOTOR DE FILTRADO, ORDENAMIENTO Y PAGINACIÓN DEL PERFIL ---
     # Traemos todos tus juegos directos anotando el conteo de comentarios de fondo
     mis_juegos_queryset = usuario_actual.juego.all().annotate(total_comentarios=Count('comentario'))
-    total_likes_data = Juego.objects.filter(autor=request.user).aggregate(total=Sum('likes'))
+    total_likes_data = Juego.objects.filter(autor=request.user).aggregate(total=Count('likes'))
     total_likes = total_likes_data['total'] if total_likes_data['total'] else 0
 
     # A. ATAJAR EL FILTRO DE CATEGORÍA DEL CARRUSEL
