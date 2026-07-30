@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Count
 from blog.models import Juego, Categoria
-from django.db.models import Sum
+
 
 # Create your views here.
 def registro_view(request):
@@ -65,10 +65,16 @@ def perfil(request):
     total_likes_data = Juego.objects.filter(autor=request.user).aggregate(total=Count('likes'))
     total_likes = total_likes_data['total'] if total_likes_data['total'] else 0
 
+    juegos_favoritos = Juego.objects.filter(likes=request.user).order_by('-id')
+
+    pestaña_activa = request.GET.get('pestaña', 'mis-posts')
+    
+
     # A. ATAJAR EL FILTRO DE CATEGORÍA DEL CARRUSEL
     categoria_filtrada = request.GET.get('categoria')
     if categoria_filtrada:
         mis_juegos_queryset = mis_juegos_queryset.filter(categoria__nombre__iexact=categoria_filtrada)
+
 
     # B. ATAJAR EL ORDEN POR FECHA
     orden_fecha = request.GET.get('orden_fecha')
@@ -88,8 +94,15 @@ def perfil(request):
     if not orden_fecha and not orden_comentarios:
         mis_juegos_queryset = mis_juegos_queryset.order_by('-id')
 
-    # D. EL PAGINADOR (Corta en 4 tarjetas por página)
-    paginator = Paginator(mis_juegos_queryset, 6)
+    # D. ⚡ INTERRUPTOR DEL PAGINADOR DEFINITIVO (Ubicado al final de todos los filtros)
+    if pestaña_activa == 'favoritos':
+        # Si elegió la pestaña de favoritos, paginamos los juegos que le gustaron
+        paginator = Paginator(juegos_favoritos, 6)
+    else:
+        # Si no, paginamos sus propios posteos procesados por el carrusel
+        paginator = Paginator(mis_juegos_queryset, 6)
+
+    # Capturamos la página actual de la URL y armamos el bloque final de tarjetas
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -98,6 +111,7 @@ def perfil(request):
         'form': form,
         'mis_juegos': page_obj,
         'categorias': Categoria.objects.all(),
-        'total_likes': total_likes
-    }
+        'total_likes': total_likes,
+        'pestaña_activa': pestaña_activa,
+        }
     return render(request, 'usuarios/perfil.html', contexto)
