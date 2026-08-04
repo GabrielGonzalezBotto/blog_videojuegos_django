@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Count
 from blog.models import Juego
+from .models import Contacto
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -21,6 +23,17 @@ def index(request):
     return render(request, 'inicio/index.html', contexto)
 
 def contacto(request):
+    if request.method == 'POST':
+        nom = request.POST.get('nombre')
+        em = request.POST.get('email')
+        men = request.POST.get('mensaje')
+
+        Contacto.objects.create(nombre=nom, email=em, mensaje=men)
+
+        messages.success(request, "¡Tu mensaje fue enviado con éxito a The Glich Zone!")
+
+        return redirect('inicio:contacto')
+
     return render(request, 'inicio/contacto.html')
 
 def nosotros(request):
