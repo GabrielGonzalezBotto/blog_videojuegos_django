@@ -666,9 +666,9 @@ h3 {
 
 .main-title {
     position:absolute;
-    top: 77%;
-    left: 32%;
-    font-size: 76px;
+    top: 61%;
+    left: 36%;
+    font-size: 96px;
     text-align: center;
     margin: 5px 0;
 }
@@ -3268,8 +3268,9 @@ hr {
 
     .main-title {
         position: absolute;
-        left: 9%;
-        font-size: 56px;
+        top: 69%;
+        left: 24%;
+        font-size: 66px;
     }
 
     .img-hero{
