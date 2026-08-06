@@ -71,25 +71,29 @@
             
             <!-- CONTENEDOR MODO VISTA NORMAL -->
             <div id="vista-perfil">
-                {% if user.imagen_perfil and "default" not in user.imagen_perfil.url %}
-                    <img src="{{ user.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil">
-                {% else %}
-                    <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Foto por defecto" class="img-perfil">
-                {% endif %}
-                
-                <h3><span class="nombre-usuario">{{ request.user.username }}</span></h3>
-                
-                <p class="biografia">{{ request.user.descripcion|default:"¡Hola! estoy dentro de The Glitch Zone." }}</p>
-                
-                <div class="perfil-stats" style="margin-bottom: 15px;">
-                    <span><strong>Posteos:</strong> {{ mis_juegos.paginator.count }}</span>
-                    <span><strong>Likes:</strong> {{ total_likes }}</span>
-                </div>
-                <button type="button" class="btn" id="btn-activar-edicion">
-                    <i class="fa-solid fa-user"></i>
-                    EDITAR PERFIL
-                </button>
-            </div>
+    <!-- ⚡ CAMBIADO: Compara contra usuario_actual -->
+    {% if usuario_actual.imagen_perfil and "default" not in usuario_actual.imagen_perfil.url %}
+        <img src="{{ usuario_actual.imagen_perfil.url }}" alt="Foto de perfil" class="img-perfil">
+    {% else %}
+        <img src="{% static 'img/profiles/perfil-default.jpg' %}" alt="Foto por defecto" class="img-perfil">
+    {% endif %}
+    
+    <!-- ⚡ CAMBIADO: Muestra el nombre del perfil que estás visitando -->
+    <h3><span class="nombre-usuario">{{ usuario_actual.username }}</span></h3>
+    
+    <!-- ⚡ CAMBIADO: Muestra la biografía de ese usuario específico -->
+    <p class="biografia">{{ usuario_actual.descripcion|default:"¡Hola! estoy dentro de The Glitch Zone." }}</p>
+    
+    <div class="perfil-stats" style="margin-bottom: 15px;">
+        <span><strong>Posteos:</strong> {{ mis_juegos.paginator.count|default:0 }}</span>
+        <span><strong>Likes:</strong> {{ total_likes|default:0 }}</span>
+    </div>
+
+    <!-- ⚡ EXTRA PRO: El botón de editar PERFIL solo debe aparecer si estás viendo TU propio perfil -->
+    {% if usuario_actual == request.user %}
+        <button type="button" class="btn" id="btn-activar-edicion">EDITAR PERFIL</button>
+    {% endif %}
+</div>
 
             <!-- CONTENEDOR MODO EDICIÓN OCULTO -->
             <div id="formulario-perfil" style="display: none; max-width: 400px; margin: 0 auto;">
@@ -146,16 +150,21 @@
         <div class="perfil-tabs-container" style="display: flex; gap: 15px; margin-top: 30px; margin-bottom: 20px; justify-content: center;">
     
     <!-- Botón A: Mis Posteos -->
-    <a href="?pestaña=mis-posts" class="btn {% if pestaña_activa != 'favoritos' %}active{% endif %}" style="text-decoration: none;">
-        <i class="fa-solid fa-gamepad"></i>
-        MIS POSTEOS
+    <div class="perfil-tabs-container" style="display: flex; gap: 15px; margin-top: 30px; margin-bottom: 20px; justify-content: center;">
+    
+    <!-- Botón A: Mis Posteos -->
+    <!-- ⚡ PISTA: Si en la URL ya había un user_id, se lo volvemos a pasar pegadito con un & -->
+    <a href="?pestaña=mis-posts{% if request.GET.user_id %}&user_id={{ usuario_actual.id }}{% endif %}" class="btn {% if pestaña_activa != 'favoritos' %}active{% endif %}" style="text-decoration: none;">
+        🎮 MIS POSTEOS
     </a>
 
     <!-- Botón B: Mis Favoritos -->
-    <a href="?pestaña=favoritos" class="btn {% if pestaña_activa == 'favoritos' %}active{% endif %}" style="text-decoration: none;">
-        <i class="fas fa-heart"></i> 
-        MIS FAVORITOS
+    <!-- ⚡ PISTA: Hacemos exactamente lo mismo acá -->
+    <a href="?pestaña=favoritos{% if request.GET.user_id %}&user_id={{ usuario_actual.id }}{% endif %}" class="btn {% if pestaña_activa == 'favoritos' %}active{% endif %}" style="text-decoration: none;">
+        ❤️ MIS FAVORITOS
     </a>
+
+</div>
 
 </div>
 
@@ -217,48 +226,49 @@
 
 
         {% if mis_juegos.has_other_pages %}
-        <nav aria-label="Paginación" class="pagination" style="margin: 30px 0 50px;">
-            <ul class="pagination justify-content-center">
-        
-                <!-- Botones: Primera y Anterior -->
-                {% if mis_juegos.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1">Primera</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ mis_juegos.previous_page_number }}">Anterior</a>
-                </li>
-                {% else %}
-                <li class="page-item disabled"><span class="page-link">Primera</span></li>
-                <li class="page-item disabled"><span class="page-link">Anterior</span></li>
-                {% endif %}
+<nav aria-label="Paginación" class="pagination" style="margin: 30px 0 50px;">
+    <ul class="pagination justify-content-center">
 
-                <!-- Bucle de Números de Página Centrales -->
-                {% for num in mis_juegos.paginator.page_range %}
-                {% if mis_juegos.number == num %}
-                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
-                {% elif num > mis_juegos.number|add:'-3' and num < mis_juegos.number|add:'3' %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                </li>
-                {% endif %}
-                {% endfor %}
-
-                <!-- Botones: Siguiente y Última -->
-                {% if mis_juegos.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ mis_juegos.next_page_number }}">Siguiente</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ mis_juegos.paginator.num_pages }}">Ultima</a>
-                </li>
-                {% else %}
-                <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
-                <li class="page-item disabled"><span class="page-link">Ultima</span></li>
-                {% endif %}
-            </ul>
-        </nav>
+        <!-- Botones: Primera y Anterior -->
+        {% if mis_juegos.has_previous %}
+        <li class="page-item">
+            <!-- ⚡ DOBLE MEMORIA: Mantenemos el user_id y la pestaña_activa en la URL -->
+            <a class="page-link" href="?page=1{% if request.GET.user_id %}&user_id={{ usuario_actual.id }}{% endif %}{% if pestaña_activa %}&pestaña={{ pestaña_activa }}{% endif %}">Primera</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ mis_juegos.previous_page_number }}{% if request.GET.user_id %}&user_id={{ usuario_actual.id }}{% endif %}{% if pestaña_activa %}&pestaña={{ pestaña_activa }}{% endif %}">Anterior</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Primera</span></li>
+        <li class="page-item disabled"><span class="page-link">Anterior</span></li>
         {% endif %}
+
+        <!-- Bucle de Números de Página Centrales -->
+        {% for num in mis_juegos.paginator.page_range %}
+        {% if mis_juegos.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% elif num > mis_juegos.number|add:'-3' and num < mis_juegos.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}{% if request.GET.user_id %}&user_id={{ usuario_actual.id }}{% endif %}{% if pestaña_activa %}&pestaña={{ pestaña_activa }}{% endif %}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        <!-- Botones: Siguiente y Última -->
+        {% if mis_juegos.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ mis_juegos.next_page_number }}{% if request.GET.user_id %}&user_id={{ usuario_actual.id }}{% endif %}{% if pestaña_activa %}&pestaña={{ pestaña_activa }}{% endif %}">Siguiente</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ mis_juegos.paginator.num_pages }}{% if request.GET.user_id %}&user_id={{ usuario_actual.id }}{% endif %}{% if pestaña_activa %}&pestaña={{ pestaña_activa }}{% endif %}">Ultima</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled"><span class="page-link">Siguiente</span></li>
+        <li class="page-item disabled"><span class="page-link">Ultima</span></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
 
     </div>
     </div>

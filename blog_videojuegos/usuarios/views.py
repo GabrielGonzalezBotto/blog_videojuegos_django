@@ -41,9 +41,21 @@ def logout_view(request):
 
 @login_required
 def perfil(request):
-    usuario_actual = request.user
+    # ⚡ CONEXIÓN MAESTRA: Django va a buscar tu modelo personalizado 'Usuario' automáticamente
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
 
-    # --- 1. LÓGICA DE EDICIÓN POST (Dejas quieto todo tu código actual aquí) ---
+    # 1. DETECTOR DE CLIC EN EL CREADOR: Atajamos si viene un ID por la URL (?user_id=)
+    usuario_id_url = request.GET.get('user_id')
+
+    if usuario_id_url:
+        # Si la URL trae un ID, cargamos el perfil de ese creador específico
+        usuario_actual = User.objects.get(id=usuario_id_url)
+    else:
+        # Si no viene ningún ID (entró desde el menú principal), ve su propio perfil
+        usuario_actual = request.user
+
+    # --- LÓGICA DE EDICIÓN POST (Tu código original blindado) ---
     if request.method == 'POST':
         if 'eliminar_imagen' in request.POST:
             usuario_actual.imagen_perfil = 'profiles/perfil-default.jpg'
@@ -59,22 +71,22 @@ def perfil(request):
     else:
         form = EditarPerfilForm(instance=usuario_actual)
 
-    # --- 2. ⚡ NUEVO: MOTOR DE FILTRADO, ORDENAMIENTO Y PAGINACIÓN DEL PERFIL ---
-    # Traemos todos tus juegos directos anotando el conteo de comentarios de fondo
+    # --- 2. MOTOR DE FILTRADO, ORDENAMIENTO Y PAGINACIÓN DEL PERFIL ---
+    # Traemos todos los juegos directos del 'usuario_actual' (puede ser el tuyo o el del creador clickeado)
     mis_juegos_queryset = usuario_actual.juego.all().annotate(total_comentarios=Count('comentario'))
-    total_likes_data = Juego.objects.filter(autor=request.user).aggregate(total=Count('likes'))
+    
+    # Tu consulta ganadora de likes limpia
+    total_likes_data = Juego.objects.filter(autor=usuario_actual).aggregate(total=Count('likes'))
     total_likes = total_likes_data['total'] if total_likes_data['total'] else 0
 
-    juegos_favoritos = Juego.objects.filter(likes=request.user).order_by('-id')
+    juegos_favoritos = Juego.objects.filter(likes=usuario_actual).order_by('-id')
 
     pestaña_activa = request.GET.get('pestaña', 'mis-posts')
-    
 
     # A. ATAJAR EL FILTRO DE CATEGORÍA DEL CARRUSEL
     categoria_filtrada = request.GET.get('categoria')
     if categoria_filtrada:
         mis_juegos_queryset = mis_juegos_queryset.filter(categoria__nombre__iexact=categoria_filtrada)
-
 
     # B. ATAJAR EL ORDEN POR FECHA
     orden_fecha = request.GET.get('orden_fecha')
@@ -94,12 +106,10 @@ def perfil(request):
     if not orden_fecha and not orden_comentarios:
         mis_juegos_queryset = mis_juegos_queryset.order_by('-id')
 
-    # D. ⚡ INTERRUPTOR DEL PAGINADOR DEFINITIVO (Ubicado al final de todos los filtros)
+    # D. ⚡ INTERRUPTOR DEL PAGINADOR DEFINITIVO (Usa de a 6 como te gustaba en el blog)
     if pestaña_activa == 'favoritos':
-        # Si elegió la pestaña de favoritos, paginamos los juegos que le gustaron
         paginator = Paginator(juegos_favoritos, 6)
     else:
-        # Si no, paginamos sus propios posteos procesados por el carrusel
         paginator = Paginator(mis_juegos_queryset, 6)
 
     # Capturamos la página actual de la URL y armamos el bloque final de tarjetas
@@ -107,11 +117,13 @@ def perfil(request):
     page_obj = paginator.get_page(page_number)
 
     # 3. CONTEXTO COMPLETO PARA EL RENDERING
+    # Reemplazamos 'request.user' por 'usuario_actual' en las llaves para que dibuje los datos correctos
     contexto = {
         'form': form,
+        'usuario_actual': usuario_actual, # ⚡ CABLE IMPORTANTE PARA EL HTML
         'mis_juegos': page_obj,
         'categorias': Categoria.objects.all(),
         'total_likes': total_likes,
         'pestaña_activa': pestaña_activa,
-        }
+    }
     return render(request, 'usuarios/perfil.html', contexto)
