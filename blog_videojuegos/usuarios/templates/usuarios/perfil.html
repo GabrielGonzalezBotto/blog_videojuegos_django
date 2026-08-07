@@ -189,7 +189,7 @@
                         <img class="main-img" src="{% static 'img/profiles/no-img.jpg' %}" alt="Sin imagen">
                     {% endif %}
 
-                     <form action="{% url 'blog:like_post' juego.id %}" method="post" class="like-form">
+        <form action="{% url 'blog:like_post' juego.id %}" method="post" class="like-form">
             <!-- CSRF global para los likes -->
             {% csrf_token %}
 
