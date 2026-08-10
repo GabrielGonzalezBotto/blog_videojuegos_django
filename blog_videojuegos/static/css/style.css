@@ -6,7 +6,7 @@ body {
     background: url(/static/img/bg.jpg) no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
-    border: 10px solid red;
+    border: 10px solid rgba(255, 0, 0, 0);
 }
 
 a {
@@ -1102,7 +1102,7 @@ h1 {
     position: relative;
     display: grid;
     margin: 50px;
-    border: 1px solid red;
+    border: 1px solid rgba(255, 0, 0, 0);
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 5px;
     justify-content: center;
@@ -3630,11 +3630,14 @@ hr {
 
 .integrantes-content {
     display: flex;
+    width: 200px;
     flex-direction: column;
     position: relative;
     left: 1%;
     padding-right: 200px;
 }
+
+
 
 /*.perfil-usuario{
     display: none;
