@@ -6,7 +6,7 @@ body {
     background: url(/static/img/bg.jpg) no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
-    border: 10px solid rgba(255, 0, 0, 0);
+    border: 1px solid rgba(255, 0, 0, 0);
 }
 
 a {
@@ -66,8 +66,9 @@ a {
     position: absolute;
     left: 3%;
     top: 20%;
-    max-height: 45px;
-    max-width: 45px;
+    max-height: 85px;
+    max-width: 85px;
+    cursor: pointer;
 }
 
 /*------BOTON INICIAR SESION------*/
@@ -653,7 +654,7 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 80px;
+    /*margin-top: 80px;*/
     height: 70vh;
 }
 
@@ -827,7 +828,7 @@ h1 {
 }
 
 .card img {
-    max-height: 270px;
+    max-height: 220px;
     width: 200px;
     border-radius: 20px;
     border: solid 3px #66ccff;
@@ -979,18 +980,6 @@ h1 {
 
 /*------CARDS-BLOG------*/
 
-/*.card-blog {
-    position: relative;
-    max-width: 1200px;
-    padding: 20px;
-    margin: 20px auto;
-    margin-bottom: 20px;
-    background: rgba(20, 20, 30, 0.5);
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    transition: all 0.4s ease;
-}*/
-
 .card-blog {
     position: relative;
     width: 600px;
@@ -1109,36 +1098,6 @@ h1 {
 }
 
 /*-------PAGINACION------*/
-
-/*.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    list-style: none;
-}
-.page-item {
-    color: #66ccee;
-    padding: 10px 15px 10px 15px;
-    border: 3px solid #66ccee;
-    border-radius: 15px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.page-item.active {
-    text-decoration: none;
-}
-
-.page-item.disabled {
-    opacity: 0.3;
-}
-
-.page-item.active {
-    background: #66ccee;
-    color: #1a1a2e;
-    text-shadow: none;
-    transform: scale(1.05);
-}*/
 
 /* Contenedor principal de paginación */
 .pagination {
@@ -3298,7 +3257,7 @@ hr {
     .card{
         position: relative;
         top: 0%;
-        left: 12%;
+        left: 2%;
         width: 100%;
         min-width: auto;
         min-height: auto;
@@ -3414,6 +3373,9 @@ hr {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        width: 98%;
+    }
     .hero-post{
         display: flex;
         flex-direction: column;
@@ -3427,7 +3389,14 @@ hr {
     filter: drop-shadow( 4px 6px 12px #66ccff);
     position: relative;
     top: 27%;
-}
+    }
+
+    .logo img {
+        position: absolute;
+        left: 1%;
+        max-height: 65px;
+        max-width: 65px;
+    }
     .blog-title {
         position: absolute;
         top: 1%;

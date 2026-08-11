@@ -232,22 +232,3 @@ def like_post(request, juego_id):
         "liked": liked,
         "total_likes": juego.likes.count()
     })
-
-
-
-#def crear_post(request):
-    #if request.method == 'POST': 
-        #form = PostJuego(request.POST, request.FILES) #Recibimos los datos del formulario
-        #if form.is_valid():
-            #juego = form.save(commit=False) #Frenamos el guardado para inyectar el autor de la sesion
-            #juego.autor = request.user # Asignacion segura del usuario logueado
-            #juego.save() #Guardado en base de datos
-
-            #messages.success(request, "¡Tu juego se publicó con éxito en The Glitch Zone!")
-            #return redirect('blog:blog') # Reddireccion a la lista de videojuegos
-    #else:
-        #form = PostJuego()
-
-
-    #return render(request, 'blog/crear_post.html', {'form': form})
-

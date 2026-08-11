@@ -14,7 +14,9 @@
     <header>
     <nav class="navbar">
         <div class="logo">
-            <img src="{% static 'img/img-blog/favicon-game.png' %}" alt="">
+            <a href="{% url 'inicio:index' %}">
+                <img src="{% static 'img/img-blog/logo_the_glitch_zone_2.png' %}" alt="Logo The Glitch Zone">
+            </a>
         </div>
 
         <input type="checkbox" class="menu-checkbox" id="hamburger-menu">
@@ -22,13 +24,6 @@
             <i class="fas fa-bars"></i>
         </label>
 
-        <!-- Barra de búsqueda -->
-        <!--<div class="container-search" role="search">
-            <input type="search" name="q" placeholder="Buscar..." value="{{ request.GET.q|default:'' }}">
-            <div class="btn-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-        </div>-->
 
         <form action="{% url 'blog:blog' %}" method="GET" role="search" class="container-search" style="display: flex; align-items: center;">
             <input type="search" name="q" placeholder="Buscar..." value="{{ request.GET.q|default:''}}">
@@ -109,7 +104,7 @@
         {% endif %}
             <li><a href="{% url 'inicio:index' %}">INICIO</a></li>
             <li><a href="{% url 'blog:blog' %}">BLOG</a></li>
-            <li><a href="{% url 'inicio:nosotros' %}">NOSOTROS</a></li>
+            <li><a href="{% url 'inicio:nosotros' %}">DESARROLLADOR</a></li>
             <li><a href="{% url 'inicio:contacto' %}">CONTACTO</a></li>
         </ul>
     </nav>
@@ -128,7 +123,7 @@
             <hr>
         </span>
         <div class="footer-content">
-            <p>&copy; 2025 Starforge Gaming. All rights reserved.</p>
+            <p>&copy; 2026 The Glitch Zone. todos los derechos reservados.</p>
             <div class="social-links">
                 <a href="#" title="Twitter">
                     <svg width="24" height="24" fill="#66ccff" viewBox="0 0 24 24">
@@ -166,7 +161,7 @@
         <span onclick="cerrarModalLogin()" style="position: absolute; top: 15px; right: 20px; color: #888; cursor: pointer; font-size: 1.5rem; transition: 0.3s;" onmouseover="this.style.color='#ff0055'" onmouseout="this.style.color='#888'">&times;</span>
         
         <h3 style="color: #ff0055; text-shadow: 0 0 10px #ff0055; margin-bottom: 20px; font-family: sans-serif; letter-spacing: 2px;">⚠️ ALERTA EN LA MATRIX</h3>
-        <p style="color: #66ccee; text-shadow: 0 0 10px #66ccee; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;">Para poder dar 'Me gusta' y guardar tus juegos favoritos en The Glitch Zone necesitas estar logueado.</p>
+        <p style="color: #66ccee; text-shadow: 0 0 10px #66ccee; font-size: 1.1rem; margin-bottom: 30px; line-height: 1.6;">Para poder interactuar en <strong>The Glitch Zone</strong>, dar "me gusta" y visitar distintos perfiles de usuarios, necesitas estar logueado, nos encantaría que formes parte de nuestra comunidad gamer.</p>
         
         <div style="display: flex; gap: 15px; justify-content: center;">
             <a href="{% url 'login' %}" style="background: #ff0055; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; box-shadow: 0 0 10px #ff0055; transition: 0.3s; width: 100%;">LOGIN</a>
