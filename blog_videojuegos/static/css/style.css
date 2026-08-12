@@ -15,7 +15,7 @@ a {
 }
 
 .favicon {
-    width:32px;
+    width:52px;
     height: 32px;
 }
 
@@ -2915,44 +2915,6 @@ hr.my-5 {
     display: flex;
     padding: 60px 80px;
 }
-/*.text-center.mb-4 h4.fw-bold.text-primary {
-    color: #66ccff;
-    text-shadow: 0 0 10px #15f4ee;
-    font-size: 24px;
-}
-
-.text-center.mb-4 p.lead {
-    color: #d0eaff;
-    font-size: 16px;
-    text-shadow: 0 0 5px #15f4ee;
-}
-
-.card.shadow-sm.h-100.text-center {
-    background: rgba(20, 20, 30, 0.5);
-    border: 2px solid #15f4ee;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    transition: all 0.6s;
-}
-
-.card.shadow-sm.h-100.text-center:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 40px rgba(0, 255, 255, 0.407);
-    animation: neon-pulse 1.5s infinite;
-}
-
-h5.card-title {
-    color: #66ccff;
-    text-shadow: 0 0 5px #15f4ee;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-.card.shadow-sm.h-100.text-center .card-text {
-    color: #d0eaff;
-    font-size: 14px;
-    text-shadow: 0 0 3px #15f4ee;
-}*/
 
 
 /*------FOOTER------*/
@@ -3485,6 +3447,11 @@ hr {
         color: #66ccee;
         cursor: pointer;
     } 
+
+    .crear-posteo {
+        position: relative;
+        left: 4%;
+    }
     .volver {
         padding: 8px 15px;
         font-size: 12px;

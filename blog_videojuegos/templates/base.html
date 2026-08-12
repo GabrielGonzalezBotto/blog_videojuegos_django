@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'img/img-blog/logo_the_glitch_zone_2.png' %}" class="favicon" alt="favicon The Glitch Zone">
     <title>{% block title %}The Glitch Zone{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <script src="{% static 'js/script.js' %}"></script>
@@ -64,7 +65,7 @@
                 <input type="checkbox" class="check-login" id="my-login">
                 <label for="my-login" class="login-label">INICIAR SESIÓN</label>
                 <div class="dropdown-login">
-                    <h3>Si ya sos parte de nuestra armada</h3>
+                    <h3>Si ya sos parte de nuestra comunidad</h3>
                     <img src="{% static 'img/img-blog/soldier2.webp' %}" class="img-login" alt="">
                     <a href="{% url 'login' %}" class="btn-login">INICIÁ SESIÓN</a>
                 </div>
