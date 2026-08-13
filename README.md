@@ -43,13 +43,13 @@ Este proyecto fue desarrollado de forma independiente, abarcando desde el diseñ
 
 ## 🛠️ Stack Tecnológico utilizado
 
-*   **Backend:** Python, Django Framework (Arquitectura MTV, Vistas basadas en funciones).
-*   **Frontend:** HTML5, CSS3 (Efectos neón, Flexbox, Maquetación Responsiva), JavaScript (API Fetch, Manipulación del DOM).
-*   **Base de Datos:** SQLite (Desarrollo local)
-*   **Herramientas & Entorno:** Git, GitHub, Django Admin Customization, Virtual Environments.
+*   **Backend:** Python, Django Framework (Arquitectura MVT, Vistas basadas en funciones).
+*   **Frontend:** HTML5, CSS3 (Efectos neón, Flexbox, Maquetación Responsiva), JavaScript.
+*   **Base de Datos:** SQLite.
+*   **Herramientas & Entorno:** Git, GitHub, Django Admin Customization, Virtual Environments, VSCode.
 
 ---
 
 ## 👤 Creador
-*   **José Gabriel González** - *Estudiante de desarrollo wed / Trainee*
+*   **José Gabriel González** - *Estudiante de desarrollo wed autodidacta / Trainee*
 *   [Mi LinkedIn](https://linkedin.com) | [Mi GitHub](https://github.com/GabrielGonzalezBotto)
