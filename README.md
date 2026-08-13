@@ -53,8 +53,3 @@ Este proyecto fue desarrollado de forma independiente, abarcando desde el diseñ
 ## 👤 Creador
 *   **José Gabriel González** - *Estudiante de desarrollo wed / Trainee*
 *   [Mi LinkedIn](https://linkedin.com) | [Mi GitHub](https://github.com/GabrielGonzalezBotto)
-
-
-## 👤 Creador
-*   **José Gabriel González** - *Estudiante de desarrollo wed / Trainee*
-*   [Mi LinkedIn](https://linkedin.com) | [Mi GitHub](https://github.com/GabrielGonzalezBotto)
