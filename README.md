@@ -3,7 +3,7 @@
 <!-- ⚡ CAPTURAS DE PANTALLA AGREGADAS -->
 ### 📸 Vista Previa del Proyecto
 <p align="center">
-  <img src="screenshots/demo.gif" alt="Funcionamiento de The Glitch Zone" width="85%">
+  <img src="blog_videojuegos/screenshots/demo.gif" alt="Funcionamiento de The Glitch Zone" width="85%">
 </p>
 <br><br>
 <p align="center">
