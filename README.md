@@ -28,6 +28,10 @@ Este proyecto fue desarrollado de forma independiente, abarcando desde el diseñ
 
 ---
 
+## 👁️ Visitá The Glitch Zone aquí: [TheGlitchZone](https://theglitchzone.pythonanywhere.com/)
+
+---
+
 ## 🚀 Características Principales 
 
 *   **Lógica de Portada:** Muestra de forma automática en la página de inicio los 3 posteos más recientes del blog y un podio con los 3 juegos que tienen más "Me gusta".
