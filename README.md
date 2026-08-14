@@ -7,18 +7,18 @@
 </p>
 <br><br>
 <p align="center">
-  <img src="screenshots/home.png" alt="Portada de The Glitch Zone" width="80%">
-  <img src="screenshots/home-2.png" alt="Portada de The Glitch Zone" width="80%">
-  <img src="screenshots/blog.png" alt="Blog de The Glitch Zone" width="80%">
-  <img src="screenshots/blog-post.png" alt="Blog posteos de The Glitch Zone" width="80%">
-  <img src="screenshots/perfil.png" alt="Perfil en The Glitch Zone" width="80%">
-  <img src="screenshots/perfil-2.png" alt="Perfil en The Glitch Zone" width="80%">
-  <img src="screenshots/mis-posts.png" alt="Mis posteos en The Glitch Zone" width="80%">
-  <img src="screenshots/crear-post.png" alt="Crear post en The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/home.png" alt="Portada de The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/home-2.png" alt="Portada de The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/blog.png" alt="Blog de The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/blog-post.png" alt="Blog posteos de The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/perfil.png" alt="Perfil en The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/perfil-2.png" alt="Perfil en The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/mis-posts.png" alt="Mis posteos en The Glitch Zone" width="80%">
+  <img src="blog_videojuegos/screenshots/crear-post.png" alt="Crear post en The Glitch Zone" width="80%">
   <br><br>
-  <img src="screenshots/home-resp.png" alt="home responsivo" width="45%">
-  <img src="screenshots/home-resp-2.png" alt="Home responsivo 2" width="45%">
-  <img src="screenshots/crear-post-resp.png" alt="Crear post responsivo" width="45%">
+  <img src="blog_videojuegos/screenshots/home-resp.png" alt="home responsivo" width="45%">
+  <img src="blog_videojuegos/screenshots/home-resp-2.png" alt="Home responsivo 2" width="45%">
+  <img src="blog_videojuegos/screenshots/crear-post-resp.png" alt="Crear post responsivo" width="45%">
 </p>
 
 
