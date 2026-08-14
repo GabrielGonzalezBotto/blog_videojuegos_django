@@ -15,7 +15,7 @@
   <img src="blog_videojuegos/screenshots/perfil-2.png" alt="Perfil en The Glitch Zone" width="80%">
   <img src="blog_videojuegos/screenshots/mis-posts.png" alt="Mis posteos en The Glitch Zone" width="80%">
   <img src="blog_videojuegos/screenshots/crear-post.png" alt="Crear post en The Glitch Zone" width="80%">
-  ### 📱 Vista responsive
+  📱 Vista Responsive
   <br><br> 
   <img src="blog_videojuegos/screenshots/home-resp.png" alt="home responsivo" width="45%">
   <img src="blog_videojuegos/screenshots/home-resp-2.png" alt="Home responsivo 2" width="45%">
