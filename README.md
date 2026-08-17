@@ -17,7 +17,7 @@
   <img src="blog_videojuegos/screenshots/crear-post.png" alt="Crear post en The Glitch Zone" width="80%">
 
   <br>
-  ### 📱 Vista Responsive
+  📱 Vista Responsive
   <br>
 
   <img src="blog_videojuegos/screenshots/home-resp.png" alt="home responsivo" width="45%">
