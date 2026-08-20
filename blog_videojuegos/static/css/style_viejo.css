@@ -120,8 +120,8 @@ a {
 .dropdown-login .img-login{
     max-height: 200px;
     position: relative;
-    bottom: 32px;
-    left: 7%;
+    bottom: 40px;
+    left: 11%;
     filter: drop-shadow(4px 6px 12px #66ccff);
 }
 
@@ -568,7 +568,7 @@ h3 {
 .ir {
     position: fixed;
     bottom: 95px;
-    left: 23px;
+    right: 10px;
     z-index: 1000;
     display: none;
     background: transparent;
@@ -2967,8 +2967,8 @@ hr {
 
     .hamburger-label {
     display: block;
-    position: absolute;
-    left: 46%;
+    position: relative;
+    left: 44%;
     top: 10px;
     }
 
@@ -2998,9 +2998,6 @@ hr {
 
     .menu-checkbox:checked ~ .nav-links {
         display: flex;
-        position: relative;
-        left: 22%;
-        top: 595%;
     }
 
     .nav-links li {
@@ -3009,23 +3006,22 @@ hr {
 
     .login-label{
         position: relative;
-        left: 44%;
-        bottom: 3px;
+        left: 39%;
+        bottom: 15px;
         color: #66ccff;
         font-family: 'Orbitron', sans-serif;
-        padding: 1px 1px 1px 1px;
+        padding: 3px 3px 3px 3px;
         border: 2px solid #66ccff;
         border-radius: 10px;
         cursor: pointer;
         transition: all 0.5s ease;
-        font-size: 14px;
     }
 
     .dropdown-login {
         display: none;
         position: absolute;
-        /*top: 100%;*/
-        left: 12%;
+        top: 100%;
+        left: 13%;
         max-height: 250px;
         text-align: center;
         font-family: 'Orbitron', sans-serif;
@@ -3034,7 +3030,7 @@ hr {
         border-radius: 8px;
         box-shadow: 0 0 10px #66ccff;
         z-index: 1000;
-        max-width: 153px;
+        max-width: 167px;
         padding: 10px 0;
     }
 
@@ -3055,15 +3051,6 @@ hr {
         top: 25%;
         font-size: 16px;
     }
-    
-    .ir {
-    position: fixed;
-    bottom: 95px;
-    left: 23px;
-    z-index: 1000;
-    display: none;
-    background: transparent;
-}
 
     .hero {
     flex-direction: column;
@@ -3072,14 +3059,12 @@ hr {
 
     .main-title {
         position: absolute;
-        top: 72%;
-        left: 23%;
-        font-size: 76px;
+        left: 43%;
+        font-size: 56px;
     }
 
     .img-hero{
         position: relative;
-        height: 400px;
         left: 6%;
     }
 
@@ -3096,11 +3081,10 @@ hr {
         width: 300px;
     }
 
-
     .card{
         position: relative;
         top: 120%;
-        left: 7%;
+        left: 77%;
         width: 100%;
         min-width: auto;
         min-height: auto;
@@ -3133,50 +3117,50 @@ hr {
         flex-direction: column;
     }
 
-    .news-card{
-        position: relative;
+    /*.news-card{
+        position: absolute;
         top: 300%;
-        left: 7%;
-        width: 500% ;
+        left: 11%;
+        width: 100% ;
         min-width: auto;
         min-height: auto;
         overflow: hidden;
-    }
+    }*/
 
     .news-content {
-        position: relative;
         display: flex;
         flex-direction: column;
+        position: relative;
         top: 369%;
-        left: 4%;
+        left: 35%;
     }
 
 
 
-    .arrows {
-        font-size: 24px;
-    }
+  .arrows {
+    font-size: 24px;
+  }
 
-    /*.card, .news-card {
+  /*.card, .news-card {
     max-width: 100%;
     margin: 10px 0;
-    }*/
+  }*/
 
-    /*.destacados, .news {
+  /*.destacados, .news {
     padding: 40px 10px;
-    }*/
+  }*/
 
-    .footer {
+  .footer {
     position: relative;
     right: 4%;
     /*top: 560%;*/
     width: 100%;
     font-size: 0.65rem;
-    }
+  }
 
-    .social-links a {
+  .social-links a {
     margin: 5px 6px;
-    }
+  }
 }
 
 @media (max-width: 530px) {
@@ -3194,10 +3178,10 @@ hr {
     }
 
     .main-title {
-        position: relative;
-        top: 35%;
-        left: 2%;
-        font-size: 76px;
+        position: absolute;
+        top: 69%;
+        left: 24%;
+        font-size: 66px;
     }
 
     .img-hero{
@@ -3312,7 +3296,7 @@ hr {
 @media (max-width: 970px) {
     .filtros-container {
         position: absolute;
-        left: 2%;
+        left: 12%;
         max-width: 395px;
         margin: 20px auto;
         padding: 0 20px;
@@ -3320,7 +3304,7 @@ hr {
     }
     .carrusel-filtros {
         position: absolute;
-        left: 1%;
+        left: 7%;
         max-width: 395px;
         margin: 20px auto;
         padding: 0 20px;
@@ -3353,11 +3337,10 @@ hr {
     }
 
     .img-hero {
-    height: 450px;
+    height: 350px;
     filter: drop-shadow( 4px 6px 12px #66ccff);
     position: relative;
     top: 27%;
-    left: 1%;
     }
 
     .logo img {
@@ -3457,23 +3440,7 @@ hr {
 
     .crear-posteo {
         position: relative;
-        left: 6%;
-        top: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        align-items: center;
-        gap: 20px;
-        padding: 20px;
-        height: 800px;
-        width: 350px;
-        padding: 20px;
-        margin-top: 120px;
-        margin-bottom: 50px;
-        background: rgba(20, 20, 30, 0.5);
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        left: 4%;
     }
     .volver {
         padding: 8px 15px;
@@ -3487,8 +3454,7 @@ hr {
 
     .login-container {
         position: relative;
-        left: 2%;
-        width: 90%;
+        left: 4%;
     }
 
     .login-title {
@@ -3551,7 +3517,6 @@ hr {
     .contacto-title{
         position: relative;
         left: 1%;
-        font-size: 46px;
     }
 
     .sub-text{

@@ -157,3 +157,29 @@ window.onclick = function(event) {
         modal.style.display = 'none';
     }
 }
+
+//BUSCADOR
+document.addEventListener("DOMContentLoaded", function() {
+    const searchForm = document.getElementById("search-form");
+    const searchInput = document.getElementById("search-input");
+    const searchBtn = document.getElementById("search-btn");
+
+    searchBtn.addEventListener("click", function(e) {
+        // Si el buscador está cerrado o vacío (caso del celular al primer toque)
+        if (searchInput.value.trim() === "") {
+            // Le damos el foco al input para que se abra y aparezca el teclado
+            searchInput.focus(); 
+        } else {
+            // Si ya tiene texto adentro, el usuario tocó la lupa por segunda vez para buscar
+            searchForm.submit();
+        }
+    });
+
+    // Esto permite que si el usuario escribe y aprieta "Enter" en el teclado, también busque
+    searchInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter" && searchInput.value.trim() !== "") {
+            e.preventDefault();
+            searchForm.submit();
+        }
+    });
+});
